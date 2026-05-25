@@ -1,0 +1,396 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:1rem 0.5rem;font-family:var(--font-sans)}
+.page{display:none}.page.active{display:block}
+.nav{display:flex;gap:4px;flex-wrap:wrap;padding:6px;background:var(--color-background-secondary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);margin-bottom:1.25rem}
+.navbtn{flex:1;min-width:70px;padding:6px 8px;font-size:12px;font-weight:500;border:none;border-radius:var(--border-radius-md);cursor:pointer;background:transparent;color:var(--color-text-secondary);transition:all .18s}
+.navbtn.on{background:var(--color-background-primary);color:var(--color-text-primary);border:0.5px solid var(--color-border-tertiary)}
+.navbtn:hover:not(.on){background:var(--color-background-primary);color:var(--color-text-primary)}
+
+.section-label{font-size:11px;font-weight:500;letter-spacing:.06em;color:var(--color-text-tertiary);text-transform:uppercase;margin-bottom:8px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.1rem;margin-bottom:.75rem}
+.card-title{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.card-sub{font-size:12px;color:var(--color-text-secondary);line-height:1.6}
+
+.tree{margin-bottom:1rem}
+.t-root{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:var(--border-radius-md);background:#E6F1FB;color:#0C447C;font-size:14px;font-weight:500;margin-bottom:10px}
+.t-l1{margin-left:16px;border-left:2px solid #378ADD;padding-left:12px;margin-bottom:8px}
+.t-l2{margin-left:14px;border-left:2px solid #1D9E75;padding-left:10px;margin-bottom:6px}
+.t-l3{margin-left:12px;border-left:2px solid #EF9F27;padding-left:8px;margin-bottom:4px}
+.t-l4{margin-left:12px;border-left:1.5px solid #D85A30;padding-left:8px;margin-bottom:3px}
+.node-l1{display:inline-block;padding:4px 10px;background:#E1F5EE;color:#085041;border-radius:var(--border-radius-md);font-size:13px;font-weight:500;margin-bottom:4px}
+.node-l2{display:inline-block;padding:3px 9px;background:#FAEEDA;color:#633806;border-radius:var(--border-radius-md);font-size:12px;font-weight:500;margin-bottom:3px}
+.node-l3{display:inline-block;padding:2px 8px;background:#FAECE7;color:#712B13;border-radius:var(--border-radius-md);font-size:12px;margin-bottom:2px}
+.node-l4{display:inline-block;padding:2px 7px;background:#EEEDFE;color:#3C3489;border-radius:var(--border-radius-md);font-size:11px;margin-bottom:2px}
+.detail{font-size:12px;color:var(--color-text-secondary);line-height:1.55;margin-top:2px;margin-bottom:4px}
+
+.pill-row{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.pill{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:500}
+.pill-blue{background:#E6F1FB;color:#0C447C}
+.pill-green{background:#E1F5EE;color:#085041}
+.pill-amber{background:#FAEEDA;color:#633806}
+.pill-purple{background:#EEEDFE;color:#3C3489}
+.pill-coral{background:#FAECE7;color:#712B13}
+.pill-red{background:#FCEBEB;color:#791F1F}
+
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:.75rem 0}
+.cmp-card{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:.65rem .8rem}
+.cmp-title{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.cmp-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cmp-list{list-style:none;padding:0}
+.cmp-list li{font-size:11px;color:var(--color-text-secondary);line-height:1.5;padding:2px 0;border-bottom:0.5px solid var(--color-border-tertiary);padding-bottom:3px}
+.cmp-list li:last-child{border:none}
+
+.sprint-track{display:flex;gap:0;margin:1rem 0;overflow-x:auto}
+.sp-block{flex:1;min-width:70px;border:0.5px solid var(--color-border-tertiary);padding:8px 6px;text-align:center;position:relative}
+.sp-block:first-child{border-radius:var(--border-radius-md) 0 0 var(--border-radius-md)}
+.sp-block:last-child{border-radius:0 var(--border-radius-md) var(--border-radius-md) 0}
+.sp-label{font-size:11px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
+.sp-sub{font-size:10px;color:var(--color-text-secondary)}
+.sp-active{background:#E6F1FB}
+.sp-done{background:#E1F5EE}
+
+.xp-circle{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:.75rem 0}
+.xp-val{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:.6rem .5rem;text-align:center}
+.xp-val-icon{font-size:18px;margin-bottom:4px}
+.xp-val-name{font-size:12px;font-weight:500;color:var(--color-text-primary)}
+.xp-val-desc{font-size:10px;color:var(--color-text-secondary);margin-top:2px;line-height:1.4}
+
+.vs-table{width:100%;border-collapse:collapse;font-size:12px;margin:.75rem 0}
+.vs-table th{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-align:left;padding:5px 8px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary)}
+.vs-table td{padding:5px 8px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);vertical-align:top;line-height:1.45}
+.vs-table tr:nth-child(even) td{background:var(--color-background-secondary)}
+
+.q-item{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);margin-bottom:6px;overflow:hidden}
+.q-hdr{padding:8px 12px;cursor:pointer;font-size:13px;color:var(--color-text-primary);background:var(--color-background-secondary);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.q-hdr:hover{background:var(--color-background-primary)}
+.q-badge{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500;white-space:nowrap;flex-shrink:0}
+.bm{background:#E6F1FB;color:#0C447C}.bs{background:#E1F5EE;color:#085041}.bl{background:#FAEEDA;color:#633806}
+.q-body{display:none;padding:8px 12px;font-size:12px;color:var(--color-text-secondary);line-height:1.6;background:var(--color-background-primary);border-top:0.5px solid var(--color-border-tertiary)}
+.q-body.open{display:block}
+.q-body ul{margin-left:14px;margin-top:4px}
+.q-body li{margin-bottom:3px}
+
+.tip-row{display:flex;gap:8px;align-items:flex-start;padding:7px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.tip-row:last-child{border:none}
+.tip-num{min-width:22px;height:22px;border-radius:50%;background:#E6F1FB;color:#0C447C;font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tip-text{font-size:12px;color:var(--color-text-secondary);line-height:1.55}
+.hot{background:#FCEBEB;color:#791F1F}
+</style>
+
+<h2 class="sr-only">Unit 6 WMA — Web Application Life Cycle Models: Agile, XP, Scrum, Sprint, Time Boxing, FDD</h2>
+
+<div class="wrap">
+<div class="nav">
+  <button class="navbtn on" onclick="go('overview',this)">Overview</button>
+  <button class="navbtn" onclick="go('agile',this)">Agile &amp; XP</button>
+  <button class="navbtn" onclick="go('scrum',this)">Scrum &amp; Sprint</button>
+  <button class="navbtn" onclick="go('others',this)">Time Box &amp; FDD</button>
+  <button class="navbtn" onclick="go('compare',this)">Compare</button>
+  <button class="navbtn" onclick="go('qa',this)">Q &amp; A</button>
+</div>
+
+<!-- ===== OVERVIEW ===== -->
+<div class="page active" id="overview">
+  <div class="section-label">Unit 6 — Web app life cycle models</div>
+  <div class="tree">
+    <div class="t-root"><i class="ti ti-refresh" aria-hidden="true" style="font-size:16px"></i> Web App Life Cycle (Unit 6)</div>
+    <div class="t-l1">
+      <div class="node-l1">6.1 Web Development Lifecycle — 7 Stages</div>
+      <div class="detail">The standard step-by-step process to build a website from idea to live product.</div>
+      <div class="t-l2"><span class="node-l2">1. Research &amp; Analysis</span><div class="detail">Gather info, understand users, surveys, requirement docs</div></div>
+      <div class="t-l2"><span class="node-l2">2. Planning</span><div class="detail">Wireframes, technology stack, content structure, methodology</div></div>
+      <div class="t-l2"><span class="node-l2">3. Designing</span><div class="detail">UI/UX — layout, buttons, menus, colors, typography</div></div>
+      <div class="t-l2"><span class="node-l2">4. Content Creation</span><div class="detail">Writing, CTAs, headlines, formatting — "content is king"</div></div>
+      <div class="t-l2"><span class="node-l2">5. Development</span><div class="detail">Frontend + backend coding — most time-consuming phase</div></div>
+      <div class="t-l2"><span class="node-l2">6. Testing &amp; QA</span><div class="detail">Unit, stress, load testing. Check functionality + performance</div></div>
+      <div class="t-l2"><span class="node-l2">7. Deployment &amp; Maintenance</span><div class="detail">FTP hosting, continuous feedback, regular updates</div></div>
+    </div>
+    <div class="t-l1">
+      <div class="node-l1">6.2 Life Cycle Models (SDLC)</div>
+      <div class="detail">Structured methodologies to guide how software is built.</div>
+      <div class="t-l2">
+        <span class="node-l2">Traditional models</span>
+        <div class="t-l3"><span class="node-l3">Waterfall</span><span class="node-l3" style="margin-left:6px">Iterative</span><span class="node-l3" style="margin-left:6px">Spiral</span><span class="node-l3" style="margin-left:6px">V-Model</span><span class="node-l3" style="margin-left:6px">Big Bang</span></div>
+      </div>
+      <div class="t-l2">
+        <span class="node-l2">Agile models (exam focus)</span>
+        <div class="t-l3">
+          <span class="node-l3">Extreme Programming (XP)</span>
+          <div class="t-l4"><span class="node-l4">5 values: Communication, Simplicity, Feedback, Courage, Respect</span></div>
+          <div class="t-l4"><span class="node-l4">Activities: Coding, Testing, Listening, Designing, Feedback</span></div>
+        </div>
+        <div class="t-l3">
+          <span class="node-l3">Scrum</span>
+          <div class="t-l4"><span class="node-l4">Product Backlog → Sprint Planning → Sprint (2-4 wks) → Review → Retrospective</span></div>
+        </div>
+        <div class="t-l3">
+          <span class="node-l3">Time Boxing</span>
+          <div class="t-l4"><span class="node-l4">Fixed-duration iterations. Functionality adjusted to fit. Pipelined teams.</span></div>
+        </div>
+        <div class="t-l3">
+          <span class="node-l3">Feature-Driven Development (FDD)</span>
+          <div class="t-l4"><span class="node-l4">Feature-focused, short iterative cycles. Good for large projects only.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">What is Agile? <span class="pill pill-blue" style="font-size:11px;margin-left:6px">Core concept</span></div>
+    <div class="card-sub">The word "agile" means able to move or think quickly and clearly. In software, Agile is a way of planning and doing work where making changes as needed is an important part of the job. Business agility = a company always ready to respond to market changes. All the models below (XP, Scrum, Time Boxing, FDD) are Agile models.</div>
+  </div>
+</div>
+
+<!-- ===== AGILE & XP ===== -->
+<div class="page" id="agile">
+  <div class="section-label">Extreme Programming (XP) — Agile model</div>
+
+  <div class="card">
+    <div class="card-title">What is XP?</div>
+    <div class="card-sub">Extreme Programming (XP) is one of the most important software development frameworks under Agile. It improves software quality and responsiveness to customer requirements. XP takes the best practices that have worked in the past and pushes them to extreme levels.</div>
+  </div>
+
+  <div class="tree">
+    <div class="t-root">Extreme Programming (XP)</div>
+    <div class="t-l1">
+      <div class="node-l1">5 Core Values <span class="pill pill-red" style="font-size:10px;margin-left:4px">Must memorise</span></div>
+      <div class="xp-circle">
+        <div class="xp-val"><div class="xp-val-icon">💬</div><div class="xp-val-name">Communication</div><div class="xp-val-desc">Constant interaction between team and customer</div></div>
+        <div class="xp-val"><div class="xp-val-icon">✂️</div><div class="xp-val-name">Simplicity</div><div class="xp-val-desc">Build only what is needed right now</div></div>
+        <div class="xp-val"><div class="xp-val-icon">🔁</div><div class="xp-val-name">Feedback</div><div class="xp-val-desc">Frequent feedback from customer and tests</div></div>
+        <div class="xp-val"><div class="xp-val-icon">🦁</div><div class="xp-val-name">Courage</div><div class="xp-val-desc">Make hard decisions, refactor boldly</div></div>
+        <div class="xp-val"><div class="xp-val-icon">🤝</div><div class="xp-val-name">Respect</div><div class="xp-val-desc">Team and customer respect each other</div></div>
+      </div>
+    </div>
+    <div class="t-l1">
+      <div class="node-l1">5 Core Activities</div>
+      <div class="t-l2">
+        <span class="node-l2">Coding</span>
+        <div class="detail">Different from traditional coding. Includes drawing diagrams (modeling), scripting web systems, choosing among alternative solutions.</div>
+      </div>
+      <div class="t-l2">
+        <span class="node-l2">Testing</span>
+        <div class="detail">XP gives the highest importance to testing. It is the primary factor for developing fault-free software. Tests are written before or alongside code.</div>
+      </div>
+      <div class="t-l2">
+        <span class="node-l2">Listening</span>
+        <div class="detail">Developers must carefully listen to customers. Programmers may not have in-depth knowledge of what needs to be built — listening bridges that gap.</div>
+      </div>
+      <div class="t-l2">
+        <span class="node-l2">Designing</span>
+        <div class="detail">Good design eliminates complex dependencies. Without proper design, implementation becomes too complex and maintenance becomes expensive.</div>
+      </div>
+      <div class="t-l2">
+        <span class="node-l2">Feedback</span>
+        <div class="detail">Most important aspect. Frequent contact with the customer makes development effective and ensures the exact customer needs are understood.</div>
+      </div>
+    </div>
+    <div class="t-l1">
+      <div class="node-l1">Key Principles</div>
+      <div class="t-l2"><span class="node-l2">Simplicity first</span><div class="detail">Build a simple system that works now, rather than trying to build something complicated that may never be used.</div></div>
+      <div class="t-l2"><span class="node-l2">Focus on immediate needs</span><div class="detail">Address features that are needed right now; don't spend time and effort on speculations about future requirements.</div></div>
+      <div class="t-l2"><span class="node-l2">Quality over speed</span><div class="detail">XP improves software quality. Taking "best practices to extreme levels" ensures consistent quality through iterations.</div></div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:3px solid #185FA5;border-radius:0">
+    <div class="card-title" style="font-size:13px">Memory tip — XP Values</div>
+    <div class="card-sub">Remember: <strong>C S F C R</strong> → "Can Software Fix Customer Requirements?" — Communication, Simplicity, Feedback, Courage, Respect</div>
+  </div>
+</div>
+
+<!-- ===== SCRUM & SPRINT ===== -->
+<div class="page" id="scrum">
+  <div class="section-label">Scrum &amp; Sprint — Agile framework</div>
+
+  <div class="card">
+    <div class="card-title">What is Scrum?</div>
+    <div class="card-sub">Scrum is an Agile development methodology used in software development based on iterative and incremental processes. It is adaptable, fast, flexible and effective. The primary objective: satisfy the customer through transparency in communication, collective responsibility, and continuous progress.</div>
+  </div>
+
+  <div class="tree">
+    <div class="t-root">Scrum Framework</div>
+    <div class="t-l1">
+      <div class="node-l1">Product Backlog</div>
+      <div class="detail">A list of all features, characteristics, requirements, and fixes ordered by priority that the product owner wants. Development begins from a general idea, elaborating this backlog over time.</div>
+    </div>
+    <div class="t-l1">
+      <div class="node-l1">Sprint <span class="pill pill-red" style="font-size:10px;margin-left:4px">Very important</span></div>
+      <div class="detail">A sprint is a short, fixed time period (2–4 weeks) in which the development team works to complete specific tasks, milestones, or deliverables. Also called "iterations." Sprints break the project into digestible time blocks.</div>
+      <div class="t-l2"><span class="node-l2">Duration</span><div class="detail">2 to 4 weeks per sprint. Fixed and cannot be extended once started.</div></div>
+      <div class="t-l2"><span class="node-l2">Each sprint delivers</span><div class="detail">A complete, working result — a variation of the final product that can be delivered to the client with least possible effort.</div></div>
+      <div class="t-l2"><span class="node-l2">Sprint is self-contained</span><div class="detail">Each sprint is an entity in itself. It doesn't depend on another sprint to function — it provides a standalone increment.</div></div>
+    </div>
+    <div class="t-l1">
+      <div class="node-l1">Scrum Process Flow</div>
+      <div class="sprint-track">
+        <div class="sp-block sp-done"><div class="sp-label">Backlog</div><div class="sp-sub">All features listed &amp; prioritised</div></div>
+        <div class="sp-block sp-done"><div class="sp-label">Sprint Plan</div><div class="sp-sub">Team picks backlog items</div></div>
+        <div class="sp-block sp-active"><div class="sp-label">Sprint</div><div class="sp-sub">2–4 weeks of work</div></div>
+        <div class="sp-block"><div class="sp-label">Review</div><div class="sp-sub">Demo to stakeholders</div></div>
+        <div class="sp-block"><div class="sp-label">Retrospective</div><div class="sp-sub">What to improve next</div></div>
+      </div>
+      <div class="detail" style="font-size:11px">Blue = current stage. Green = completed. After Retrospective → next Sprint begins.</div>
+    </div>
+    <div class="t-l1">
+      <div class="node-l1">Scrum Key Characteristics</div>
+      <div class="pill-row">
+        <span class="pill pill-blue">Iterative</span>
+        <span class="pill pill-green">Incremental</span>
+        <span class="pill pill-amber">Adaptable</span>
+        <span class="pill pill-purple">Transparent</span>
+        <span class="pill pill-coral">Customer-focused</span>
+        <span class="pill pill-blue">Collective responsibility</span>
+      </div>
+    </div>
+    <div class="t-l1">
+      <div class="node-l1">Scrum vs XP — Key difference</div>
+      <div class="detail">Both are Agile. Scrum focuses on <em>how to manage the process</em> (sprints, backlog, roles). XP focuses on <em>engineering practices</em> (coding standards, test-driven, pair programming). They can be used together.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TIME BOXING & FDD ===== -->
+<div class="page" id="others">
+  <div class="section-label">Time Boxing &amp; Feature-Driven Development</div>
+
+  <div class="tree">
+    <div class="t-root">Time Boxing</div>
+    <div class="t-l1">
+      <div class="node-l1">Definition</div>
+      <div class="detail">Development is done iteratively (like the Iterative Enhancement Model), but each iteration is done in a "timebox" of fixed duration. The functionality to be developed is adjusted to fit the duration — not the other way around.</div>
+    </div>
+    <div class="t-l1">
+      <div class="node-l1">Key idea — fixed time, flexible scope</div>
+      <div class="detail">Unlike Scrum where scope is set and time is fixed, Time Boxing strictly fixes the duration and adjusts what gets done within it. If a feature won't fit, it is moved to the next timebox.</div>
+    </div>
+    <div class="t-l1">
+      <div class="node-l1">3 Fixed Stages per Timebox</div>
+      <div class="t-l2"><span class="node-l2">Analysis</span><div class="detail">What needs to be built in this timebox? Requirements gathering and breakdown.</div></div>
+      <div class="t-l2"><span class="node-l2">Implementation</span><div class="detail">Coding and building the features. Teams work in parallel using pipelining.</div></div>
+      <div class="t-l2"><span class="node-l2">Deploy</span><div class="detail">Release the timebox output. Each stage's output becomes the next stage's input.</div></div>
+    </div>
+    <div class="t-l1">
+      <div class="node-l1">Pipelining — dedicated teams</div>
+      <div class="detail">There is a dedicated team for each stage so work can be done in pipelining. Stages are chosen so that each performs a logical unit of work that becomes the input for the next stage. This maximises efficiency.</div>
+    </div>
+  </div>
+
+  <div class="tree" style="margin-top:1.25rem">
+    <div class="t-root">Feature-Driven Development (FDD)</div>
+    <div class="t-l1">
+      <div class="node-l1">Definition</div>
+      <div class="detail">FDD is an Agile iterative and incremental model that focuses on progressing the features of the software being developed. The main goal: provide timely, updated, working software to the client. Reporting and progress tracking is necessary at all levels.</div>
+    </div>
+    <div class="t-l1">
+      <div class="node-l1">4 Characteristics <span class="pill pill-red" style="font-size:10px;margin-left:4px">Exam favourite</span></div>
+      <div class="t-l2"><span class="node-l2">Short iterative</span><div class="detail">Works in simple and short iterations. Efficiently finishes work on time. Gives good pace for large projects.</div></div>
+      <div class="t-l2"><span class="node-l2">Customer focused</span><div class="detail">Each feature is inspected by the client before it is pushed to the main build/code.</div></div>
+      <div class="t-l2"><span class="node-l2">Structured &amp; feature-focused</span><div class="detail">Initial activities build the domain model and features list. More than 70% of efforts go to the last 2 activities of the lifecycle.</div></div>
+      <div class="t-l2"><span class="node-l2">Frequent releases</span><div class="detail">Continuous release of features. Ensures continuous success of the project.</div></div>
+    </div>
+    <div class="t-l1">
+      <div class="node-l1">Advantages</div>
+      <div class="pill-row">
+        <span class="pill pill-green">Easy progress tracking</span>
+        <span class="pill pill-green">Continuous success for large teams</span>
+        <span class="pill pill-green">Risk reduction via small segments</span>
+        <span class="pill pill-green">Greater cost estimation accuracy</span>
+      </div>
+    </div>
+    <div class="t-l1">
+      <div class="node-l1">Disadvantages <span class="pill pill-red" style="font-size:10px;margin-left:4px">Common MCQ</span></div>
+      <div class="pill-row">
+        <span class="pill pill-red">Not good for small projects</span>
+        <span class="pill pill-red">High dependency on lead programmers</span>
+        <span class="pill pill-red">Lack of documentation</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== COMPARE ===== -->
+<div class="page" id="compare">
+  <div class="section-label">Side-by-side comparison — all 4 Agile models</div>
+  <table class="vs-table">
+    <tr><th>Feature</th><th>XP</th><th>Scrum</th><th>Time Boxing</th><th>FDD</th></tr>
+    <tr><td>Full name</td><td>Extreme Programming</td><td>Scrum</td><td>Time Boxing</td><td>Feature-Driven Dev.</td></tr>
+    <tr><td>Type</td><td>Agile / iterative</td><td>Agile / iterative &amp; incremental</td><td>Agile / iterative</td><td>Agile / iterative &amp; incremental</td></tr>
+    <tr><td>Key idea</td><td>Best practices to extreme. 5 values.</td><td>Short sprints, product backlog</td><td>Fixed duration, flexible scope</td><td>Feature-by-feature delivery</td></tr>
+    <tr><td>Iteration name</td><td>Iteration / release</td><td>Sprint (2–4 weeks)</td><td>Timebox (fixed duration)</td><td>Iteration (short)</td></tr>
+    <tr><td>Customer role</td><td>On-site customer, frequent feedback</td><td>Product owner, reviews at end of sprint</td><td>Reviews per timebox</td><td>Inspects each feature before merge</td></tr>
+    <tr><td>Best for</td><td>Small teams, high-quality code</td><td>Most projects; very popular</td><td>Large parallel teams</td><td>Large projects with many features</td></tr>
+    <tr><td>Not good for</td><td>Large, distributed teams</td><td>Very rigid, fixed-price contracts</td><td>Projects needing flexible deadlines</td><td>Small projects</td></tr>
+    <tr><td>Documentation</td><td>Minimal</td><td>Minimal (agile manifesto)</td><td>Some</td><td>Lacks documentation (disadvantage)</td></tr>
+    <tr><td>Core focus</td><td>Engineering practices, code quality</td><td>Process &amp; teamwork</td><td>Time management &amp; pipeline</td><td>Feature progress &amp; tracking</td></tr>
+    <tr><td>Key unique term</td><td>5 Values (CSFCR)</td><td>Sprint, Product Backlog</td><td>Timebox, Pipelining</td><td>Feature list, domain model</td></tr>
+  </table>
+
+  <div class="section-label" style="margin-top:1rem">When to use which?</div>
+  <div class="compare-grid">
+    <div class="cmp-card">
+      <div class="cmp-title"><div class="cmp-dot" style="background:#185FA5"></div>XP</div>
+      <ul class="cmp-list"><li>Need high code quality</li><li>Small, co-located team</li><li>Requirements change frequently</li><li>Customer available on-site</li></ul>
+    </div>
+    <div class="cmp-card">
+      <div class="cmp-title"><div class="cmp-dot" style="background:#1D9E75"></div>Scrum</div>
+      <ul class="cmp-list"><li>Most common choice</li><li>Complex projects</li><li>Need visibility &amp; transparency</li><li>Regular stakeholder demos</li></ul>
+    </div>
+    <div class="cmp-card">
+      <div class="cmp-title"><div class="cmp-dot" style="background:#EF9F27"></div>Time Boxing</div>
+      <ul class="cmp-list"><li>Need strict deadlines</li><li>Large parallel teams available</li><li>Pipeline-style workflow</li><li>Time is the constraint</li></ul>
+    </div>
+    <div class="cmp-card">
+      <div class="cmp-title"><div class="cmp-dot" style="background:#D85A30"></div>FDD</div>
+      <ul class="cmp-list"><li>Large teams &amp; large projects</li><li>Feature-by-feature delivery</li><li>Need progress tracking at all levels</li><li>NOT for small projects</li></ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Q & A ===== -->
+<div class="page" id="qa">
+  <div class="section-label">Probable exam questions — Unit 6</div>
+  <p style="font-size:12px;color:var(--color-text-secondary);margin-bottom:.75rem">Click any question to see the answer.</p>
+
+  <div class="q-item"><div class="q-hdr" onclick="tq(this)">What is Agile? Why is it used? <span class="q-badge bm">MCQ</span></div><div class="q-body">Agile is a software development approach where making changes as needed is an important part of the job. It is used because: (1) Requirements change frequently, (2) Customer needs continuous delivery of working software, (3) It allows teams to adapt quickly to new information or market changes. "Agile" means able to move and think quickly and clearly.</div></div>
+
+  <div class="q-item"><div class="q-hdr" onclick="tq(this)">List and explain the 5 values of Extreme Programming (XP). <span class="q-badge bl">Long</span></div><div class="q-body"><ul><li><strong>Communication</strong> — Constant interaction between team members and with the customer ensures everyone understands requirements and progress.</li><li><strong>Simplicity</strong> — Build only what is needed right now. Avoid over-engineering and speculating about future requirements.</li><li><strong>Feedback</strong> — Frequent feedback from tests and customers ensures the product meets actual needs and allows fast correction.</li><li><strong>Courage</strong> — Make hard decisions like refactoring code, abandoning a bad design, or telling the customer what they need to hear.</li><li><strong>Respect</strong> — Team members respect each other's contributions and the customer's needs are respected throughout development.</li></ul></div></div>
+
+  <div class="q-item"><div class="q-hdr" onclick="tq(this)">What are the 5 activities in XP? <span class="q-badge bs">Short</span></div><div class="q-body"><ul><li><strong>Coding</strong> — Includes drawing diagrams (modeling), scripting, choosing among alternatives — not just writing code.</li><li><strong>Testing</strong> — Highest importance. Primary factor for fault-free software.</li><li><strong>Listening</strong> — Developers carefully listen to customers to understand system requirements they don't know.</li><li><strong>Designing</strong> — Good design eliminates complex dependencies and makes maintenance affordable.</li><li><strong>Feedback</strong> — Frequent contact with customer makes development effective.</li></ul></div></div>
+
+  <div class="q-item"><div class="q-hdr" onclick="tq(this)">What is Scrum? Explain its key features. <span class="q-badge bl">Long</span></div><div class="q-body">Scrum is an Agile development methodology based on iterative and incremental processes. Key features: (1) Adaptable, fast, flexible, effective framework. (2) Uses Product Backlog — a prioritized list of features the product owner wants. (3) Development is done in Sprints — fixed 2-4 week iterations. (4) Each Sprint delivers a complete, working product increment. (5) Primary goal: satisfy customer through transparency, collective responsibility, and continuous progress. (6) After each sprint: Review (demo) and Retrospective (improvements) are held.</div></div>
+
+  <div class="q-item"><div class="q-hdr" onclick="tq(this)">What is a Sprint in Scrum? <span class="q-badge bm">MCQ</span></div><div class="q-body">A Sprint is a short, fixed time period (usually 2 to 4 weeks) in which the development team works to complete specific tasks, milestones, or deliverables. Sprints are also called "iterations." Each Sprint is an independent entity that provides a complete result — a working version of the product that can be delivered to the client. Sprints break a large project schedule into manageable blocks of time.</div></div>
+
+  <div class="q-item"><div class="q-hdr" onclick="tq(this)">What is Time Boxing? How does it differ from Scrum? <span class="q-badge bs">Short</span></div><div class="q-body">Time Boxing is an Agile model where each iteration is done within a fixed duration (the timebox). Unlike Scrum where the scope of work is decided first and the sprint accommodates it, in Time Boxing the time is strictly fixed and the scope (functionality) is adjusted to fit within that time. Each timebox has 3 fixed stages: Analysis → Implementation → Deploy. Dedicated teams handle each stage in a pipeline fashion, making it efficient for large parallel teams.</div></div>
+
+  <div class="q-item"><div class="q-hdr" onclick="tq(this)">What is FDD? List its characteristics, advantages and disadvantages. <span class="q-badge bl">Long</span></div><div class="q-body">FDD (Feature-Driven Development) is an Agile iterative and incremental model focusing on progressing software features. Its goal is to deliver timely, updated, working software to clients.<br><br><strong>Characteristics:</strong><ul><li>Short iterative — simple, fast iterations, good pace for large projects</li><li>Customer focused — each feature inspected by client before merging</li><li>Structured &amp; feature-focused — domain model built at start, 70%+ effort on last 2 activities</li><li>Frequent releases — continuous feature releases</li></ul><strong>Advantages:</strong> Easy progress tracking, continuous success for large projects, risk reduction, greater cost estimation accuracy.<br><strong>Disadvantages:</strong> Not suitable for small projects, high dependency on lead programmers/designers/mentors, lack of documentation.</div></div>
+
+  <div class="q-item"><div class="q-hdr" onclick="tq(this)">List the 7 stages of the web development life cycle. <span class="q-badge bs">Short</span></div><div class="q-body">1. Research &amp; Analysis — gather info, understand audience, surveys. 2. Planning — wireframes, tech stack, methodology. 3. Designing — UI/UX layout, colors, typography. 4. Content Creation — writing, CTAs, headlines. 5. Development — frontend + backend coding (most time-consuming). 6. Testing &amp; QA — unit, stress, load testing. 7. Deployment &amp; Maintenance — FTP hosting, continuous updates.</div></div>
+
+  <div class="q-item"><div class="q-hdr" onclick="tq(this)">Compare any two Agile life cycle models. <span class="q-badge bl">Long</span></div><div class="q-body">Comparing XP and Scrum:<ul><li><strong>Focus:</strong> XP focuses on engineering practices and code quality. Scrum focuses on process and team management.</li><li><strong>Iteration:</strong> Both use iterations. Scrum calls them Sprints (2-4 weeks, fixed). XP iterations are also short but focus on coding practices.</li><li><strong>Values:</strong> XP has 5 explicit values: Communication, Simplicity, Feedback, Courage, Respect. Scrum has no explicit values list but relies on transparency, inspection, and adaptation.</li><li><strong>Customer:</strong> XP requires an on-site customer for constant feedback. Scrum uses a Product Owner who sets backlog priorities.</li><li><strong>Testing:</strong> XP gives highest importance to testing (test-first approach). Scrum leaves testing practices to the team.</li><li><strong>Best use:</strong> XP = small teams, high code quality. Scrum = most projects, any size.</li></ul></div></div>
+
+  <div style="margin-top:1rem;padding:.75rem 1rem;background:var(--color-background-secondary);border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary)">
+    <div style="font-size:13px;font-weight:500;margin-bottom:.5rem">Pro tips for Unit 6</div>
+    <div class="tip-row"><div class="tip-num">1</div><div class="tip-text">XP values — memorise with "CSFCR": Communication, Simplicity, Feedback, Courage, Respect. This comes up as MCQ and short answer.</div></div>
+    <div class="tip-row"><div class="tip-num">2</div><div class="tip-text">Sprint duration is always 2–4 weeks. Never say "1 week" or "1 month" in the exam — that is wrong.</div></div>
+    <div class="tip-row"><div class="tip-num">3</div><div class="tip-text">FDD is NOT good for small projects — this is a classic MCQ trap. The exam loves asking "which model is not suitable for small projects?" Answer: FDD.</div></div>
+    <div class="tip-row"><div class="tip-num">4</div><div class="tip-text">Time Boxing = time is fixed, scope is flexible. Scrum = scope is fixed per sprint, time is fixed. These are often confused — know the difference.</div></div>
+    <div class="tip-row"><div class="tip-num">5</div><div class="tip-text">7 SDLC stages mnemonic: "Research Plans Design Content — Developers Test Daily" (R-P-D-C-D-T-D).</div></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('on');
+}
+function tq(hdr){
+  hdr.nextElementSibling.classList.toggle('open');
+}
+</script>
