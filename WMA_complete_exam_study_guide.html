@@ -1,0 +1,682 @@
+
+<h2 class="sr-only">WMA Complete Exam Study Guide — All 6 Units with Mind Maps, Notes, and Practice Questions</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--font-sans)}
+a{color:inherit}
+:focus-visible{outline:2px solid rgba(45,125,255,0.6);outline-offset:2px}
+:root{
+  /* Black theme tokens (used throughout the markup) */
+  --accent:#2D7DFF;      /* blue */
+  --accent2:#2EC6A5;     /* green */
+  --accent3:#FFB020;     /* amber */
+  --accent4:#FF4D4D;     /* red */
+  --accent5:#8B5CF6;     /* purple */
+
+  --color-background-primary:#0B0F17;
+  --color-background-secondary:#111827;
+  --color-background-tertiary:#0F172A;
+
+  --color-text-primary:#E6EDF7;
+  --color-text-secondary:#A7B2C7;
+  --color-text-muted:#7F8AA2;
+
+  --color-border-tertiary:rgba(148,163,184,0.28);
+  --border-radius-lg:14px;
+  --border-radius-md:10px;
+  --border-radius-sm:8px;
+
+  --font-sans:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+
+  --surface:var(--color-background-secondary);
+  --border:var(--color-border-tertiary);
+}
+
+html{color-scheme:dark}
+
+.wrap{padding:1rem 0.5rem;max-width:760px;margin:auto}
+body{
+  background:radial-gradient(1100px 600px at 10% -10%, rgba(45,125,255,0.18), transparent 60%),
+             radial-gradient(900px 500px at 90% 0%, rgba(139,92,246,0.16), transparent 55%),
+             var(--color-background-primary);
+  color:var(--color-text-primary);
+}
+
+.hero{text-align:center;padding:1.25rem 1rem 1rem;border-bottom:0.5px solid var(--border);margin-bottom:1.5rem}
+.hero h1{font-size:22px;font-weight:650;color:var(--color-text-primary);margin-bottom:6px;letter-spacing:0.2px}
+.hero p{font-size:13px;color:var(--color-text-secondary)}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:1.5rem;padding:0.5rem;background:var(--color-background-secondary);border-radius:var(--border-radius-lg);border:0.5px solid var(--border)}
+.tab{flex:1;min-width:80px;padding:6px 8px;font-size:12px;font-weight:600;border:0.5px solid transparent;border-radius:var(--border-radius-md);cursor:pointer;background:transparent;color:var(--color-text-secondary);transition:all 0.2s}
+.tab.active{background:var(--color-background-primary);color:var(--color-text-primary);border:0.5px solid var(--border)}
+.tab:hover:not(.active){background:rgba(17,24,39,0.9);color:var(--color-text-primary);border:0.5px solid var(--border)}
+.section{display:none}
+.section.active{display:block}
+
+.unit-card{
+  border:0.5px solid var(--border);
+  border-radius:var(--border-radius-lg);
+  margin-bottom:1rem;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(17,24,39,0.85), rgba(11,15,23,0.85));
+}
+.unit-header{
+  padding:0.75rem 1rem;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:var(--color-background-secondary);
+}
+.unit-header:hover{background:var(--color-background-primary)}
+.unit-title{font-size:15px;font-weight:600;color:var(--color-text-primary)}
+.unit-sub{font-size:12px;color:var(--color-text-secondary);margin-top:2px}
+.unit-body{display:none;padding:1rem;background:var(--color-background-primary);}
+.unit-body.open{display:block}
+.chevron{font-size:16px;color:var(--color-text-secondary);transition:transform 0.2s}
+.chevron.open{transform:rotate(180deg)}
+
+.mind-wrap{overflow-x:auto;padding:0.5rem 0}
+.mind-root{display:flex;flex-direction:column;gap:8px}
+.m-branch{border-left:2px solid var(--accent);padding-left:12px;margin-left:8px}
+.m-branch.b2{border-color:var(--accent2);margin-left:20px}
+.m-branch.b3{border-color:var(--accent3);margin-left:36px}
+.m-node{padding:4px 10px;border-radius:var(--border-radius-md);font-size:13px;font-weight:500;display:inline-block;margin-bottom:4px}
+.m-node.root{
+  background:linear-gradient(90deg, rgba(45,125,255,0.18), rgba(139,92,246,0.12));
+  border:1px solid rgba(45,125,255,0.35);
+  color:#DCE9FF;
+  font-size:15px;
+  font-weight:650;
+  padding:8px 14px;
+}
+.m-node.l1{
+  background:rgba(46,198,165,0.10);
+  border:1px solid rgba(46,198,165,0.30);
+  color:#BFF3E7;
+}
+.m-node.l2{
+  background:rgba(255,176,32,0.10);
+  border:1px solid rgba(255,176,32,0.30);
+  color:#FFE7B8;
+}
+.m-node.l3{
+  background:rgba(255,77,77,0.10);
+  border:1px solid rgba(255,77,77,0.26);
+  color:#FFD1D1;
+  font-size:12px;
+  font-weight:500;
+}
+.detail-text{font-size:12px;color:var(--color-text-secondary);margin-top:2px;margin-left:2px;line-height:1.5}
+
+.notes-block{
+  background:linear-gradient(180deg, rgba(17,24,39,0.85), rgba(11,15,23,0.85));
+  border-radius:var(--border-radius-md);
+  padding:0.75rem 1rem;
+  margin-bottom:0.75rem;
+  border:0.5px solid var(--border);
+  border-left:3px solid var(--accent);
+}
+.notes-block.green{border-color:var(--accent2)}
+.notes-block.amber{border-color:var(--accent3)}
+.notes-block.red{border-color:var(--accent4)}
+.notes-block.purple{border-color:var(--accent5)}
+.notes-title{font-size:13px;font-weight:650;color:var(--color-text-primary);margin-bottom:6px}
+.notes-list{list-style:none;padding:0}
+.notes-list li{font-size:12px;color:var(--color-text-secondary);padding:4px 0;padding-left:12px;position:relative;line-height:1.6}
+.notes-list li::before{content:"•";position:absolute;left:0;color:var(--accent)}
+
+.q-block{border:0.5px solid var(--border);border-radius:var(--border-radius-md);margin-bottom:8px;overflow:hidden;background:rgba(17,24,39,0.45)}
+.q-header{padding:10px 12px;cursor:pointer;font-size:13px;color:var(--color-text-primary);background:var(--color-background-secondary);display:flex;justify-content:space-between;align-items:center}
+.q-header:hover{background:var(--color-background-primary)}
+.q-badge{font-size:10px;padding:2px 7px;border-radius:var(--border-radius-md);font-weight:650;border:0.5px solid var(--border)}
+.badge-mcq{background:rgba(46,198,165,0.12);color:#7AF3D4}
+.badge-short{background:rgba(45,125,255,0.12);color:#9EC3FF}
+.badge-long{background:rgba(255,176,32,0.12);color:#FFD68A}
+.q-ans{display:none;padding:10px 12px;font-size:12px;color:var(--color-text-secondary);background:var(--color-background-primary);border-top:0.5px solid var(--border);line-height:1.7}
+.q-ans.open{display:block}
+.q-ans ul{margin-left:14px;margin-top:4px}
+.q-ans li{margin-bottom:2px}
+
+.cheat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-bottom:1rem}
+.cheat-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem;border:0.5px solid var(--border)}
+.cheat-card h4{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px;padding-bottom:4px;border-bottom:0.5px solid var(--border)}
+.cheat-card p,.cheat-card li{font-size:11px;color:var(--color-text-secondary);line-height:1.5}
+.cheat-card ul{margin-left:12px}
+
+.tip-item{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:0.5px solid var(--border)}
+.tip-item:last-child{border-bottom:none}
+.tip-num{min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;background:#E6F1FB;color:#0C447C}
+.tip-text{font-size:12px;color:var(--color-text-secondary);line-height:1.5}
+
+.progress-bar{height:4px;border-radius:2px;background:var(--border);margin-bottom:4px;overflow:hidden}
+.progress-fill{height:100%;border-radius:2px;background:var(--accent)}
+
+.diff-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.diff-table th{background:var(--color-background-secondary);color:var(--color-text-secondary);padding:6px 8px;text-align:left;font-weight:500;border:0.5px solid var(--border)}
+.diff-table td{padding:5px 8px;border:0.5px solid var(--border);color:var(--color-text-secondary);line-height:1.4}
+.diff-table tr:nth-child(even) td{background:var(--color-background-secondary)}
+
+.tag{display:inline-block;font-size:10px;padding:2px 7px;border-radius:var(--border-radius-md);font-weight:500;margin:2px}
+.tag-hot{background:rgba(255,77,77,0.14);color:#FFB3B3;border:0.5px solid rgba(255,77,77,0.30)}
+.tag-med{background:rgba(255,176,32,0.14);color:#FFE0A1;border:0.5px solid rgba(255,176,32,0.30)}
+.tag-def{background:rgba(46,198,165,0.14);color:#A8F7E6;border:0.5px solid rgba(46,198,165,0.30)}
+</style>
+
+<div class="wrap">
+<div class="hero">
+  <h1><i class="ti ti-device-mobile" aria-hidden="true"></i> WMA — Complete Exam Study Guide</h1>
+  <p>Web &amp; Mobile Application Development · Grade 11 · All 6 Units</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showSection('mindmap')"><i class="ti ti-sitemap" aria-hidden="true"></i> Mind Maps</button>
+  <button class="tab" onclick="showSection('notes')"><i class="ti ti-notes" aria-hidden="true"></i> Key Notes</button>
+  <button class="tab" onclick="showSection('questions')"><i class="ti ti-help-circle" aria-hidden="true"></i> Exam Q&amp;A</button>
+  <button class="tab" onclick="showSection('cheatsheet')"><i class="ti ti-bolt" aria-hidden="true"></i> Cheat Sheet</button>
+  <button class="tab" onclick="showSection('tips')"><i class="ti ti-star" aria-hidden="true"></i> Pro Tips</button>
+</div>
+
+<!-- ===== MIND MAPS ===== -->
+<div class="section active" id="mindmap">
+
+  <div class="unit-card">
+    <div class="unit-header" onclick="toggle(this)">
+      <div><div class="unit-title">Unit 1 — Introduction to Mobile Applications</div><div class="unit-sub">8 hrs · App intro, history, platforms, comparison</div></div>
+      <i class="ti ti-chevron-down chevron" aria-hidden="true"></i>
+    </div>
+    <div class="unit-body">
+      <div class="mind-root">
+        <span class="m-node root">📱 Mobile Applications</span>
+        <div class="m-branch">
+          <span class="m-node l1">1.1 Introduction</span>
+          <div class="detail-text">Computer program/software for mobile devices (phone, tablet, watch). Runs in mobile environment limited by screen, hardware, battery, connectivity.</div>
+          <div class="m-branch b2"><span class="m-node l2">3 Types of Apps</span>
+            <div class="m-branch b3"><span class="m-node l3">Native — built for one platform (Android/iOS)</span></div>
+            <div class="m-branch b3"><span class="m-node l3">Web Apps — run in browser, HTML/CSS/JS</span></div>
+            <div class="m-branch b3"><span class="m-node l3">Hybrid — mix of native + web</span></div>
+          </div>
+        </div>
+        <div class="m-branch">
+          <span class="m-node l1">1.2 History</span>
+          <div class="detail-text">Early apps: calculators, ringtones, games. Nokia 6110 (1997) — first "Snake" game app. WAP = stripped-down HTTP for early phones.</div>
+          <div class="m-branch b2"><span class="m-node l2">Key Milestones</span>
+            <div class="m-branch b3"><span class="m-node l3">1983 — Motorola DynaTAC 8000X (first cell phone)</span></div>
+            <div class="m-branch b3"><span class="m-node l3">1997 — Nokia 6110 "Snake" (first mobile app)</span></div>
+            <div class="m-branch b3"><span class="m-node l3">2007 — iPhone released (Apple)</span></div>
+            <div class="m-branch b3"><span class="m-node l3">2008 — App Store + Android launch</span></div>
+            <div class="m-branch b3"><span class="m-node l3">2011 — 1 million apps, app use &gt; web use</span></div>
+          </div>
+        </div>
+        <div class="m-branch">
+          <span class="m-node l1">1.3 Distribution Platforms</span>
+          <div class="m-branch b2"><span class="m-node l2">Google Play</span><div class="detail-text">Android, 3.48M+ apps, $25 one-time developer fee</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Apple App Store</span><div class="detail-text">iOS, opened 2008, secure distribution for iPhones/iPad/iPod</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Windows Store</span><div class="detail-text">Microsoft, launched 2010, replaced Windows Phone Store in 2015</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Google Assistant / Siri</span><div class="detail-text">Intelligent Personal Assistants — Speech-based NUI (Natural User Interface)</div></div>
+        </div>
+        <div class="m-branch">
+          <span class="m-node l1">1.4 Mobile App vs Application Software</span>
+          <div class="detail-text">Mobile app = designed for mobile OS (Android/iOS), touch UI, small unit. Application software = desktop, keyboard/mouse, larger scope (e.g. MS Word)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="unit-card">
+    <div class="unit-header" onclick="toggle(this)">
+      <div><div class="unit-title">Unit 2 — Mobile Operating Systems</div><div class="unit-sub">12 hrs · Android, iOS, BlackBerry overview</div></div>
+      <i class="ti ti-chevron-down chevron" aria-hidden="true"></i>
+    </div>
+    <div class="unit-body">
+      <div class="mind-root">
+        <span class="m-node root">🖥 Mobile OS</span>
+        <div class="m-branch">
+          <span class="m-node l1">2.1 Introduction</span>
+          <div class="detail-text">OS that helps run other apps on mobile devices. Like PC OS (Linux/Windows) but lightweight. Earlier OS was simple; now complex due to hardware/internet advances.</div>
+        </div>
+        <div class="m-branch">
+          <span class="m-node l1">2.2 Need &amp; Effectiveness</span>
+          <div class="m-branch b2"><span class="m-node l2">Need</span><div class="detail-text">UI/UX, hardware management, app compatibility, security, connectivity, resource management</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Effectiveness</span><div class="detail-text">Performance, app compatibility, security (updates), user experience, developer support, maintenance</div></div>
+        </div>
+        <div class="m-branch">
+          <span class="m-node l1">2.3 Types</span>
+          <div class="m-branch b2"><span class="m-node l2">Android</span>
+            <div class="m-branch b3"><span class="m-node l3">Linux-based, open source (Apache License)</span></div>
+            <div class="m-branch b3"><span class="m-node l3">Developed by Google. First device: 2008</span></div>
+            <div class="m-branch b3"><span class="m-node l3">Uses Dalvik VM (DVM) — JVM optimized for mobile</span></div>
+            <div class="m-branch b3"><span class="m-node l3">Layers: Linux Kernel → Libraries → Android Runtime → App Framework → Apps</span></div>
+          </div>
+          <div class="m-branch b2"><span class="m-node l2">iOS</span>
+            <div class="m-branch b3"><span class="m-node l3">Developed by Apple. Closed source, proprietary</span></div>
+            <div class="m-branch b3"><span class="m-node l3">Built on Darwin (open-source POSIX-UNIX)</span></div>
+            <div class="m-branch b3"><span class="m-node l3">4 Layers: Core OS → Core Services → Media → Cocoa Touch</span></div>
+            <div class="m-branch b3"><span class="m-node l3">Touch gestures: swipe, tap, tap-hold, pinch</span></div>
+          </div>
+          <div class="m-branch b2"><span class="m-node l2">BlackBerry OS</span>
+            <div class="m-branch b3"><span class="m-node l3">By RIM (Research In Motion). Best for push email</span></div>
+            <div class="m-branch b3"><span class="m-node l3">Uses BlackBerry Enterprise Server (BES) for email</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="unit-card">
+    <div class="unit-header" onclick="toggle(this)">
+      <div><div class="unit-title">Unit 3 — Android</div><div class="unit-sub">12 hrs · History, versions, architecture, toolkit</div></div>
+      <i class="ti ti-chevron-down chevron" aria-hidden="true"></i>
+    </div>
+    <div class="unit-body">
+      <div class="mind-root">
+        <span class="m-node root">🤖 Android</span>
+        <div class="m-branch">
+          <span class="m-node l1">3.1–3.2 Intro &amp; History</span>
+          <div class="detail-text">Founded 2003 by Andy Rubin, Rich Miner, Nick Sears, Chris White. Acquired by Google for $50M in 2005. Beta v1.0 released November 5, 2007.</div>
+          <div class="m-branch b2"><span class="m-node l2">Version Names (A→P)</span>
+            <div class="detail-text">Astro, Blender, Cupcake, Donut, Eclair, Froyo, Gingerbread, Honeycomb, Ice Cream Sandwich, Jelly Bean, KitKat, Lollipop, Marshmallow, Nougat, Oreo, Pie. Android 10+ uses numbers only.</div>
+          </div>
+        </div>
+        <div class="m-branch">
+          <span class="m-node l1">Key Features</span>
+          <div class="m-branch b2"><span class="m-node l2">Open source, customizable</span></div>
+          <div class="m-branch b2"><span class="m-node l2">Connectivity: GSM, CDMA, Bluetooth, Wi-Fi, LTE, NFC</span></div>
+          <div class="m-branch b2"><span class="m-node l2">Storage: SQLite (lightweight relational DB)</span></div>
+          <div class="m-branch b2"><span class="m-node l2">Multitasking, Multi-language, Multi-touch</span></div>
+          <div class="m-branch b2"><span class="m-node l2">GCM — Google Cloud Messaging (push messages)</span></div>
+          <div class="m-branch b2"><span class="m-node l2">Android Beam — NFC-based sharing</span></div>
+        </div>
+        <div class="m-branch">
+          <span class="m-node l1">3.3 Architecture (5 Layers)</span>
+          <div class="m-branch b2"><span class="m-node l2">1. Linux Kernel (Heart)</span><div class="detail-text">Device drivers, power/memory/process management</div></div>
+          <div class="m-branch b2"><span class="m-node l2">2. Native Libraries</span><div class="detail-text">WebKit (browser), SQLite (DB), FreeType (fonts), Media, OpenGL, libc</div></div>
+          <div class="m-branch b2"><span class="m-node l2">3. Android Runtime</span><div class="detail-text">Core libraries + DVM (Dalvik Virtual Machine) — runs apps. Less memory, fast performance</div></div>
+          <div class="m-branch b2"><span class="m-node l2">4. Application Framework</span><div class="detail-text">APIs: UI, telephony, resources, location, Content Providers, Package Managers</div></div>
+          <div class="m-branch b2"><span class="m-node l2">5. Applications</span><div class="detail-text">Top layer — Home, Contacts, Browser, Games, etc.</div></div>
+        </div>
+        <div class="m-branch">
+          <span class="m-node l1">3.4 Development Toolkit</span>
+          <div class="m-branch b2"><span class="m-node l2">Kotlin</span><div class="detail-text">Preferred language since 2019. 100% interoperable with Java. Concise, safe.</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Android Studio</span><div class="detail-text">Official IDE by Google + JetBrains. Features: wireless debug, Compose preview, Logcat, Gradle, Device Profiler</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Firebase</span><div class="detail-text">Google backend: authentication, database, cloud storage, Crashlytics, ML Kit</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Jira</span><div class="detail-text">Project management — tracks issues, sprints, agile. Team collaboration tool</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="unit-card">
+    <div class="unit-header" onclick="toggle(this)">
+      <div><div class="unit-title">Unit 4 — iOS</div><div class="unit-sub">12 hrs · History, versions, architecture, toolkit</div></div>
+      <i class="ti ti-chevron-down chevron" aria-hidden="true"></i>
+    </div>
+    <div class="unit-body">
+      <div class="mind-root">
+        <span class="m-node root">🍎 iOS</span>
+        <div class="m-branch">
+          <span class="m-node l1">4.1–4.2 Intro &amp; History</span>
+          <div class="detail-text">Developed by Apple Inc. First released June 2007 with original iPhone. Derived from OS X / Darwin. Supports Objective-C, C, C++, Swift. World's 2nd most popular mobile OS (after Android).</div>
+        </div>
+        <div class="m-branch">
+          <span class="m-node l1">iOS Architecture — 4 Layers</span>
+          <div class="m-branch b2"><span class="m-node l2">Core OS (lowest)</span><div class="detail-text">Bluetooth, Security Services, Accelerate Framework, Local Authorization</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Core Services</span><div class="detail-text">C and Objective-C frameworks: accounts, contacts, networking, data, location, calendar, SQLite, XML</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Media Layer</span><div class="detail-text">2D/3D graphics, audio, video technologies</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Cocoa Touch (top)</span><div class="detail-text">UIKit framework — multitasking, touch input, notifications, UI views, device data access</div></div>
+        </div>
+        <div class="m-branch">
+          <span class="m-node l1">iOS Versions — Key Milestones</span>
+          <div class="m-branch b2"><span class="m-node l2">iPhone OS 1 (2007)</span><div class="detail-text">First release with original iPhone. Multi-touch concept, no App Store</div></div>
+          <div class="m-branch b2"><span class="m-node l2">iPhone OS 2 (2008)</span><div class="detail-text">First App Store — third-party apps allowed</div></div>
+          <div class="m-branch b2"><span class="m-node l2">iOS 4 (2010)</span><div class="detail-text">Name changed from "iPhone OS" to "iOS". Multitasking introduced</div></div>
+          <div class="m-branch b2"><span class="m-node l2">iOS 7 (2013)</span><div class="detail-text">Complete visual redesign (flat UI by Jony Ive)</div></div>
+          <div class="m-branch b2"><span class="m-node l2">iOS 11 (2017)</span><div class="detail-text">Dropped 32-bit apps. 64-bit only OS</div></div>
+          <div class="m-branch b2"><span class="m-node l2">iOS 13 (2019)</span><div class="detail-text">Dark Mode, Memoji. iPadOS split off as separate OS</div></div>
+        </div>
+        <div class="m-branch">
+          <span class="m-node l1">4.4 iOS Development Toolkit</span>
+          <div class="m-branch b2"><span class="m-node l2">Swift</span><div class="detail-text">Released 2014. Memory-safe, type-safe, 2.6× faster than Objective-C. Preferred language.</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Objective-C</span><div class="detail-text">Original language, based on C. Supports OOP — encapsulation, inheritance, polymorphism</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Xcode</span><div class="detail-text">Official Apple IDE (since 2003). For macOS, iOS, watchOS, tvOS development. Includes Instruments, SwiftUI Builder, compilers</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="unit-card">
+    <div class="unit-header" onclick="toggle(this)">
+      <div><div class="unit-title">Unit 5 — Web Applications</div><div class="unit-sub">10 hrs · Intro, platforms, components, DB connection</div></div>
+      <i class="ti ti-chevron-down chevron" aria-hidden="true"></i>
+    </div>
+    <div class="unit-body">
+      <div class="mind-root">
+        <span class="m-node root">🌐 Web Applications</span>
+        <div class="m-branch">
+          <span class="m-node l1">5.1 Introduction</span>
+          <div class="detail-text">Application stored on remote server, accessed via web browser. Uses server-side scripts (PHP, ASP) + client-side scripts (HTML, JS). Requires authentication. Examples: Google Apps, Amazon, YouTube.</div>
+          <div class="m-branch b2"><span class="m-node l2">Client-side code</span><div class="detail-text">Runs in browser — responds to user input. Languages: HTML, JS, CSS</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Server-side code</span><div class="detail-text">Runs on server — handles HTTP requests, stores data. Languages: C#, Java, Python, PHP, Ruby</div></div>
+        </div>
+        <div class="m-branch">
+          <span class="m-node l1">5.2 Platforms / Frameworks</span>
+          <div class="m-branch b2"><span class="m-node l2">AngularJS</span><div class="detail-text">By Google, 2009. JavaScript framework. Implements MVC. Used by Google, Netflix, PayPal.</div></div>
+          <div class="m-branch b2"><span class="m-node l2">ReactJS</span><div class="detail-text">By Facebook (Meta). Component-based, Virtual DOM, reusable UI. WhatsApp, Instagram use it.</div></div>
+          <div class="m-branch b2"><span class="m-node l2">ASP.NET</span><div class="detail-text">By Microsoft. ASP = Active Server Pages. Uses C# or VB.NET</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Node.js</span><div class="detail-text">JavaScript server environment. Open-source, runs on all platforms. Great for video streaming, SPAs.</div></div>
+        </div>
+        <div class="m-branch">
+          <span class="m-node l1">5.3 Components</span>
+          <div class="m-branch b2"><span class="m-node l2">Application Server</span><div class="detail-text">Exposes business logic, generates dynamic content. Contains Web + EJB containers. Handles servlet, JSP, EJB.</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Database Server</span><div class="detail-text">Dedicated to storage and retrieval. Holds DBMS + databases. Key component in client/server architecture.</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Web Browser</span><div class="detail-text">Displays web pages. Translates HTTP into human-readable content. Supports HTML, XML, CSS.</div></div>
+          <div class="m-branch b2"><span class="m-node l2">Connecting to DB</span>
+            <div class="m-branch b3"><span class="m-node l3">PHP mysql_connect(server, user, password)</span></div>
+            <div class="m-branch b3"><span class="m-node l3">PHP PDO — new PDO(mysql:host=..., dbname=..., user, pass)</span></div>
+            <div class="m-branch b3"><span class="m-node l3">SQL SELECT — SELECT col FROM table WHERE condition</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="unit-card">
+    <div class="unit-header" onclick="toggle(this)">
+      <div><div class="unit-title">Unit 6 — Web Application Life Cycle Models</div><div class="unit-sub">10 hrs · SDLC stages, XP, Scrum, Time Boxing, FDD</div></div>
+      <i class="ti ti-chevron-down chevron" aria-hidden="true"></i>
+    </div>
+    <div class="unit-body">
+      <div class="mind-root">
+        <span class="m-node root">🔄 Web App Life Cycle</span>
+        <div class="m-branch">
+          <span class="m-node l1">6.1 Web Dev Life Cycle — 7 Stages</span>
+          <div class="m-branch b2"><span class="m-node l2">1. Research &amp; Analysis</span><div class="detail-text">Gather info about client/project. Understand target audience. Surveys, feedback, requirement elicitation</div></div>
+          <div class="m-branch b2"><span class="m-node l2">2. Planning</span><div class="detail-text">Wireframes, technology stack, software methodology, content structure</div></div>
+          <div class="m-branch b2"><span class="m-node l2">3. Designing</span><div class="detail-text">UI/UX design. Layout, buttons, menus, color themes, typography, graphics</div></div>
+          <div class="m-branch b2"><span class="m-node l2">4. Content Creation</span><div class="detail-text">Writing relevant, easy-to-understand content. CTAs, headlines, formatting</div></div>
+          <div class="m-branch b2"><span class="m-node l2">5. Development</span><div class="detail-text">Frontend + Backend coding. Most time-consuming stage</div></div>
+          <div class="m-branch b2"><span class="m-node l2">6. Testing &amp; QA</span><div class="detail-text">Unit testing, stress testing, load testing. Check functionality, usability, compatibility, performance</div></div>
+          <div class="m-branch b2"><span class="m-node l2">7. Deployment &amp; Maintenance</span><div class="detail-text">FTP-based hosting. Continuous feedback. Regular updates and maintenance</div></div>
+        </div>
+        <div class="m-branch">
+          <span class="m-node l1">6.2 Life Cycle Models</span>
+          <div class="m-branch b2"><span class="m-node l2">Extreme Programming (XP)</span>
+            <div class="detail-text">Agile model. Values: Communication, Simplicity, Feedback, Courage, Respect. Activities: Coding, Testing, Listening, Designing, Feedback.</div>
+          </div>
+          <div class="m-branch b2"><span class="m-node l2">Scrum</span>
+            <div class="detail-text">Agile, iterative+incremental. Uses Sprints (2-4 weeks each). Product Backlog = priority feature list. Goal: transparency, collective responsibility, continuous progress.</div>
+          </div>
+          <div class="m-branch b2"><span class="m-node l2">Time Boxing</span>
+            <div class="detail-text">Each iteration has fixed duration (timebox). Functionality adjusted to fit timebox. Stages: analysis → implementation → deploy. Pipeline approach with dedicated teams per stage.</div>
+          </div>
+          <div class="m-branch b2"><span class="m-node l2">Feature-Driven Development (FDD)</span>
+            <div class="detail-text">Agile, iterative. Focuses on progressing features. Short iterations, customer-focused, frequent releases. Good for large projects. NOT good for small projects.</div>
+            <div class="m-branch b3"><span class="m-node l3">Characteristics: Short iterative, Customer focused, Structured, Frequent releases</span></div>
+            <div class="m-branch b3"><span class="m-node l3">Disadvantage: High dependency on lead programmers, lack of documentation</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== NOTES ===== -->
+<div class="section" id="notes">
+  <div class="notes-block">
+    <div class="notes-title">Unit 1 — Mobile App Fundamentals <span class="tag tag-hot">🔥 High Priority</span></div>
+    <ul class="notes-list">
+      <li>Mobile app = computer program designed for mobile devices (phone/tablet/watch)</li>
+      <li>3 categories: Native (platform-specific), Web apps (browser-based), Hybrid (combo)</li>
+      <li>First mobile app: Nokia 6110's "Snake" game (1997)</li>
+      <li>First phone: Motorola DynaTAC 8000X (approved 1983)</li>
+      <li>App Store opened 2008 — Apple changed the game</li>
+      <li>Google Play ($25 developer fee), App Store (iOS only), Windows Store (Microsoft)</li>
+      <li>WAP = Wireless Application Protocol = stripped-down HTTP for early phones</li>
+      <li>Google Assistant = Speech-based NUI (Natural User Interface), debuted May 2016</li>
+      <li>Siri = Apple personal assistant, released 2010, oldest intelligent personal assistant</li>
+    </ul>
+  </div>
+  <div class="notes-block green">
+    <div class="notes-title">Unit 2 — Mobile Operating Systems <span class="tag tag-hot">🔥 High Priority</span></div>
+    <ul class="notes-list">
+      <li>Mobile OS = lightweight OS for running apps on mobile devices</li>
+      <li>Android = Linux-based, open-source, developed by Google, uses DVM (Dalvik Virtual Machine)</li>
+      <li>iOS = derived from Mac OS X/Darwin, closed-source, POSIX-compliant UNIX variant</li>
+      <li>Android Architecture (bottom→top): Linux Kernel → Native Libraries → Android Runtime → App Framework → Applications</li>
+      <li>iOS Architecture: Core OS → Core Services → Media → Cocoa Touch</li>
+      <li>BlackBerry OS = proprietary, by RIM, best known for push email, uses BES</li>
+      <li>DVM = Dalvik Virtual Machine — Android's VM, like JVM but optimized for mobile, less memory</li>
+    </ul>
+  </div>
+  <div class="notes-block amber">
+    <div class="notes-title">Unit 3 — Android Deep Dive <span class="tag tag-med">📌 Medium</span></div>
+    <ul class="notes-list">
+      <li>Android Inc. founded 2003, acquired by Google 2005 for $50 million</li>
+      <li>First public Android Beta: November 5, 2007</li>
+      <li>First commercial Android phone: T-Mobile G1 / HTC Dream, October 2008</li>
+      <li>Version names follow alphabet + confectionery: Cupcake, Donut, Eclair... Pie. After Android 10, numeric only.</li>
+      <li>Kotlin = preferred language since May 2019. 100% interoperable with Java. Concise syntax.</li>
+      <li>Android Studio = official IDE, by Google + JetBrains. Wireless debug, Logcat, Gradle, Compose preview</li>
+      <li>Firebase = Google backend service — auth, DB, cloud storage, Crashlytics, ML Kit. Free until limit.</li>
+      <li>Jira = project management. Agile poker, Sprint cycles, issue tracking.</li>
+      <li>ADB = Android Debug Bridge — runs commands on connected device</li>
+      <li>NDK = Native Development Kit — compiles C/C++ to ARM/x86 native code</li>
+    </ul>
+  </div>
+  <div class="notes-block red">
+    <div class="notes-title">Unit 4 — iOS Deep Dive <span class="tag tag-hot">🔥 High Priority</span></div>
+    <ul class="notes-list">
+      <li>iOS = iPhone Operating System. Developed by Apple. First released June 29, 2007 (iPhone OS 1)</li>
+      <li>Name changed from "iPhone OS" to "iOS" in June 2010 with iOS 4</li>
+      <li>App Store introduced in iPhone OS 2 (July 2008)</li>
+      <li>Swift = Apple programming language released 2014. 2.6× faster than Objective-C. Type-safe, memory-safe.</li>
+      <li>Objective-C = original language. Based on C. Supports OOP (encapsulation, inheritance, polymorphism)</li>
+      <li>Xcode = Official Apple IDE since 2003. For macOS, iOS, watchOS, tvOS. SwiftUI Builder + Instruments</li>
+      <li>iOS 4 (2010): Introduced multitasking. iOS 11 (2017): 64-bit only. iOS 13 (2019): Dark Mode + iPadOS split</li>
+      <li>Cocoa Touch = top layer of iOS architecture — UIKit framework for UI management</li>
+      <li>Apple has paid ~$50 billion to app developers since 2008. App Store has 2M+ apps.</li>
+    </ul>
+  </div>
+  <div class="notes-block purple">
+    <div class="notes-title">Unit 5 — Web Applications <span class="tag tag-med">📌 Medium</span></div>
+    <ul class="notes-list">
+      <li>Web app = stored on remote server, accessed via browser. Needs internet + authentication</li>
+      <li>Client-side: HTML, CSS, JavaScript — runs in browser</li>
+      <li>Server-side: PHP, Python, Java, C#, Ruby — runs on server</li>
+      <li>AngularJS: Google (2009), implements MVC, open-source JS framework</li>
+      <li>ReactJS: Facebook (Meta), Virtual DOM, component-based, view layer only</li>
+      <li>ASP.NET: Microsoft, ASP = Active Server Pages, uses C# or VB.NET</li>
+      <li>Node.js: JavaScript server platform, event-driven, non-blocking I/O</li>
+      <li>Application Server: business logic, dynamic content, contains Web + EJB containers</li>
+      <li>Web Server: static content only (HTML files, images) — handles HTTP requests/responses</li>
+      <li>PHP connect: mysql_connect(servername, username, password)</li>
+      <li>PDO: new PDO("mysql:host=server;dbname=db", user, pass)</li>
+      <li>SQL SELECT: SELECT col1, col2 FROM table WHERE col='value'</li>
+    </ul>
+  </div>
+  <div class="notes-block">
+    <div class="notes-title">Unit 6 — Web App Life Cycle <span class="tag tag-hot">🔥 High Priority</span></div>
+    <ul class="notes-list">
+      <li>7 Stages: Research → Planning → Designing → Content → Development → Testing → Deployment</li>
+      <li>Agile = ability to respond to change, iterative, customer-focused</li>
+      <li>XP (Extreme Programming) = Agile model. 5 Values: Communication, Simplicity, Feedback, Courage, Respect</li>
+      <li>Scrum = iterative+incremental. Sprints = 2-4 weeks. Product Backlog = prioritized features list</li>
+      <li>Sprint = short time period for completing specific tasks/milestones</li>
+      <li>Time Boxing = fixed duration iterations. Teams pipelined per stage (analysis→implementation→deploy)</li>
+      <li>FDD (Feature-Driven Development) = focuses on features. Good for large, NOT small projects</li>
+      <li>FDD Characteristics: Short iterative, Customer focused, Structured, Frequent releases</li>
+      <li>FDD Disadvantage: High dependency on lead programmers, lack of documentation</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== QUESTIONS ===== -->
+<div class="section" id="questions">
+  <p style="font-size:12px;color:var(--color-text-secondary);margin-bottom:1rem">Click any question to reveal the answer.</p>
+
+  <div style="font-size:13px;font-weight:500;color:var(--color-text-secondary);margin:0.75rem 0 0.4rem">Unit 1 — Mobile App Intro</div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">What is a mobile application? <span class="q-badge badge-mcq">MCQ</span></div><div class="q-ans">A mobile application is a computer program or software designed to run on a mobile device such as phone, tablet, or watch. It performs specific tasks for the user and is generally small with limited functions.</div></div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">Which was the first mobile app? Who introduced it? <span class="q-badge badge-mcq">MCQ</span></div><div class="q-ans">Nokia 6110's built-in game "Snake" (1997) is considered the first mobile app.</div></div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">What is WAP? What was its purpose? <span class="q-badge badge-short">Short</span></div><div class="q-ans">WAP (Wireless Application Protocol) was a stripped-down version of HTTP designed for early mobile phones. It allowed mobile devices to access the internet despite limited storage, processing power, and bandwidth. Early WAP sites were extensions of popular websites like CNN.com and ESPN.com.</div></div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">Differentiate between Mobile Application and Application Software. <span class="q-badge badge-long">Long</span></div><div class="q-ans">Key differences:<ul><li><b>Platform:</b> Mobile apps run on iOS/Android; Application software runs on Windows/macOS/Linux</li><li><b>Interface:</b> Mobile apps use touch UI with small screens; Application software uses keyboard/mouse with larger screens</li><li><b>Distribution:</b> Mobile apps via App Store/Google Play; Application software via websites/CDs</li><li><b>Language:</b> Mobile apps use Java, Kotlin, Swift; App software uses C++, C#, Java, Python</li><li><b>Resources:</b> Mobile apps limited by CPU/battery; App software uses more powerful hardware</li><li><b>Updates:</b> Mobile apps auto-update via store; App software may need manual updates</li><li><b>Examples:</b> Mobile: Instagram, WhatsApp; Application: MS Office, Photoshop</li></ul></div></div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">List the major mobile app distribution platforms. <span class="q-badge badge-short">Short</span></div><div class="q-ans">1. Google Play (Android, 3.48M+ apps, $25 fee) 2. Apple App Store (iOS, opened 2008) 3. Windows Store (Microsoft, launched 2010) 4. Google Assistant/Siri (intelligent personal assistants)</div></div>
+
+  <div style="font-size:13px;font-weight:500;color:var(--color-text-secondary);margin:0.75rem 0 0.4rem">Unit 2 — Mobile Operating Systems</div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">What is a mobile operating system? <span class="q-badge badge-mcq">MCQ</span></div><div class="q-ans">A mobile operating system is a lightweight OS that helps run other application software on mobile devices. It manages hardware, provides user interface, and enables app compatibility — similar to PC operating systems like Windows or Linux.</div></div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">What is DVM? How is it different from JVM? <span class="q-badge badge-short">Short</span></div><div class="q-ans">DVM (Dalvik Virtual Machine) is Android's virtual machine. It is similar to JVM (Java Virtual Machine) but optimized specifically for mobile devices — it consumes less memory and provides fast performance. It uses just-in-time compilation to translate Java byte code into Dalvik dex-code.</div></div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">Describe the layers of Android architecture. <span class="q-badge badge-long">Long</span></div><div class="q-ans">Android architecture has 5 layers (bottom to top):<ul><li><b>Linux Kernel:</b> Heart of Android. Manages device drivers, power, memory, and processes</li><li><b>Native Libraries:</b> C/C++ libraries — WebKit (browser), SQLite (DB), FreeType (fonts), Media, OpenGL</li><li><b>Android Runtime:</b> Core libraries + DVM. Responsible for running Android apps</li><li><b>Application Framework:</b> APIs for UI, telephony, location, Content Providers, Package Managers</li><li><b>Applications:</b> Top layer — all user apps like Home, Contacts, Browser, Games</li></ul></div></div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">What are the 4 layers of iOS architecture? <span class="q-badge badge-short">Short</span></div><div class="q-ans">iOS has 4 abstraction layers: 1. Core OS (lowest) — Bluetooth, Security, Accelerate framework 2. Core Services — accounts, contacts, networking, location, SQLite 3. Media Layer — 2D/3D graphics, audio, video 4. Cocoa Touch (top) — UIKit, multitasking, touch input, notifications</div></div>
+
+  <div style="font-size:13px;font-weight:500;color:var(--color-text-secondary);margin:0.75rem 0 0.4rem">Unit 3 — Android</div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">When and by whom was Android founded? <span class="q-badge badge-mcq">MCQ</span></div><div class="q-ans">Android was founded in 2003 by Andy Rubin, Rich Miner, Nick Sears, and Chris White. Google acquired it in 2005 for $50 million.</div></div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">What is Android Studio? List its key features. <span class="q-badge badge-short">Short</span></div><div class="q-ans">Android Studio is the official IDE for Android development, created by Google and JetBrains. Features: Wireless Debugging, Compose Preview, Sync with Android SDK, Built-in Gradle system, Logcat for debugging, Device Manager and Profiler.</div></div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">Why was Kotlin preferred over Java for Android? <span class="q-badge badge-short">Short</span></div><div class="q-ans">Google announced Kotlin as Android's preferred language in May 2019. Kotlin improves on Java by: reducing verbose syntax, adding modern features, being 100% interoperable with Java, providing concise and safer code. Old Java code doesn't need to be replaced — both can coexist.</div></div>
+
+  <div style="font-size:13px;font-weight:500;color:var(--color-text-secondary);margin:0.75rem 0 0.4rem">Unit 4 — iOS</div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">When was iOS first released and on which device? <span class="q-badge badge-mcq">MCQ</span></div><div class="q-ans">iOS (then called iPhone OS 1) was first released on June 29, 2007 alongside the original iPhone.</div></div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">Compare Swift and Objective-C. <span class="q-badge badge-short">Short</span></div><div class="q-ans">Swift: Released 2014, modern, type-safe, memory-safe, 2.6× faster than Objective-C, functional programming support, easier to read. Objective-C: Original Apple language based on C, general-purpose OOP, supports encapsulation/inheritance/polymorphism, similar structure to C. Swift is now Apple's preferred language.</div></div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">Describe the history of iOS versions and their key features. <span class="q-badge badge-long">Long</span></div><div class="q-ans">Key iOS version history: iPhone OS 1 (2007) — First release, multi-touch interface, no App Store. iPhone OS 2 (2008) — App Store introduced, third-party apps. iOS 4 (2010) — Name changed to iOS, multitasking added. iOS 5 (2011) — iCloud, Siri. iOS 7 (2013) — Complete redesign (flat UI). iOS 11 (2017) — 64-bit only, dropped 32-bit apps. iOS 13 (2019) — Dark Mode, Memoji, iPadOS split. iOS 14 (2020) — Widgets on homescreen, App Library. iOS 15 (2021) — FaceTime improvements, Focus mode.</div></div>
+
+  <div style="font-size:13px;font-weight:500;color:var(--color-text-secondary);margin:0.75rem 0 0.4rem">Unit 5 — Web Applications</div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">What is a web application? How does it work? <span class="q-badge badge-short">Short</span></div><div class="q-ans">A web application is a program stored on a remote server accessed through a web browser. It uses client-side scripts (HTML/JS for browser) + server-side scripts (PHP/Python for server). Client-side responds to user input; server-side handles HTTP requests and data storage.</div></div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">Differentiate between Web Server and Application Server. <span class="q-badge badge-short">Short</span></div><div class="q-ans">Web Server: Handles only HTTP requests/responses. Serves static content — HTML pages, files, images, videos. Application Server: Exposes business logic, generates dynamic content. Contains Web + EJB containers. Handles servlet, JSP, EJB. Makes website content change based on context.</div></div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">Write PHP code to connect to a MySQL database. <span class="q-badge badge-short">Short</span></div><div class="q-ans">Method 1 — mysql_connect: $dh = mysql_connect(servername, username, password); Method 2 — PDO: $dbconn = new PDO("mysql:host=servername;dbname=databasename", username, password); SQL query: SELECT column1, column2 FROM table1 WHERE column2='value';</div></div>
+
+  <div style="font-size:13px;font-weight:500;color:var(--color-text-secondary);margin:0.75rem 0 0.4rem">Unit 6 — Web App Life Cycle Models</div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">What are the 7 stages of web development life cycle? <span class="q-badge badge-short">Short</span></div><div class="q-ans">1. Research &amp; Analysis — gather info, understand users 2. Planning — wireframes, technology stack 3. Designing — UI/UX, layout, colors 4. Content Creation — writing, CTAs 5. Development — frontend + backend coding 6. Testing &amp; QA — unit, stress, load testing 7. Deployment &amp; Maintenance — FTP hosting, updates</div></div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">Explain Scrum methodology. What is a Sprint? <span class="q-badge badge-long">Long</span></div><div class="q-ans">Scrum is an Agile development methodology based on iterative and incremental processes. Key aspects: Product Backlog = ordered priority list of features. Sprint = time-boxed iteration of 2-4 weeks where team completes specific tasks. Each sprint delivers a working product increment. Scrum values: transparency, collective responsibility, continuous progress. It is adaptable, fast, flexible, and customer-focused.</div></div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">Compare XP, Scrum, Time Boxing and FDD. <span class="q-badge badge-long">Long</span></div><div class="q-ans">XP (Extreme Programming): Values-based (Communication, Simplicity, Feedback, Courage, Respect). Activities: coding, testing, listening, designing. Best for quality-focused teams. Scrum: Uses Sprints (2-4 weeks), Product Backlog. Iterative, incremental. Focus on delivering value. Time Boxing: Fixed-duration iterations, functionality adjusted to fit. Pipelined dedicated teams per stage. FDD: Feature-focused, iterative. Customer inspection of each feature. Short iterations. Good for large projects, bad for small. Requires lead programmers.</div></div>
+  <div class="q-block"><div class="q-header" onclick="toggleQ(this)">What are the advantages and disadvantages of FDD? <span class="q-badge badge-short">Short</span></div><div class="q-ans">Advantages: Easy progress tracking at all levels, continuous success for large projects, risk reduction through smaller segments, better cost estimation. Disadvantages: Not suitable for small projects, high dependency on lead programmers/designers, lack of documentation.</div></div>
+</div>
+
+<!-- ===== CHEAT SHEET ===== -->
+<div class="section" id="cheatsheet">
+  <p style="font-size:12px;color:var(--color-text-secondary);margin-bottom:1rem">Quick-fire facts for last-minute revision before the exam.</p>
+  <div class="cheat-grid">
+    <div class="cheat-card">
+      <h4>📱 App Types</h4>
+      <ul><li>Native — single platform</li><li>Web — browser-based</li><li>Hybrid — native + web</li></ul>
+    </div>
+    <div class="cheat-card">
+      <h4>📅 Key Dates</h4>
+      <ul><li>1983 — DynaTAC 8000X</li><li>1997 — Snake (Nokia)</li><li>2007 — iPhone + iOS</li><li>2008 — App Store + Android</li></ul>
+    </div>
+    <div class="cheat-card">
+      <h4>🤖 Android Layers</h4>
+      <ul><li>Linux Kernel</li><li>Native Libraries</li><li>Android Runtime (DVM)</li><li>App Framework</li><li>Applications</li></ul>
+    </div>
+    <div class="cheat-card">
+      <h4>🍎 iOS Layers</h4>
+      <ul><li>Core OS (lowest)</li><li>Core Services</li><li>Media Layer</li><li>Cocoa Touch (top)</li></ul>
+    </div>
+    <div class="cheat-card">
+      <h4>🔧 Android Tools</h4>
+      <ul><li>Kotlin (2019+)</li><li>Android Studio (IDE)</li><li>Firebase (backend)</li><li>Jira (project mgmt)</li></ul>
+    </div>
+    <div class="cheat-card">
+      <h4>🔧 iOS Tools</h4>
+      <ul><li>Swift (2014, faster)</li><li>Objective-C (original)</li><li>Xcode (IDE, 2003)</li></ul>
+    </div>
+    <div class="cheat-card">
+      <h4>🌐 Web Frameworks</h4>
+      <ul><li>AngularJS — Google, MVC</li><li>ReactJS — Facebook, DOM</li><li>ASP.NET — Microsoft</li><li>Node.js — JS server</li></ul>
+    </div>
+    <div class="cheat-card">
+      <h4>🔄 SDLC Models</h4>
+      <ul><li>XP — values-based agile</li><li>Scrum — sprints (2-4wk)</li><li>Time Boxing — fixed duration</li><li>FDD — feature-focused</li></ul>
+    </div>
+    <div class="cheat-card">
+      <h4>📋 XP Values (5)</h4>
+      <ul><li>Communication</li><li>Simplicity</li><li>Feedback</li><li>Courage</li><li>Respect</li></ul>
+    </div>
+    <div class="cheat-card">
+      <h4>🌐 Web App Stages (7)</h4>
+      <ul><li>Research → Planning</li><li>Designing → Content</li><li>Development → Testing</li><li>Deployment+Maintenance</li></ul>
+    </div>
+    <div class="cheat-card">
+      <h4>💾 DB Connection</h4>
+      <p>mysql_connect(server, user, pass)</p>
+      <p>new PDO("mysql:host=...", u, p)</p>
+      <p>SELECT col FROM tbl WHERE x</p>
+    </div>
+    <div class="cheat-card">
+      <h4>🔒 Blackberry OS</h4>
+      <ul><li>By RIM (Research in Motion)</li><li>Push email specialist</li><li>Uses BES (Enterprise Server)</li><li>Supports MS Exchange</li></ul>
+    </div>
+  </div>
+
+  <div style="border:0.5px solid var(--border);border-radius:var(--border-radius-lg);padding:1rem;margin-top:0.5rem">
+    <div style="font-size:14px;font-weight:500;margin-bottom:0.75rem">Important Comparisons — Likely Exam Topics</div>
+    <table class="diff-table">
+      <tr><th>Feature</th><th>Android</th><th>iOS</th></tr>
+      <tr><td>Developed by</td><td>Google</td><td>Apple</td></tr>
+      <tr><td>Source</td><td>Open Source</td><td>Closed Source</td></tr>
+      <tr><td>Language</td><td>Java / Kotlin</td><td>Objective-C / Swift</td></tr>
+      <tr><td>IDE</td><td>Android Studio</td><td>Xcode</td></tr>
+      <tr><td>VM</td><td>DVM (Dalvik)</td><td>None (native)</td></tr>
+      <tr><td>Kernel</td><td>Linux</td><td>Darwin (UNIX)</td></tr>
+      <tr><td>Store</td><td>Google Play</td><td>App Store</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===== PRO TIPS ===== -->
+<div class="section" id="tips">
+  <div style="border:0.5px solid var(--border);border-radius:var(--border-radius-lg);padding:1rem;margin-bottom:1rem">
+    <div style="font-size:14px;font-weight:500;margin-bottom:0.75rem"><i class="ti ti-bulb" aria-hidden="true"></i> Exam Pro Tips</div>
+    <div class="tip-item"><div class="tip-num">1</div><div class="tip-text">Always remember the Android architecture layers in order: Linux Kernel → Native Libraries → Android Runtime → App Framework → Applications. A common trick: "Let None Allow Failure Again" (L-N-A-F-A).</div></div>
+    <div class="tip-item"><div class="tip-num">2</div><div class="tip-text">For iOS, remember 4 layers: "Core OS, Core Services, Media, Cocoa Touch" — bottom to top. Cocoa Touch (UIKit) is always the top layer closest to the user.</div></div>
+    <div class="tip-item"><div class="tip-num">3</div><div class="tip-text">The 7 SDLC stages for web: "Research Plans Design Content — Developers Test Deployment" (RPDCDTD). Most common long-answer question!</div></div>
+    <div class="tip-item"><div class="tip-num">4</div><div class="tip-text">For model comparisons (XP vs Scrum vs FDD), focus on the key differentiator: XP = values (5 values), Scrum = Sprints, Time Boxing = fixed duration, FDD = feature focus.</div></div>
+    <div class="tip-item"><div class="tip-num">5</div><div class="tip-text">Common trap: Don't confuse "Web Server" (static content only) with "Application Server" (business logic, dynamic content). Exam often asks this distinction.</div></div>
+    <div class="tip-item"><div class="tip-num">6</div><div class="tip-text">Android was acquired by Google in 2005 for $50 million. Beta launched Nov 5, 2007. First phone: T-Mobile G1 / HTC Dream, Oct 2008. Memorize these dates!</div></div>
+    <div class="tip-item"><div class="tip-num">7</div><div class="tip-text">Swift is 2.6× faster than Objective-C — this specific fact is very likely to appear in MCQ. Also remember: Swift released 2014, Xcode released 2003.</div></div>
+    <div class="tip-item"><div class="tip-num">8</div><div class="tip-text">For FDD: advantages = reporting at all levels, suits large projects. Disadvantage = NOT good for small projects, lacks documentation, relies on lead programmers. These often appear as MCQs.</div></div>
+    <div class="tip-item"><div class="tip-num">9</div><div class="tip-text">WAP = Wireless Application Protocol = stripped-down HTTP. This is a very common one-liner MCQ answer.</div></div>
+    <div class="tip-item"><div class="tip-num">10</div><div class="tip-text">Remember GCM (Google Cloud Messaging) and Android Beam (NFC-based) as unique Android features — they often appear as MCQ options.</div></div>
+  </div>
+
+  <div style="border:0.5px solid var(--border);border-radius:var(--border-radius-lg);padding:1rem;background:var(--color-background-secondary)">
+    <div style="font-size:14px;font-weight:500;margin-bottom:0.75rem">⭐ Most Likely Exam Questions (Hot List)</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px">
+      <span class="tag tag-hot">Differentiate Mobile App vs App Software</span>
+      <span class="tag tag-hot">Android Architecture 5 layers</span>
+      <span class="tag tag-hot">iOS Architecture 4 layers</span>
+      <span class="tag tag-hot">7 Web Dev Life Cycle Stages</span>
+      <span class="tag tag-hot">Scrum + Sprint explanation</span>
+      <span class="tag tag-hot">XP values (5)</span>
+      <span class="tag tag-hot">Android vs iOS comparison table</span>
+      <span class="tag tag-med">History of mobile apps</span>
+      <span class="tag tag-med">Web Server vs Application Server</span>
+      <span class="tag tag-med">Kotlin vs Java</span>
+      <span class="tag tag-med">Swift vs Objective-C</span>
+      <span class="tag tag-med">PHP DB connection code</span>
+      <span class="tag tag-med">FDD advantages/disadvantages</span>
+      <span class="tag tag-def">Google Play vs App Store</span>
+      <span class="tag tag-def">What is WAP?</span>
+      <span class="tag tag-def">What is DVM?</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.closest('.tab').classList.add('active');
+}
+function toggle(header){
+  const body=header.nextElementSibling;
+  const chev=header.querySelector('.chevron');
+  const open=body.classList.toggle('open');
+  if(open)chev.classList.add('open');else chev.classList.remove('open');
+}
+function toggleQ(header){
+  const ans=header.nextElementSibling;
+  ans.classList.toggle('open');
+}
+document.querySelectorAll('.unit-header')[0].click();
+</script>
