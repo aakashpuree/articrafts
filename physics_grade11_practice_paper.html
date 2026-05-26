@@ -1,0 +1,615 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap');
+
+  .paper-root {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--color-text-primary);
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 0 2rem;
+  }
+
+  .paper-header {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem 1.75rem 1.25rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .school-name {
+    font-family: 'EB Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin: 0 0 4px;
+  }
+
+  .exam-meta {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 0 0 1rem;
+  }
+
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    padding-top: 0.75rem;
+    font-size: 13px;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .meta-label {
+    color: var(--color-text-secondary);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .meta-value {
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .hot-badge {
+    display: inline-block;
+    background: var(--color-background-danger);
+    color: var(--color-text-danger);
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 999px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  .note-box {
+    border: 0.5px solid var(--color-border-tertiary);
+    border-left: 3px solid var(--color-border-warning);
+    border-radius: var(--border-radius-md);
+    padding: 0.75rem 1rem;
+    background: var(--color-background-warning);
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-block {
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.25rem;
+    background: var(--color-background-secondary);
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+  }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-icon {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+  }
+
+  .marks-pill {
+    font-size: 12px;
+    font-weight: 500;
+    background: var(--color-background-info);
+    color: var(--color-text-info);
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  .section-body {
+    padding: 1rem 1.25rem;
+  }
+
+  .q-item {
+    padding: 0.6rem 0;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    font-size: 14px;
+    line-height: 1.65;
+    display: flex;
+    gap: 10px;
+  }
+
+  .q-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .q-num {
+    color: var(--color-text-secondary);
+    font-size: 13px;
+    min-width: 22px;
+    padding-top: 1px;
+  }
+
+  .q-text {
+    flex: 1;
+  }
+
+  .q-marks {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    margin-left: 6px;
+    white-space: nowrap;
+  }
+
+  .mcq-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 16px;
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+  }
+
+  .group-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 0.5rem 0 0.3rem;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    margin-bottom: 0.4rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .footer-note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-top: 1rem;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+  }
+
+  .attempt-tag {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .or-divider {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    padding: 0.3rem 0;
+    border-bottom: 0.5px dashed var(--color-border-tertiary);
+    margin-bottom: 0.3rem;
+  }
+</style>
+
+<div class="paper-root">
+  <h2 class="sr-only" style="display:none">Grade 11 Physics Practice Exam Paper based on previous years</h2>
+
+  <div class="paper-header">
+    <div class="school-name">Shree Siddhababa Secondary School</div>
+    <div class="exam-meta">Resungga-08, Khanigaun, Gulmi &nbsp;|&nbsp; Pre-Board Practice Examination – 2082</div>
+    <div class="meta-row">
+      <div class="meta-item">
+        <span class="meta-label">Grade</span>
+        <span class="meta-value">11 (Science)</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Subject</span>
+        <span class="meta-value">Physics &nbsp;<span style="font-size:11px;color:var(--color-text-secondary)">PHY 8131</span></span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Full Marks</span>
+        <span class="meta-value">75</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Pass Marks</span>
+        <span class="meta-value">27</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Time</span>
+        <span class="meta-value">3 Hours</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <i class="ti ti-info-circle" aria-hidden="true"></i>
+    <strong>Instructions:</strong> Attempt all questions. Use blue/black ink. Figures in the margin indicate full marks. Calculator is not allowed. All questions are based on repeated/high-probability topics from previous exams. <span class="hot-badge">High Probability</span> = appeared 2+ times before.
+  </div>
+
+  <!-- GROUP A: MCQ -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-title">
+        <i class="ti ti-list-check section-icon" aria-hidden="true"></i>
+        Group A — Multiple Choice Questions
+      </div>
+      <span class="marks-pill">11 × 1 = 11 marks</span>
+    </div>
+    <div class="section-body">
+      <span class="attempt-tag">Attempt all 11 questions. Each carries 1 mark.</span>
+
+      <div class="q-item">
+        <span class="q-num">1.</span>
+        <span class="q-text">
+          Which physical quantity has the dimensional formula [M L⁻¹ T⁻²]? <span class="hot-badge">Hot</span>
+          <div class="mcq-options">
+            <span>a. Work</span><span>b. Power</span>
+            <span>c. Pressure</span><span>d. Force</span>
+          </div>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">2.</span>
+        <span class="q-text">
+          If the vector A = 3î + 4ĵ, its magnitude is: <span class="hot-badge">Hot</span>
+          <div class="mcq-options">
+            <span>a. 5</span><span>b. 7</span>
+            <span>c. 25</span><span>d. None of these</span>
+          </div>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">3.</span>
+        <span class="q-text">
+          The SI unit of impulse is same as that of:
+          <div class="mcq-options">
+            <span>a. Force</span><span>b. Momentum</span>
+            <span>c. Energy</span><span>d. Power</span>
+          </div>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">4.</span>
+        <span class="q-text">
+          A 2 kg object moving at 3 m/s strikes a wall and stops in 0.1 s. The average force exerted by the wall is: <span class="hot-badge">Hot</span>
+          <div class="mcq-options">
+            <span>a. 6 N</span><span>b. 30 N</span>
+            <span>c. 60 N</span><span>d. 120 N</span>
+          </div>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">5.</span>
+        <span class="q-text">
+          In uniform circular motion, which of the following quantities remains constant?
+          <div class="mcq-options">
+            <span>a. 0°</span><span>b. 45°</span>
+            <span>c. 90°</span><span>d. 180°</span>
+          </div>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">6.</span>
+        <span class="q-text">
+          WorkDone is maximum when the angle between force and displacement is: <span class="hot-badge">Hot</span>
+          <div class="mcq-options">
+            <span>a. 0°</span><span>b. 45°</span>
+            <span>c. 90°</span><span>d. 180°</span>
+          </div>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">7.</span>
+        <span class="q-text">
+          A particle of mass m has momentum P. What is its kinetic energy?
+          <div class="mcq-options">
+            <span>a. 2mp</span><span>b. p²/2m</span>
+            <span>c. 2mp²</span><span>d. 2m/p²</span>
+          </div>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">8.</span>
+        <span class="q-text">
+          At what height above the Earth's surface does the acceleration due to gravity become one-fourth of its value on the surface? <span class="hot-badge">Hot</span>
+          <div class="mcq-options">
+            <span>a. R/4</span><span>b. R/2</span>
+            <span>c. R</span><span>d. 2R</span>
+          </div>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">9.</span>
+        <span class="q-text">
+          What is the value of bulk modulus for an incompressible liquid? <span class="hot-badge">Hot</span>
+          <div class="mcq-options">
+            <span>a. Zero</span><span>b. Less than 1</span>
+            <span>c. Unity</span><span>d. Infinity</span>
+          </div>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">10.</span>
+        <span class="q-text">
+          If the emissivity (e) of a body is less than 1 (e &lt; 1), the body is considered:
+          <div class="mcq-options">
+            <span>a. A perfect black body</span><span>b. Not a perfectly black body</span>
+            <span>c. An impossible body</span><span>d. A perfect reflector</span>
+          </div>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">11.</span>
+        <span class="q-text">
+          If a ray of light is incident normally on a plane surface, the angle of refraction is:
+          <div class="mcq-options">
+            <span>a. 90°</span><span>b. 45°</span>
+            <span>c. 180°</span><span>d. 0°</span>
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP B: SHORT ANSWER -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-title">
+        <i class="ti ti-pencil section-icon" aria-hidden="true"></i>
+        Group B — Short Answer Questions
+      </div>
+      <span class="marks-pill">8 × 5 = 40 marks</span>
+    </div>
+    <div class="section-body">
+      <span class="attempt-tag">Attempt any 8 questions from the following. Each carries 5 marks.</span>
+
+      <div class="group-label">
+        <span>Attempt any 8 of the following</span>
+        <span>5 marks each</span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">1.</span>
+        <span class="q-text">
+          (a) State the principle of homogeneity. Find the dimension of K in the equation T = 2π√(m/K). <span class="hot-badge">Hot</span>
+          <span class="q-marks">[2+3]</span>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">2.</span>
+        <span class="q-text">
+          (a) State the triangle law of vector addition. Two vectors A and B are such that A – B = C and A = B = C. Find the angle between them.
+          <span class="q-marks">[2+3]</span>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">3.</span>
+        <span class="q-text">
+          (a) What is centripetal acceleration? Derive an expression for centripetal acceleration. <span class="hot-badge">Hot</span>
+          <span class="q-marks">[1+4]</span>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">4.</span>
+        <span class="q-text">
+          (a) State and prove the Work-Energy theorem. <span class="hot-badge">Hot</span>
+          <span class="q-marks">[2+3]</span>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">5.</span>
+        <span class="q-text">
+          (a) Define gravitational potential energy and explain why it is negative. Derive an expression for it. <span class="hot-badge">Hot</span>
+          <span class="q-marks">[1+4]</span>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">6.</span>
+        <span class="q-text">
+          (a) Define Poisson's ratio. Derive the expression for it and find the expression for escape velocity of earth. <span class="hot-badge">Hot</span>
+          <span class="q-marks">[2+3]</span>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">7.</span>
+        <span class="q-text">
+          (a) Define moment of couple (torque). Find the expression for work done due to couple. (b) A cricketer moves his hand while catching the ball — why? Explain.
+          <span class="q-marks">[3+2]</span>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">8.</span>
+        <span class="q-text">
+          (a) State Newton's law of cooling. (b) A steel wire 2 mm in diameter is stretched between two clamps. When its temperature falls to 30°C, calculate the tension. [αs = 11×10⁻⁶ °C⁻¹, Ys = 21×10¹⁰ dyne/cm²]
+          <span class="q-marks">[2+3]</span>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">9.</span>
+        <span class="q-text">
+          (a) Why do pendulum clocks made of brass keep correct time at 15°C but lose time at higher temperatures? How many seconds per day will it lose at 20°C? [For brass = 0.000018 °C⁻¹]
+          <span class="q-marks">[2+3]</span>
+        </span>
+      </div>
+
+      <div class="q-item">
+        <span class="q-num">10.</span>
+        <span class="q-text">
+          (a) What is weightlessness? Derive an expression for escape velocity. (b) What is Angular displacement? Derive an expression for centripetal acceleration. <span class="hot-badge">Hot</span>
+          <span class="q-marks">[2+3]</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP C: LONG ANSWER -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-title">
+        <i class="ti ti-file-text section-icon" aria-hidden="true"></i>
+        Group C — Long Answer Questions
+      </div>
+      <span class="marks-pill">3 × 8 = 24 marks</span>
+    </div>
+    <div class="section-body">
+      <span class="attempt-tag">Attempt any 3 questions. Each carries 8 marks.</span>
+
+      <div class="q-item" style="flex-direction: column; gap: 6px;">
+        <div style="display:flex; gap:10px;">
+          <span class="q-num">1.</span>
+          <span class="q-text" style="font-weight:500;">Projectile Motion <span class="hot-badge">Hot — appeared both papers</span></span>
+        </div>
+        <div style="padding-left: 32px; font-size: 14px; line-height: 1.7;">
+          (a) Show that the path of a projectile fired from the ground by making angle θ with horizontal is parabolic. <span class="q-marks">[3]</span><br>
+          (b) Find the angle of projection at which horizontal range and maximum height is equal. <span class="q-marks">[3]</span><br>
+          (c) Find the distance, displacement and acceleration at 20 seconds using the v-t graph given. <span class="q-marks">[2]</span>
+        </div>
+      </div>
+
+      <div class="or-divider">OR</div>
+
+      <div class="q-item" style="flex-direction: column; gap: 6px;">
+        <div style="display:flex; gap:10px;">
+          <span class="q-num"></span>
+          <span class="q-text" style="font-size:14px; line-height:1.7; padding-left:0;">
+            A ball is thrown upward with an initial velocity of 20 m/s and sometimes it returns. What is the maximum height reached? Take g = 10 m/s².
+          </span>
+        </div>
+      </div>
+
+      <div style="border-top: 0.5px solid var(--color-border-tertiary); margin: 0.5rem 0;"></div>
+
+      <div class="q-item" style="flex-direction: column; gap: 6px;">
+        <div style="display:flex; gap:10px;">
+          <span class="q-num">2.</span>
+          <span class="q-text" style="font-weight:500;">Satellite and Orbital Velocity <span class="hot-badge">Hot — appeared both papers</span></span>
+        </div>
+        <div style="padding-left: 32px; font-size: 14px; line-height: 1.7;">
+          (a) A satellite revolves close to the surface of a planet. How is its orbital velocity related to the velocity of escape from that planet? Derive an expression for orbital velocity. <span class="q-marks">[4]</span><br>
+          (b) A satellite revolves close to the surface of the planet. Calculate the magnitude and direction of velocity after 5 seconds. <span class="q-marks">[2]</span><br>
+          (c) An earth satellite moves in a circular orbit at distance 3400 km from earth. Find the period of revolution and orbital velocity. [R = 6400 km, g = 9.8 m/s²] <span class="q-marks">[2]</span>
+        </div>
+      </div>
+
+      <div style="border-top: 0.5px solid var(--color-border-tertiary); margin: 0.5rem 0;"></div>
+
+      <div class="q-item" style="flex-direction: column; gap: 6px;">
+        <div style="display:flex; gap:10px;">
+          <span class="q-num">3.</span>
+          <span class="q-text" style="font-weight:500;">Concave Mirror and Optics <span class="hot-badge">Hot — appeared both papers</span></span>
+        </div>
+        <div style="padding-left: 32px; font-size: 14px; line-height: 1.7;">
+          (a) Derive the mirror formula of a concave mirror. <span class="q-marks">[4]</span><br>
+          (b) The radius of curvature of a concave mirror is 24 cm and the image is magnified by 1.5 times. What is the object distance? <span class="q-marks">[2]</span><br>
+          (c) Define linear magnification and express it in terms of image distance and object distance. <span class="q-marks">[2]</span>
+        </div>
+      </div>
+
+      <div class="or-divider">OR</div>
+
+      <div class="q-item" style="flex-direction: column; gap: 6px;">
+        <div style="display:flex; gap:10px;">
+          <span class="q-num"></span>
+          <span class="q-text" style="font-size:14px; line-height:1.7; padding-left:0;">
+            (a) What is minimum deviation? Write the conditions for it. <span class="q-marks">[2]</span> (b) Derive the relation between refractive index, angle of prism and angle of minimum deviation. <span class="q-marks">[3]</span> (c) A glass prism of angle 72° and index of refraction 1.66 is immersed in liquid of refractive index 1.33. Find the angle of refraction and angle of minimum deviation when a ray is refracted through the prism. <span class="q-marks">[3]</span>
+          </span>
+        </div>
+      </div>
+
+      <div style="border-top: 0.5px solid var(--color-border-tertiary); margin: 0.5rem 0;"></div>
+
+      <div class="q-item" style="flex-direction: column; gap: 6px;">
+        <div style="display:flex; gap:10px;">
+          <span class="q-num">4.</span>
+          <span class="q-text" style="font-weight:500;">Thermal Expansion and Heat <span class="hot-badge">Hot</span></span>
+        </div>
+        <div style="padding-left: 32px; font-size: 14px; line-height: 1.7;">
+          (a) Define an element of an electric fire with an output of 1.5 kW. It is a cylinder of 0.3 m long and 0.04 m in radius. Calculate its temperature if it behaves as a black body. <span class="q-marks">[3]</span><br>
+          (b) Define temperature gradient. Derive the relation between thermal conductivity and temperature gradient. <span class="q-marks">[2]</span><br>
+          (c) A glass vessel of volume 50 cm³ is filled with mercury and is heated from 20°C to 60°C. What volume of mercury will overflow? [αg = 1.8×10⁻⁶ K⁻¹ and γm = ?] <span class="q-marks">[3]</span>
+        </div>
+      </div>
+
+      <div style="border-top: 0.5px solid var(--color-border-tertiary); margin: 0.5rem 0;"></div>
+
+      <div class="q-item" style="flex-direction: column; gap: 6px;">
+        <div style="display:flex; gap:10px;">
+          <span class="q-num">5.</span>
+          <span class="q-text" style="font-weight:500;">Gravitational PE, Conservation of Energy & Circular Motion</span>
+        </div>
+        <div style="padding-left: 32px; font-size: 14px; line-height: 1.7;">
+          (a) Derive the mathematical expression for gravitational potential energy. <span class="q-marks">[3]</span><br>
+          (b) Derive the orbital velocity, time period and total energy of satellite. <span class="q-marks">[3]</span><br>
+          (c) If the force on all bodies is proportional to their masses, why does a heavy body fall faster than a light body? <span class="q-marks">[2]</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Spec summary -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-title">
+        <i class="ti ti-layout-grid section-icon" aria-hidden="true"></i>
+        Mark distribution (matches specification grid)
+      </div>
+    </div>
+    <div class="section-body" style="font-size:13px; color: var(--color-text-secondary);">
+      <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; text-align:center;">
+        <div>
+          <div style="font-weight:500; color: var(--color-text-primary); font-size:14px;">11</div>
+          <div>MCQ (1 each)</div>
+        </div>
+        <div>
+          <div style="font-weight:500; color: var(--color-text-primary); font-size:14px;">40</div>
+          <div>Short Q (5 each)</div>
+        </div>
+        <div>
+          <div style="font-weight:500; color: var(--color-text-primary); font-size:14px;">24</div>
+          <div>Long Q (8 each)</div>
+        </div>
+        <div>
+          <div style="font-weight:500; color: var(--color-text-primary); font-size:14px; color: var(--color-text-info);">75</div>
+          <div>Total</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-note">Best of luck! You've got this. — Study hard, stay calm, write clearly.</div>
+</div>
