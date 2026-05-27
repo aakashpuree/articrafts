@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java Exam — Complete Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #1a1a24;
+    --card: #1e1e2a;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.15);
+    --text: #e8e8f0;
+    --muted: #8888a8;
+    --accent: #7c6ff7;
+    --accent2: #5de8b5;
+    --accent3: #f97316;
+    --accent4: #f43f8e;
+    --accent5: #38bdf8;
+    --warn: #facc15;
+    --font: 'Space Grotesk', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
+
+  /* NAV */
+  .nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; padding: 10px 20px; overflow-x: auto; }
+  .nav-title { font-size: 14px; font-weight: 700; color: var(--accent); white-space: nowrap; margin-right: 10px; letter-spacing: 0.5px; }
+  .nav button { background: var(--bg3); border: 1px solid var(--border); color: var(--muted); font-family: var(--font); font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 20px; cursor: pointer; white-space: nowrap; transition: all .2s; }
+  .nav button.active, .nav button:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* PAGES */
+  .page { display: none; padding: 24px 20px; max-width: 900px; margin: 0 auto; }
+  .page.active { display: block; }
+
+  /* MIND MAP */
+  .mindmap-container { overflow-x: auto; padding-bottom: 10px; }
+  .tree { display: flex; flex-direction: column; align-items: center; gap: 0; }
+  .root-node { background: linear-gradient(135deg, #7c6ff7, #5de8b5); color: #fff; font-size: 18px; font-weight: 700; padding: 14px 32px; border-radius: 14px; text-align: center; margin-bottom: 8px; }
+  .units-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; padding: 8px 0; }
+  .unit-col { display: flex; flex-direction: column; align-items: center; min-width: 130px; max-width: 160px; }
+  .unit-node { color: #fff; font-size: 12px; font-weight: 600; padding: 8px 14px; border-radius: 10px; text-align: center; cursor: pointer; transition: transform .15s, box-shadow .15s; width: 100%; }
+  .unit-node:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  .u1 { background: #7c6ff7; }
+  .u2 { background: #5de8b5; color: #0a2a1e !important; }
+  .u3 { background: #f97316; }
+  .u4 { background: #f43f8e; }
+  .u5 { background: #38bdf8; color: #0a1f2a !important; }
+  .u6 { background: #facc15; color: #1a1000 !important; }
+  .u7 { background: #a78bfa; }
+  .sub-nodes { display: flex; flex-direction: column; gap: 4px; margin-top: 6px; width: 100%; }
+  .sub-node { background: var(--card); border: 1px solid var(--border); font-size: 10px; color: var(--muted); padding: 4px 8px; border-radius: 6px; text-align: center; cursor: pointer; transition: all .15s; }
+  .sub-node:hover { border-color: var(--accent); color: var(--text); }
+  .connector-v { width: 2px; height: 10px; background: var(--border2); margin: 0 auto; }
+
+  /* NOTES */
+  .unit-section { margin-bottom: 28px; }
+  .unit-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .unit-badge { font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.5px; }
+  .unit-title { font-size: 20px; font-weight: 700; }
+  .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+  .topic-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+  .topic-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+  .topic-card ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  .topic-card li { font-size: 12px; color: var(--muted); padding-left: 14px; position: relative; line-height: 1.5; }
+  .topic-card li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 10px; top: 2px; }
+  .star-item li::before { content: '★'; color: var(--warn); }
+  .code-block { background: #0f0f18; border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-top: 8px; font-family: var(--mono); font-size: 11px; color: #a5f3fc; overflow-x: auto; white-space: pre; line-height: 1.6; }
+  .imp-tag { display: inline-block; background: rgba(249,115,22,0.15); border: 1px solid rgba(249,115,22,0.3); color: #f97316; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; margin-bottom: 6px; }
+  .exam-tag { display: inline-block; background: rgba(244,63,142,0.15); border: 1px solid rgba(244,63,142,0.3); color: #f43f8e; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; margin-left: 6px; }
+
+  /* TABLE */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
+  .data-table th { background: var(--bg3); color: var(--accent); font-weight: 600; text-align: left; padding: 8px 12px; border: 1px solid var(--border); }
+  .data-table td { padding: 7px 12px; border: 1px solid var(--border); color: var(--muted); }
+  .data-table tr:hover td { background: var(--bg3); color: var(--text); }
+
+  /* QUESTIONS */
+  .q-section { margin-bottom: 24px; }
+  .q-section-title { font-size: 14px; font-weight: 700; color: var(--accent2); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .q-section-title span { background: var(--accent2); color: #0a2a1e; font-size: 11px; padding: 2px 8px; border-radius: 10px; }
+  .question-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; cursor: pointer; transition: border-color .2s; }
+  .question-card:hover { border-color: var(--border2); }
+  .question-card.open { border-color: var(--accent); }
+  .q-text { font-size: 13px; font-weight: 500; line-height: 1.5; display: flex; justify-content: space-between; gap: 12px; }
+  .q-num { color: var(--accent); font-weight: 700; flex-shrink: 0; }
+  .q-toggle { font-size: 16px; color: var(--muted); flex-shrink: 0; transition: transform .2s; }
+  .question-card.open .q-toggle { transform: rotate(180deg); }
+  .q-answer { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); line-height: 1.7; }
+  .question-card.open .q-answer { display: block; }
+  .ans-code { background: #0f0f18; border-radius: 6px; padding: 10px; font-family: var(--mono); font-size: 11px; color: #a5f3fc; margin-top: 8px; overflow-x: auto; white-space: pre; }
+  .marks-badge { font-size: 10px; background: rgba(124,111,247,0.15); border: 1px solid rgba(124,111,247,0.3); color: var(--accent); padding: 2px 8px; border-radius: 10px; flex-shrink: 0; }
+
+  /* CHEATSHEET */
+  .cheat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+  .cheat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+  .cheat-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .cheat-item { display: flex; flex-direction: column; gap: 2px; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .cheat-item:last-child { border: none; margin: 0; padding: 0; }
+  .cheat-label { font-size: 11px; color: var(--muted); }
+  .cheat-val { font-size: 12px; color: var(--text); font-weight: 500; }
+  .cheat-code { font-family: var(--mono); font-size: 11px; color: #a5f3fc; background: #0f0f18; padding: 2px 6px; border-radius: 4px; }
+
+  /* QUICK TEST */
+  .quiz-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 16px; }
+  .quiz-q { font-size: 14px; font-weight: 600; margin-bottom: 14px; line-height: 1.5; }
+  .quiz-opts { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-opt { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; font-size: 13px; cursor: pointer; transition: all .2s; text-align: left; color: var(--text); font-family: var(--font); }
+  .quiz-opt:hover:not(.disabled) { border-color: var(--accent); background: rgba(124,111,247,0.1); }
+  .quiz-opt.correct { background: rgba(93,232,181,0.1); border-color: var(--accent2); color: var(--accent2); }
+  .quiz-opt.wrong { background: rgba(244,63,142,0.1); border-color: var(--accent4); color: var(--accent4); }
+  .quiz-opt.disabled { cursor: default; }
+  .quiz-feedback { margin-top: 10px; font-size: 12px; color: var(--muted); line-height: 1.6; display: none; padding: 10px; background: var(--bg3); border-radius: 8px; }
+  .quiz-score { text-align: center; padding: 20px; background: var(--card); border-radius: 14px; }
+  .quiz-score h2 { font-size: 32px; color: var(--accent); margin-bottom: 6px; }
+  .quiz-score p { color: var(--muted); font-size: 14px; margin-bottom: 16px; }
+  .btn { background: var(--accent); color: #fff; border: none; border-radius: 10px; padding: 10px 24px; font-family: var(--font); font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity .2s; }
+  .btn:hover { opacity: 0.85; }
+  .btn-outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
+
+  /* TIPS BANNER */
+  .tip-banner { background: linear-gradient(135deg, rgba(124,111,247,0.15), rgba(93,232,181,0.1)); border: 1px solid rgba(124,111,247,0.3); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; font-size: 13px; line-height: 1.6; }
+  .tip-banner strong { color: var(--warn); }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+  /* PROGRESS */
+  .progress-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 16px 0; }
+  .prog-chip { font-size: 11px; padding: 4px 10px; border-radius: 10px; border: 1px solid var(--border); color: var(--muted); }
+  .prog-chip.done { background: rgba(93,232,181,0.1); border-color: var(--accent2); color: var(--accent2); }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-title">☕ JAVA EXAM</div>
+  <button class="active" onclick="show('mindmap')">🗺️ Mind Map</button>
+  <button onclick="show('notes')">📖 Notes</button>
+  <button onclick="show('questions')">❓ Questions</button>
+  <button onclick="show('cheatsheet')">⚡ Cheat Sheet</button>
+  <button onclick="show('quiz')">🧪 Quick Test</button>
+</div>
+
+<!-- ===== MIND MAP ===== -->
+<div id="mindmap" class="page active">
+  <div class="tip-banner">
+    🎯 <strong>Exam Tomorrow!</strong> Focus on Units 1, 3, 4 most — OOP, Control Statements, Classes & Constructors are highest probability. Click any node to jump to that section.
+  </div>
+  <div class="mindmap-container">
+    <div class="tree">
+      <div class="root-node">☕ Programming in Java</div>
+      <div class="connector-v"></div>
+      <div class="units-row">
+
+        <div class="unit-col">
+          <div class="unit-node u1" onclick="show('notes'); scrollTo('unit1')">Unit 1<br>Fundamentals</div>
+          <div class="sub-nodes">
+            <div class="sub-node">Features of Java</div>
+            <div class="sub-node">JVM / Bytecode</div>
+            <div class="sub-node">OOP Concepts</div>
+            <div class="sub-node">Class & Objects</div>
+            <div class="sub-node">Inheritance</div>
+            <div class="sub-node">Polymorphism</div>
+            <div class="sub-node">Abstraction</div>
+            <div class="sub-node">Encapsulation</div>
+          </div>
+        </div>
+
+        <div class="unit-col">
+          <div class="unit-node u2" onclick="show('notes'); scrollTo('unit2')">Unit 2<br>Data Types</div>
+          <div class="sub-nodes">
+            <div class="sub-node">Primitive Types</div>
+            <div class="sub-node">Variables</div>
+            <div class="sub-node">Identifiers</div>
+            <div class="sub-node">Operators</div>
+            <div class="sub-node">Precedence</div>
+          </div>
+        </div>
+
+        <div class="unit-col">
+          <div class="unit-node u3" onclick="show('notes'); scrollTo('unit3')">Unit 3<br>Classes</div>
+          <div class="sub-nodes">
+            <div class="sub-node">Class Declaration</div>
+            <div class="sub-node">Constructors</div>
+            <div class="sub-node">Default vs Param</div>
+            <div class="sub-node">Interfaces</div>
+            <div class="sub-node">Inheritance Types</div>
+          </div>
+        </div>
+
+        <div class="unit-col">
+          <div class="unit-node u4" onclick="show('notes'); scrollTo('unit4')">Unit 4<br>Control</div>
+          <div class="sub-nodes">
+            <div class="sub-node">if / else</div>
+            <div class="sub-node">if-else ladder</div>
+            <div class="sub-node">switch</div>
+            <div class="sub-node">while / do-while</div>
+            <div class="sub-node">for / for-each</div>
+            <div class="sub-node">break / continue</div>
+          </div>
+        </div>
+
+        <div class="unit-col">
+          <div class="unit-node u5" onclick="show('notes'); scrollTo('unit5')">Unit 5<br>Arrays</div>
+          <div class="sub-nodes">
+            <div class="sub-node">1D Arrays</div>
+            <div class="sub-node">2D / Multidim</div>
+            <div class="sub-node">Array Methods</div>
+            <div class="sub-node">sort / search</div>
+            <div class="sub-node">Arrays class</div>
+          </div>
+        </div>
+
+        <div class="unit-col">
+          <div class="unit-node u6" onclick="show('notes'); scrollTo('unit6')">Unit 6<br>Strings</div>
+          <div class="sub-nodes">
+            <div class="sub-node">Immutability</div>
+            <div class="sub-node">String Pool</div>
+            <div class="sub-node">StringBuffer</div>
+            <div class="sub-node">StringBuilder</div>
+            <div class="sub-node">Methods</div>
+          </div>
+        </div>
+
+        <div class="unit-col">
+          <div class="unit-node u7" onclick="show('notes'); scrollTo('unit7')">Unit 7<br>I/O & Applets</div>
+          <div class="sub-nodes">
+            <div class="sub-node">Byte Streams</div>
+            <div class="sub-node">Char Streams</div>
+            <div class="sub-node">Java Applets</div>
+            <div class="sub-node">I/O Classes</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:28px;">
+    <div style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:1px;">Study Priority</div>
+    <div class="progress-row">
+      <div class="prog-chip done">🔥 Unit 1 — Fundamentals & OOP</div>
+      <div class="prog-chip done">🔥 Unit 3 — Classes & Constructors</div>
+      <div class="prog-chip done">🔥 Unit 4 — Control Statements</div>
+      <div class="prog-chip">📌 Unit 2 — Data Types & Operators</div>
+      <div class="prog-chip">📌 Unit 5 — Arrays</div>
+      <div class="prog-chip">📌 Unit 6 — Strings</div>
+      <div class="prog-chip">📌 Unit 7 — I/O & Applets</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== NOTES ===== -->
+<div id="notes" class="page">
+
+  <!-- UNIT 1 -->
+  <div class="unit-section" id="unit1">
+    <div class="unit-header">
+      <div class="unit-badge" style="background:rgba(124,111,247,0.2);color:#7c6ff7;">Unit 1</div>
+      <div class="unit-title">Java Fundamentals & OOP</div>
+      <div class="exam-tag">HIGH PRIORITY</div>
+    </div>
+    <div class="topics-grid">
+      <div class="topic-card">
+        <div class="imp-tag">Features of Java</div>
+        <ul>
+          <li>Simple — based on C++, no pointers</li>
+          <li>Object-Oriented — everything is an object</li>
+          <li>Platform Independent — bytecode + JVM</li>
+          <li>Portable — same bytecode on any JVM</li>
+          <li>Secured — sandbox, no explicit pointers</li>
+          <li>Robust — garbage collection, exception handling</li>
+          <li>Multithreaded — multiple threads in memory</li>
+          <li>Architecture Neutral — fixed primitive sizes</li>
+          <li>High Performance — bytecode near native code</li>
+        </ul>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">OOP Pillars</div>
+        <ul class="star-item">
+          <li><strong>Class</strong> — blueprint/template for objects</li>
+          <li><strong>Object</strong> — instance of a class</li>
+          <li><strong>Inheritance</strong> — child gets parent's properties (extends)</li>
+          <li><strong>Polymorphism</strong> — same action, different ways</li>
+          <li><strong>Abstraction</strong> — hide implementation, show features</li>
+          <li><strong>Encapsulation</strong> — wrap data + methods together</li>
+        </ul>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">Types of Inheritance</div>
+        <ul>
+          <li>Single — one parent, one child</li>
+          <li>Multilevel — A → B → C</li>
+          <li>Hierarchical — one parent, many children</li>
+          <li>Multiple — NOT supported via classes (only interfaces)</li>
+          <li>Hybrid — combination (via interfaces)</li>
+        </ul>
+        <div class="code-block">class Child extends Parent { }</div>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">Polymorphism Types</div>
+        <ul>
+          <li><strong>Compile-time (Static)</strong> — Method Overloading</li>
+          <li><strong>Runtime (Dynamic)</strong> — Method Overriding</li>
+        </ul>
+        <div class="code-block">// Overloading (compile-time)
+int add(int a, int b)
+double add(double a, double b)
+
+// Overriding (runtime)
+class Dog extends Animal {
+  void sound() { // different impl }
+}</div>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">Abstraction</div>
+        <ul>
+          <li>Abstract class → partial abstraction</li>
+          <li>Interface → 100% abstraction</li>
+          <li>Hide implementation, show only what user needs</li>
+          <li>ATM machine analogy (you press buttons, not see internals)</li>
+        </ul>
+        <div class="code-block">abstract class Animal {
+  abstract void sound(); // no body
+  void eat() { } // has body
+}</div>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">Encapsulation</div>
+        <ul>
+          <li>Wrap data (fields) + methods into a single unit</li>
+          <li>Use private fields + public getters/setters</li>
+          <li>Protects data from direct access</li>
+        </ul>
+        <div class="code-block">private String name;
+public String getName() { return name; }
+public void setName(String n) { name = n; }</div>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">Java Platforms</div>
+        <ul>
+          <li>Java SE — Standard, core APIs</li>
+          <li>Java EE — Enterprise, web apps</li>
+          <li>Java ME — Mobile/Micro edition</li>
+          <li>JavaFX — Rich Internet Applications</li>
+        </ul>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">Java Program Flow</div>
+        <ul>
+          <li>.java → javac (compiler) → .class (bytecode)</li>
+          <li>JVM reads and executes bytecode</li>
+          <li>Entry point: public static void main(String[] args)</li>
+          <li>Bytecode = platform independent</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNIT 2 -->
+  <div class="unit-section" id="unit2">
+    <div class="unit-header">
+      <div class="unit-badge" style="background:rgba(93,232,181,0.2);color:#5de8b5;">Unit 2</div>
+      <div class="unit-title">Data Types, Identifiers & Operators</div>
+    </div>
+    <div class="topics-grid">
+      <div class="topic-card">
+        <div class="imp-tag">8 Primitive Types</div>
+        <table class="data-table" style="font-size:11px;">
+          <tr><th>Type</th><th>Size</th><th>Range</th></tr>
+          <tr><td>byte</td><td>8-bit</td><td>-128 to 127</td></tr>
+          <tr><td>short</td><td>16-bit</td><td>-32768 to 32767</td></tr>
+          <tr><td>int</td><td>32-bit</td><td>±2.1 billion</td></tr>
+          <tr><td>long</td><td>64-bit</td><td>±2⁶³</td></tr>
+          <tr><td>float</td><td>32-bit float</td><td>10⁻⁴⁶ to 10³⁸</td></tr>
+          <tr><td>double</td><td>64-bit float</td><td>10⁻³²⁴ to 10³⁰⁸</td></tr>
+          <tr><td>char</td><td>Unicode</td><td>0 to 65535</td></tr>
+          <tr><td>boolean</td><td>1-bit</td><td>true / false</td></tr>
+        </table>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">Operators</div>
+        <ul>
+          <li>Arithmetic: + - * / % </li>
+          <li>Unary: ++ -- (increment/decrement)</li>
+          <li>Relational: == != &lt; &gt; &lt;= &gt;=</li>
+          <li>Logical: && || !</li>
+          <li>Assignment: = += -= etc.</li>
+        </ul>
+        <div class="imp-tag" style="margin-top:8px;">Precedence (High→Low)</div>
+        <ul>
+          <li>1. ( ) — parentheses</li>
+          <li>2. * / % — multiplication</li>
+          <li>3. + - — addition</li>
+          <li>4. = — assignment</li>
+        </ul>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">Identifier Rules</div>
+        <ul>
+          <li>Letters, digits, _ and $ allowed</li>
+          <li>Cannot start with a digit</li>
+          <li>Cannot be a reserved word</li>
+          <li>Case sensitive (name ≠ NAME)</li>
+        </ul>
+        <ul class="star-item" style="margin-top:8px;">
+          <li>int 2cool — ❌ starts with digit</li>
+          <li>int float — ❌ reserved word</li>
+          <li>int yes&no — ❌ & not allowed</li>
+          <li>Int x — ❌ Int is not int (case)</li>
+          <li>float y — ❌ missing semicolon</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNIT 3 -->
+  <div class="unit-section" id="unit3">
+    <div class="unit-header">
+      <div class="unit-badge" style="background:rgba(249,115,22,0.2);color:#f97316;">Unit 3</div>
+      <div class="unit-title">Java Classes, Constructors & Interfaces</div>
+      <div class="exam-tag">HIGH PRIORITY</div>
+    </div>
+    <div class="topics-grid">
+      <div class="topic-card">
+        <div class="imp-tag">Class Declaration</div>
+        <div class="code-block">access_modifier class ClassName {
+  data member;
+  method;
+  constructor;
+  nested class;
+  interface;
+}</div>
+        <ul style="margin-top:8px;">
+          <li>Class = blueprint / template</li>
+          <li>Class does NOT occupy memory</li>
+          <li>Object occupies memory when created</li>
+        </ul>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">Constructors</div>
+        <ul class="star-item">
+          <li>Same name as class, no return type</li>
+          <li>Called automatically when object is created (new)</li>
+          <li>Cannot be abstract, static, final, synchronized</li>
+          <li>If no constructor defined, Java provides default</li>
+        </ul>
+        <div class="code-block">// Default (no-arg)
+class Car { Car() { } }
+
+// Parameterized
+class Car { 
+  Car(String model) { 
+    this.model = model; 
+  }
+}</div>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">Interface</div>
+        <ul>
+          <li>Blueprint of class — only abstract methods</li>
+          <li>Achieves 100% abstraction</li>
+          <li>Supports multiple inheritance</li>
+          <li>Class uses "implements" keyword</li>
+          <li>All methods are by default public & abstract</li>
+        </ul>
+        <div class="code-block">interface Animal {
+  void eat();
+  void sleep();
+}
+class Dog implements Animal {
+  public void eat() { ... }
+  public void sleep() { ... }
+}</div>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">Benefits of Inheritance</div>
+        <ul>
+          <li>Code Reusability</li>
+          <li>Hierarchical Organisation</li>
+          <li>Polymorphism support</li>
+          <li>Easier Maintenance</li>
+          <li>Method Overriding possible</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNIT 4 -->
+  <div class="unit-section" id="unit4">
+    <div class="unit-header">
+      <div class="unit-badge" style="background:rgba(244,63,142,0.2);color:#f43f8e;">Unit 4</div>
+      <div class="unit-title">Control Statements</div>
+      <div class="exam-tag">HIGH PRIORITY</div>
+    </div>
+    <div class="topics-grid">
+      <div class="topic-card">
+        <div class="imp-tag">if / else / ladder</div>
+        <div class="code-block">if (condition) {
+  // true block
+} else if (condition2) {
+  // another block
+} else {
+  // default
+}</div>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">switch</div>
+        <div class="code-block">switch(expr) {
+  case val1: // code; break;
+  case val2: // code; break;
+  default:   // if no match
+}</div>
+        <ul style="margin-top:8px;">
+          <li>break is needed to stop fall-through</li>
+          <li>default runs when no case matches</li>
+        </ul>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">Loops</div>
+        <ul class="star-item">
+          <li>while — pre-test (may not run)</li>
+          <li>do-while — post-test (runs at least once)</li>
+          <li>for — when iterations are known</li>
+          <li>for-each — iterate arrays/collections</li>
+        </ul>
+        <div class="code-block">// for-each
+for (String s : names) {
+  System.out.println(s);
+}</div>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">break & continue</div>
+        <ul>
+          <li><strong>break</strong> — exits the loop/switch immediately</li>
+          <li><strong>continue</strong> — skips current iteration, loop continues</li>
+        </ul>
+        <div class="code-block">for (int i=1; i<=5; i++) {
+  if (i==3) continue; // skip 3
+  System.out.println(i); // 1,2,4,5
+}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNIT 5 -->
+  <div class="unit-section" id="unit5">
+    <div class="unit-header">
+      <div class="unit-badge" style="background:rgba(56,189,248,0.2);color:#38bdf8;">Unit 5</div>
+      <div class="unit-title">Arrays</div>
+    </div>
+    <div class="topics-grid">
+      <div class="topic-card">
+        <div class="imp-tag">Array Basics</div>
+        <ul>
+          <li>Fixed size, same data type</li>
+          <li>Indexed from 0</li>
+          <li>Homogeneous — all same type</li>
+        </ul>
+        <div class="code-block">int[] arr = new int[5];
+int[] nums = {1, 2, 3, 4, 5};
+int[][] matrix = {{1,2},{3,4}};</div>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">Arrays Class Methods</div>
+        <ul>
+          <li>Arrays.sort(arr) — ascending sort</li>
+          <li>Arrays.binarySearch(arr, key) — search</li>
+          <li>Arrays.equals(a1, a2) — compare</li>
+          <li>Arrays.fill(arr, val) — fill with value</li>
+          <li>Arrays.copyOf(arr, len) — copy</li>
+          <li>Arrays.toString(arr) — print as string</li>
+        </ul>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">Array Types</div>
+        <ul>
+          <li>Primitive arrays — int[], char[], etc.</li>
+          <li>Object arrays — String[], Person[]</li>
+          <li>Multidimensional — int[][]</li>
+          <li>Jagged arrays — rows of different length</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNIT 6 -->
+  <div class="unit-section" id="unit6">
+    <div class="unit-header">
+      <div class="unit-badge" style="background:rgba(250,204,21,0.2);color:#facc15;">Unit 6</div>
+      <div class="unit-title">Strings in Java</div>
+    </div>
+    <div class="topics-grid">
+      <div class="topic-card">
+        <div class="imp-tag">String Properties</div>
+        <ul class="star-item">
+          <li>Strings are IMMUTABLE — value cannot change</li>
+          <li>String literal uses String Pool</li>
+          <li>new String() creates on heap memory</li>
+          <li>Thread-safe due to immutability</li>
+        </ul>
+        <div class="code-block">String s1 = "Hello"; // pool
+String s2 = new String("Hi"); // heap</div>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">StringBuffer vs StringBuilder</div>
+        <table class="data-table">
+          <tr><th>Feature</th><th>StringBuffer</th><th>StringBuilder</th></tr>
+          <tr><td>Thread-safe</td><td>✅ Yes</td><td>❌ No</td></tr>
+          <tr><td>Synchronized</td><td>✅ Yes</td><td>❌ No</td></tr>
+          <tr><td>Speed</td><td>Slower</td><td>Faster</td></tr>
+          <tr><td>Use case</td><td>Multi-thread</td><td>Single-thread</td></tr>
+        </table>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">StringBuffer Methods</div>
+        <ul>
+          <li>append(str) — add to end</li>
+          <li>insert(pos, str) — insert at position</li>
+          <li>delete(start, end) — remove chars</li>
+          <li>reverse() — reverse the string</li>
+          <li>capacity() — default 16</li>
+        </ul>
+        <div class="code-block">StringBuffer sb = new StringBuffer("Hello");
+sb.append(" World"); // Hello World
+sb.reverse();        // dlroW olleH</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNIT 7 -->
+  <div class="unit-section" id="unit7">
+    <div class="unit-header">
+      <div class="unit-badge" style="background:rgba(167,139,250,0.2);color:#a78bfa;">Unit 7</div>
+      <div class="unit-title">I/O Streams & Java Applets</div>
+    </div>
+    <div class="topics-grid">
+      <div class="topic-card">
+        <div class="imp-tag">Stream Types</div>
+        <ul>
+          <li><strong>Byte Streams</strong> — handle binary (8-bit) data</li>
+          <li><strong>Character Streams</strong> — handle text (16-bit Unicode)</li>
+        </ul>
+        <div class="imp-tag" style="margin-top:8px;">Byte Stream Classes</div>
+        <ul>
+          <li>FileInputStream / FileOutputStream</li>
+          <li>BufferedInputStream / BufferedOutputStream</li>
+          <li>ByteArrayInputStream / ByteArrayOutputStream</li>
+        </ul>
+        <div class="imp-tag" style="margin-top:8px;">Character Stream Classes</div>
+        <ul>
+          <li>FileReader / FileWriter</li>
+          <li>BufferedReader / BufferedWriter</li>
+          <li>InputStreamReader / OutputStreamWriter</li>
+        </ul>
+      </div>
+      <div class="topic-card">
+        <div class="imp-tag">Java Applets</div>
+        <ul>
+          <li>Small programs embedded in web pages</li>
+          <li>Run inside browser using Java Plugin</li>
+          <li>Client-side execution</li>
+          <li>Sandboxed — restricted system access</li>
+          <li>Platform-independent (JVM)</li>
+          <li>Popular in late 1990s–2000s</li>
+          <li>Now deprecated/removed from modern browsers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUESTIONS ===== -->
+<div id="questions" class="page">
+  <div class="tip-banner">
+    <strong>📌 Exam Questions</strong> — Click any question to reveal the answer. Study the long-answer outlines carefully — they carry most marks.
+  </div>
+
+  <div class="q-section">
+    <div class="q-section-title">MCQ / One-Line Answers <span>1 mark each</span></div>
+
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q1.</span> Who is the father of Java?</span><div style="display:flex;gap:8px;"><span class="marks-badge">1 mark</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">✅ <strong>James Gosling</strong>. Java was developed at Sun Microsystems in 1995. Original name was Oak.</div>
+    </div>
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q2.</span> What does JVM stand for and what is its role?</span><div style="display:flex;gap:8px;"><span class="marks-badge">1 mark</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">✅ <strong>Java Virtual Machine</strong>. It executes Java bytecode, making Java platform-independent.</div>
+    </div>
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q3.</span> What is the default capacity of StringBuffer?</span><div style="display:flex;gap:8px;"><span class="marks-badge">1 mark</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">✅ <strong>16 characters</strong>. Default capacity of StringBuffer is 16.</div>
+    </div>
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q4.</span> Which loop guarantees at least one execution?</span><div style="display:flex;gap:8px;"><span class="marks-badge">1 mark</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">✅ <strong>do-while loop</strong>. It checks condition after executing, so body always runs at least once.</div>
+    </div>
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q5.</span> Does Java support multiple inheritance through classes?</span><div style="display:flex;gap:8px;"><span class="marks-badge">1 mark</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">✅ <strong>No</strong>. Java does NOT support multiple inheritance through classes. It is supported through Interfaces only.</div>
+    </div>
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q6.</span> What is the difference between break and continue?</span><div style="display:flex;gap:8px;"><span class="marks-badge">1 mark</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">✅ <strong>break</strong> exits the loop entirely. <strong>continue</strong> skips the current iteration and moves to the next one.</div>
+    </div>
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q7.</span> Are Strings in Java mutable or immutable?</span><div style="display:flex;gap:8px;"><span class="marks-badge">1 mark</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">✅ <strong>Immutable</strong>. Once created, a String's value cannot be changed. Any modification creates a new String object.</div>
+    </div>
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q8.</span> What is an array's index start value in Java?</span><div style="display:flex;gap:8px;"><span class="marks-badge">1 mark</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">✅ <strong>0 (zero)</strong>. Arrays in Java are zero-indexed — first element is at index 0.</div>
+    </div>
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q9.</span> What keyword is used for inheritance in Java?</span><div style="display:flex;gap:8px;"><span class="marks-badge">1 mark</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">✅ <strong>extends</strong> keyword. Example: class Dog extends Animal { }</div>
+    </div>
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q10.</span> What is bytecode in Java?</span><div style="display:flex;gap:8px;"><span class="marks-badge">1 mark</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">✅ Bytecode is the intermediate code (.class file) generated by the Java compiler (javac). It is executed by the JVM and is platform-independent.</div>
+    </div>
+  </div>
+
+  <div class="q-section">
+    <div class="q-section-title">Short Answer Questions <span>2–5 marks</span></div>
+
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q11.</span> Explain the four main OOP concepts with examples.</span><div style="display:flex;gap:8px;"><span class="marks-badge">5 marks</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">
+        <strong>1. Encapsulation:</strong> Wrapping data and methods together. Example: Student class with private name and public getters/setters.<br><br>
+        <strong>2. Inheritance:</strong> Child class inherits parent's properties. Example: Dog extends Animal — Dog gets eat() from Animal.<br><br>
+        <strong>3. Polymorphism:</strong> Same action, different forms. Overloading = compile-time; Overriding = runtime.<br><br>
+        <strong>4. Abstraction:</strong> Hiding implementation details. Abstract class or Interface used. ATM example — user sees buttons, not internal logic.
+      </div>
+    </div>
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q12.</span> What is the difference between StringBuffer and StringBuilder?</span><div style="display:flex;gap:8px;"><span class="marks-badge">3 marks</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">
+        <strong>StringBuffer:</strong> Thread-safe, synchronized, slower. Used in multi-threaded environment.<br><br>
+        <strong>StringBuilder:</strong> Not thread-safe, not synchronized, faster. Used in single-threaded environment.<br><br>
+        Both are mutable alternatives to String, part of java.lang package.
+      </div>
+    </div>
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q13.</span> Explain the types of loops in Java with syntax.</span><div style="display:flex;gap:8px;"><span class="marks-badge">4 marks</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">
+        <strong>1. while loop</strong> — pre-test, may not execute if condition is false initially<br>
+        <div class="ans-code">while(condition) { // body }</div>
+        <strong>2. do-while loop</strong> — post-test, always executes at least once<br>
+        <div class="ans-code">do { // body } while(condition);</div>
+        <strong>3. for loop</strong> — when number of iterations known<br>
+        <div class="ans-code">for(init; condition; increment) { }</div>
+        <strong>4. for-each loop</strong> — traverse arrays/collections<br>
+        <div class="ans-code">for(type var : array) { }</div>
+      </div>
+    </div>
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q14.</span> What is a constructor? What are its types?</span><div style="display:flex;gap:8px;"><span class="marks-badge">3 marks</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">
+        A constructor is a special method that initializes an object when created. It has the same name as the class and no return type.<br><br>
+        <strong>Types:</strong><br>
+        1. <strong>Default Constructor</strong> — No arguments. Java provides one if you don't define any.<br>
+        <div class="ans-code">class Car { Car() { } }</div>
+        2. <strong>Parameterized Constructor</strong> — Accepts arguments for initialization.<br>
+        <div class="ans-code">class Car { Car(String model, int year) { } }</div>
+      </div>
+    </div>
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q15.</span> Explain byte streams and character streams.</span><div style="display:flex;gap:8px;"><span class="marks-badge">3 marks</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">
+        <strong>Byte Streams:</strong> Handle binary data (8-bit bytes). Key classes: InputStream, OutputStream, FileInputStream, FileOutputStream, BufferedInputStream.<br><br>
+        <strong>Character Streams:</strong> Handle text data (16-bit Unicode characters). Key classes: Reader, Writer, FileReader, FileWriter, BufferedReader, BufferedWriter.
+      </div>
+    </div>
+  </div>
+
+  <div class="q-section">
+    <div class="q-section-title">Long Answer / Essay Questions <span>5–10 marks</span></div>
+
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q16.</span> Explain all features of Java programming language in detail.</span><div style="display:flex;gap:8px;"><span class="marks-badge">8 marks</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">
+        Write about each feature with explanation:<br><br>
+        1. <strong>Simple</strong> — Based on C++, removes complexity (no pointers, operator overloading)<br>
+        2. <strong>Object-Oriented</strong> — Everything is object; supports class, object, inheritance, polymorphism etc.<br>
+        3. <strong>Platform Independent</strong> — bytecode runs on any JVM ("Write Once, Run Anywhere")<br>
+        4. <strong>Portable</strong> — bytecode is hardware/OS independent<br>
+        5. <strong>Secured</strong> — No explicit pointers, sandbox environment<br>
+        6. <strong>Robust</strong> — Strong memory mgmt, garbage collection, exception handling<br>
+        7. <strong>Architecture Neutral</strong> — Primitive sizes fixed (int = 4 bytes always)<br>
+        8. <strong>Multithreaded</strong> — Multiple threads share common memory<br>
+        9. <strong>High Performance</strong> — bytecode close to native, JIT compiler<br>
+        10. <strong>Interpreted</strong> — JVM interprets bytecode at runtime
+      </div>
+    </div>
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q17.</span> What is inheritance? Explain all types with examples.</span><div style="display:flex;gap:8px;"><span class="marks-badge">8 marks</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">
+        <strong>Definition:</strong> Inheritance allows a class to acquire properties and methods of another class. Uses extends keyword.<br><br>
+        <strong>Types:</strong><br>
+        1. <strong>Single</strong> — One parent, one child: A → B<br>
+        2. <strong>Multilevel</strong> — Chain: A → B → C<br>
+        3. <strong>Hierarchical</strong> — One parent, many children: A → B, A → C<br>
+        4. <strong>Multiple</strong> — Not supported via classes in Java (supported via interfaces)<br>
+        5. <strong>Hybrid</strong> — Combination of types (via interfaces)<br><br>
+        <strong>Benefits:</strong> Code reusability, method overriding, hierarchical organization, easier maintenance<br>
+        <div class="ans-code">class Animal { void eat() { System.out.println("eating"); } }
+class Dog extends Animal { void bark() { } }
+Dog d = new Dog();
+d.eat(); // inherited</div>
+      </div>
+    </div>
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q18.</span> Explain control statements in Java — if, switch, loops, break, continue.</span><div style="display:flex;gap:8px;"><span class="marks-badge">10 marks</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">
+        <strong>Categories:</strong><br>
+        1. Conditional/Selection — if, else, if-else ladder, switch<br>
+        2. Iteration/Looping — while, do-while, for, for-each<br>
+        3. Jump — break, continue<br><br>
+        <strong>if-else:</strong> Executes block based on condition.<br>
+        <strong>switch:</strong> Tests one variable against multiple cases. Needs break to prevent fall-through.<br>
+        <strong>while:</strong> Pre-test loop — condition checked first.<br>
+        <strong>do-while:</strong> Post-test loop — always runs at least once.<br>
+        <strong>for:</strong> Used when iterations are known. Has init, condition, increment in one line.<br>
+        <strong>for-each:</strong> Traverses array/collection automatically.<br>
+        <strong>break:</strong> Exits loop or switch immediately.<br>
+        <strong>continue:</strong> Skips current iteration, goes to next.
+      </div>
+    </div>
+    <div class="question-card" onclick="toggleQ(this)">
+      <div class="q-text"><span><span class="q-num">Q19.</span> What are Arrays in Java? Explain types and important methods.</span><div style="display:flex;gap:8px;"><span class="marks-badge">6 marks</span><span class="q-toggle">▾</span></div></div>
+      <div class="q-answer">
+        <strong>Definition:</strong> Array is a container that holds fixed number of values of same type. Indexed from 0.<br><br>
+        <strong>Types:</strong> Primitive arrays (int[]), Object arrays (String[]), Multidimensional (int[][]), Jagged arrays (varying row sizes)<br><br>
+        <strong>Declaration:</strong><br>
+        <div class="ans-code">int[] arr = new int[5];       // allocate
+int[] nums = {1, 2, 3};     // direct init</div>
+        <strong>java.util.Arrays methods:</strong> sort(), binarySearch(), equals(), fill(), copyOf(), toString()
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CHEAT SHEET ===== -->
+<div id="cheatsheet" class="page">
+  <div class="tip-banner">⚡ <strong>5-Minute Revision</strong> — Read this right before your exam. These are the most important things to remember.</div>
+  <div class="cheat-grid">
+    <div class="cheat-card">
+      <h3><span class="dot" style="background:#7c6ff7;"></span> Java Features (10)</h3>
+      <div class="cheat-item"><div class="cheat-val">Simple, OOP, Platform-Independent, Portable, Secured, Robust, Architecture Neutral, Multithreaded, Interpreted, High Performance</div></div>
+    </div>
+    <div class="cheat-card">
+      <h3><span class="dot" style="background:#f97316;"></span> OOP Pillars</h3>
+      <div class="cheat-item"><div class="cheat-label">Encapsulation</div><div class="cheat-val">Wrap data + methods; private fields + public getters/setters</div></div>
+      <div class="cheat-item"><div class="cheat-label">Inheritance</div><div class="cheat-code">extends</div> keyword; child gets parent's members</div>
+      <div class="cheat-item"><div class="cheat-label">Polymorphism</div><div class="cheat-val">Overloading (compile-time) + Overriding (runtime)</div></div>
+      <div class="cheat-item"><div class="cheat-label">Abstraction</div><div class="cheat-val">Abstract class OR Interface; hide implementation</div></div>
+    </div>
+    <div class="cheat-card">
+      <h3><span class="dot" style="background:#5de8b5;"></span> Primitive Types</h3>
+      <div class="cheat-item"><div class="cheat-code">byte(8) short(16) int(32) long(64)</div></div>
+      <div class="cheat-item"><div class="cheat-code">float(32) double(64) char(16) boolean</div></div>
+      <div class="cheat-item"><div class="cheat-label">Most common</div><div class="cheat-val">int, boolean, double</div></div>
+    </div>
+    <div class="cheat-card">
+      <h3><span class="dot" style="background:#f43f8e;"></span> Constructors</h3>
+      <div class="cheat-item"><div class="cheat-label">Rules</div><div class="cheat-val">Same name as class, no return type, called on new</div></div>
+      <div class="cheat-item"><div class="cheat-label">Default</div><div class="cheat-code">Car() { }</div></div>
+      <div class="cheat-item"><div class="cheat-label">Parameterized</div><div class="cheat-code">Car(String m) { }</div></div>
+      <div class="cheat-item"><div class="cheat-label">Cannot be</div><div class="cheat-val">abstract, static, final, synchronized</div></div>
+    </div>
+    <div class="cheat-card">
+      <h3><span class="dot" style="background:#38bdf8;"></span> Loops Quick Ref</h3>
+      <div class="cheat-item"><div class="cheat-label">while</div><div class="cheat-val">Pre-test — may not run at all</div></div>
+      <div class="cheat-item"><div class="cheat-label">do-while</div><div class="cheat-val">Post-test — runs at LEAST ONCE</div></div>
+      <div class="cheat-item"><div class="cheat-label">for</div><div class="cheat-val">Known iterations; init + condition + increment</div></div>
+      <div class="cheat-item"><div class="cheat-label">for-each</div><div class="cheat-val">Arrays/collections traversal</div></div>
+      <div class="cheat-item"><div class="cheat-label">break</div><div class="cheat-val">Exits loop/switch immediately</div></div>
+      <div class="cheat-item"><div class="cheat-label">continue</div><div class="cheat-val">Skips iteration, loop continues</div></div>
+    </div>
+    <div class="cheat-card">
+      <h3><span class="dot" style="background:#facc15;"></span> Strings</h3>
+      <div class="cheat-item"><div class="cheat-label">String</div><div class="cheat-val">Immutable — cannot change after creation</div></div>
+      <div class="cheat-item"><div class="cheat-label">StringBuffer</div><div class="cheat-val">Mutable, synchronized, thread-safe, SLOWER</div></div>
+      <div class="cheat-item"><div class="cheat-label">StringBuilder</div><div class="cheat-val">Mutable, NOT synchronized, FASTER</div></div>
+      <div class="cheat-item"><div class="cheat-label">Methods</div><div class="cheat-code">append insert delete reverse capacity</div></div>
+    </div>
+    <div class="cheat-card">
+      <h3><span class="dot" style="background:#a78bfa;"></span> Inheritance Types</h3>
+      <div class="cheat-item"><div class="cheat-val">Single → Multilevel → Hierarchical → Hybrid</div></div>
+      <div class="cheat-item"><div class="cheat-label">NOT supported via classes</div><div class="cheat-val">Multiple inheritance ❌ (use Interface ✅)</div></div>
+    </div>
+    <div class="cheat-card">
+      <h3><span class="dot" style="background:#5de8b5;"></span> Interface vs Abstract Class</h3>
+      <div class="cheat-item"><div class="cheat-label">Interface</div><div class="cheat-val">100% abstraction, multiple inheritance, all methods abstract by default</div></div>
+      <div class="cheat-item"><div class="cheat-label">Abstract Class</div><div class="cheat-val">Partial abstraction, can have concrete methods too</div></div>
+      <div class="cheat-item"><div class="cheat-label">Keywords</div><div class="cheat-code">implements (interface) / extends (abstract class)</div></div>
+    </div>
+    <div class="cheat-card">
+      <h3><span class="dot" style="background:#f97316;"></span> Arrays Methods</h3>
+      <div class="cheat-item"><div class="cheat-code">Arrays.sort(arr)</div></div>
+      <div class="cheat-item"><div class="cheat-code">Arrays.binarySearch(arr, key)</div></div>
+      <div class="cheat-item"><div class="cheat-code">Arrays.equals(a1, a2)</div></div>
+      <div class="cheat-item"><div class="cheat-code">Arrays.fill(arr, val)</div></div>
+      <div class="cheat-item"><div class="cheat-code">Arrays.toString(arr)</div></div>
+    </div>
+    <div class="cheat-card">
+      <h3><span class="dot" style="background:#38bdf8;"></span> I/O Streams</h3>
+      <div class="cheat-item"><div class="cheat-label">Byte Streams</div><div class="cheat-val">Binary data (8-bit): FileInputStream/OutputStream, Buffered*</div></div>
+      <div class="cheat-item"><div class="cheat-label">Character Streams</div><div class="cheat-val">Text (16-bit Unicode): FileReader/Writer, BufferedReader/Writer</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div id="quiz" class="page">
+  <div class="tip-banner">🧪 <strong>Quick Test Yourself</strong> — Try these 10 questions before your exam. Score appears at the end!</div>
+  <div id="quiz-container"></div>
+  <div id="quiz-score" class="quiz-score" style="display:none;">
+    <h2 id="score-num"></h2>
+    <p id="score-msg"></p>
+    <button class="btn" onclick="restartQuiz()">Try Again</button>
+  </div>
+</div>
+
+<script>
+// NAV
+function show(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(page).classList.add('active');
+  const btns = document.querySelectorAll('.nav button');
+  const idx = ['mindmap','notes','questions','cheatsheet','quiz'].indexOf(page);
+  if (idx >= 0) btns[idx].classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function scrollTo(id) {
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+// Q TOGGLE
+function toggleQ(card) {
+  card.classList.toggle('open');
+}
+
+// QUIZ DATA
+const quizData = [
+  { q: "What is the output of: int x = 21/4;", opts: ["5.25","5","4","Error"], ans: 1, exp: "Integer division drops the remainder. 21/4 = 5 (not 5.25). To get 5.25, you need: double y = 21/4.0;" },
+  { q: "Which Java keyword achieves inheritance?", opts: ["implements","super","extends","inherits"], ans: 2, exp: "'extends' is used for class inheritance. 'implements' is for interfaces." },
+  { q: "StringBuffer sb = new StringBuffer(); What is sb.capacity()?", opts: ["0","8","16","32"], ans: 2, exp: "Default capacity of StringBuffer is 16." },
+  { q: "Which OOP concept uses 'private' fields and public getters/setters?", opts: ["Abstraction","Inheritance","Encapsulation","Polymorphism"], ans: 2, exp: "Encapsulation wraps data + methods together. Private fields protected via public getters/setters." },
+  { q: "Java's 'int' type is how many bits?", opts: ["8","16","32","64"], ans: 2, exp: "int = 32-bit integer, range -2,147,483,648 to 2,147,483,647." },
+  { q: "Which loop is a post-test loop (runs at least once)?", opts: ["while","for","do-while","for-each"], ans: 2, exp: "do-while is a post-test loop — it checks the condition AFTER executing the body, so it always runs at least once." },
+  { q: "What does 'abstract class' achieve?", opts: ["100% abstraction","Partial abstraction","Multiple inheritance","Thread safety"], ans: 1, exp: "Abstract class achieves partial abstraction (can have both abstract and concrete methods). Interface achieves 100% abstraction." },
+  { q: "Which of these is NOT a valid identifier?", opts: ["myVar","_count","2name","MAX_SIZE"], ans: 2, exp: "'2name' starts with a digit — identifiers cannot start with a digit in Java." },
+  { q: "What does Arrays.binarySearch(arr, key) do?", opts: ["Sorts the array","Finds index of key in sorted array","Compares two arrays","Fills array with value"], ans: 1, exp: "Arrays.binarySearch() searches for a key in a SORTED array and returns its index." },
+  { q: "Java Applets run on:", opts: ["Server side","Client side (user's computer)","Database","Cloud only"], ans: 1, exp: "Java Applets run on the client-side (in the user's browser using Java Plugin). They are now deprecated." }
+];
+
+let score = 0; let answered = 0;
+
+function buildQuiz() {
+  score = 0; answered = 0;
+  const container = document.getElementById('quiz-container');
+  document.getElementById('quiz-score').style.display = 'none';
+  container.innerHTML = quizData.map((q, qi) => `
+    <div class="quiz-card" id="qcard-${qi}">
+      <div class="quiz-q">Q${qi+1}. ${q.q}</div>
+      <div class="quiz-opts">
+        ${q.opts.map((o, oi) => `<button class="quiz-opt" onclick="checkAns(${qi},${oi})">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}
+      </div>
+      <div class="quiz-feedback" id="qfb-${qi}"></div>
+    </div>
+  `).join('');
+}
+
+function checkAns(qi, oi) {
+  const q = quizData[qi];
+  const card = document.getElementById('qcard-'+qi);
+  const opts = card.querySelectorAll('.quiz-opt');
+  if (opts[0].classList.contains('disabled')) return;
+  opts.forEach(o => o.classList.add('disabled'));
+  if (oi === q.ans) { opts[oi].classList.add('correct'); score++; }
+  else { opts[oi].classList.add('wrong'); opts[q.ans].classList.add('correct'); }
+  const fb = document.getElementById('qfb-'+qi);
+  fb.style.display = 'block';
+  fb.innerHTML = (oi === q.ans ? '✅ Correct! ' : '❌ Wrong! ') + q.exp;
+  answered++;
+  if (answered === quizData.length) {
+    setTimeout(() => {
+      document.getElementById('quiz-container').innerHTML = '';
+      const sd = document.getElementById('quiz-score');
+      sd.style.display = 'block';
+      document.getElementById('score-num').textContent = score + ' / ' + quizData.length;
+      const pct = (score / quizData.length) * 100;
+      document.getElementById('score-msg').textContent = pct >= 80 ? '🎉 Excellent! You are exam-ready!' : pct >= 60 ? '👍 Good! Review the ones you missed.' : '📖 Keep studying — review the notes and try again.';
+    }, 600);
+  }
+}
+
+function restartQuiz() { buildQuiz(); }
+
+buildQuiz();
+</script>
+</body>
+</html>
