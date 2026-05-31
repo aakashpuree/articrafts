@@ -1,0 +1,402 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.app{padding:1rem 0;max-width:680px}
+.chapter-btn{width:100%;text-align:left;padding:1rem 1.25rem;background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);cursor:pointer;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;transition:all 0.2s}
+.chapter-btn:hover{background:var(--color-background-secondary)}
+.chapter-btn.active{border-color:#185FA5;background:#E6F1FB}
+.chapter-title{font-size:17px;font-weight:500;color:var(--color-text-primary)}
+.chapter-sub{font-size:13px;color:var(--color-text-secondary);margin-top:3px}
+.chevron{font-size:18px;color:var(--color-text-secondary);transition:transform 0.2s}
+.chevron.open{transform:rotate(180deg)}
+.topics-list{margin-bottom:16px;border-left:2px solid #B5D4F4;padding-left:12px}
+.topic-btn{display:block;width:100%;text-align:left;padding:8px 12px;background:transparent;border:none;border-radius:var(--border-radius-md);cursor:pointer;font-size:14px;color:var(--color-text-primary);margin-bottom:4px;transition:background 0.15s}
+.topic-btn:hover{background:var(--color-background-secondary)}
+.topic-btn.active{background:#E6F1FB;color:#185FA5;font-weight:500}
+.content-panel{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:1.5rem}
+.content-panel h2{font-size:18px;font-weight:500;color:#185FA5;margin-bottom:4px}
+.content-panel .breadcrumb{font-size:12px;color:var(--color-text-secondary);margin-bottom:1rem}
+.section{margin-bottom:1.25rem}
+.section h3{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px;padding:6px 10px;background:var(--color-background-secondary);border-radius:var(--border-radius-md)}
+.section p,.section li{font-size:14px;color:var(--color-text-primary);line-height:1.7;margin-bottom:4px}
+.section ul,.section ol{padding-left:1.2rem;margin-top:4px}
+.trick-box{background:#EAF3DE;border-left:3px solid #3B6D11;padding:10px 14px;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;margin:10px 0}
+.trick-box .trick-title{font-size:12px;font-weight:500;color:#3B6D11;margin-bottom:4px}
+.trick-box p,.trick-box li{font-size:13px;color:#27500A}
+.formula-box{background:#EEEDFE;border-left:3px solid #534AB7;padding:10px 14px;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;margin:10px 0;font-family:var(--font-mono);font-size:13px;color:#3C3489}
+.mcq-section{margin-top:1.25rem}
+.mcq-section h3{font-size:15px;font-weight:500;color:#993C1D;background:#FAECE7;padding:6px 10px;border-radius:var(--border-radius-md);margin-bottom:10px}
+.mcq{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px;margin-bottom:10px}
+.mcq .q{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;padding:6px 10px;margin-bottom:4px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);cursor:pointer;font-size:13px;color:var(--color-text-primary);transition:all 0.15s}
+.opt:hover{background:var(--color-background-secondary)}
+.opt.correct{background:#EAF3DE;border-color:#3B6D11;color:#27500A}
+.opt.wrong{background:#FCEBEB;border-color:#A32D2D;color:#791F1F}
+.opt.reveal-correct{background:#EAF3DE;border-color:#3B6D11;color:#27500A}
+.ans-feedback{font-size:12px;margin-top:6px;padding:4px 8px;border-radius:4px}
+.ans-feedback.correct{background:#C0DD97;color:#27500A}
+.ans-feedback.wrong{background:#F7C1C1;color:#791F1F}
+.tab-bar{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
+.tab{padding:6px 14px;border:0.5px solid var(--color-border-secondary);border-radius:20px;font-size:13px;cursor:pointer;background:transparent;color:var(--color-text-secondary);transition:all 0.15s}
+.tab.active{background:#185FA5;color:#fff;border-color:#185FA5}
+.home-view .intro{font-size:15px;color:var(--color-text-secondary);margin-bottom:1.5rem;line-height:1.7}
+.home-view h1{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px}
+.back-btn{font-size:13px;color:#185FA5;background:none;border:none;cursor:pointer;padding:0 0 12px;display:flex;align-items:center;gap:4px}
+</style>
+
+<div class="app" id="root"></div>
+
+<script>
+const DATA = {
+  ch8: {
+    id:"ch8", num:"8", title:"Chemistry of Non-metals",
+    color:"#185FA5", bg:"#E6F1FB",
+    topics:[
+      {id:"8.1",title:"Hydrogen",
+        content:{
+          overview:"Hydrogen is the lightest and most abundant element in the universe. It has atomic number 1 and electronic configuration 1s¹. It can act as both a metal (losing 1e⁻) and a non-metal (gaining 1e⁻), so it's placed separately in the periodic table.",
+          subtopics:[
+            {title:"8.1.1 Atomic, Nascent & Active Hydrogen",body:"<b>Atomic Hydrogen</b>: Single H atoms formed by passing H₂ through an electric arc between tungsten electrodes. Very reactive, short-lived.<br><b>Nascent Hydrogen</b>: Hydrogen at the moment of liberation from a chemical reaction. E.g., Zn + H₂SO₄ → ZnSO₄ + [H] (nascent). It is a stronger reducing agent than ordinary H₂."},
+            {title:"8.1.2 Isotopes of Hydrogen",body:"Three isotopes exist:<br>• Protium (¹H or H) — no neutron, most abundant (99.98%)<br>• Deuterium (²H or D) — 1 neutron, used in heavy water (D₂O)<br>• Tritium (³H or T) — 2 neutrons, radioactive, used in nuclear reactions"},
+            {title:"8.1.3 Hydrogen as a Fuel",body:"H₂ is a clean fuel. When burned: 2H₂ + O₂ → 2H₂O. No CO₂ produced! Used in fuel cells, rocket propulsion. Calorie value is ~142 kJ/g (highest of any fuel). Challenges: storage and production cost."},
+            {title:"8.1.4 Heavy Water (D₂O)",body:"D₂O is water made with deuterium. Properties: density 1.105 g/mL (heavier than H₂O), MP = 3.82°C, BP = 101.4°C. Used as moderator in nuclear reactors to slow down neutrons. Retards biological processes (toxic in large amounts)."}
+          ],
+          tricks:["Trick: Hydrogen isotopes — P.D.T. = Protium, Deuterium, Tritium (0,1,2 neutrons). Remember: PDT!","Nascent H = freshly born hydrogen — always more reactive.","Heavy water: D₂O is ~11% heavier than H₂O"],
+          formulas:["2H₂ + O₂ → 2H₂O (fuel reaction)","Zn + H₂SO₄ → ZnSO₄ + H₂↑ (nascent H formation)","3Fe + 4H₂O → Fe₃O₄ + 4H₂ (reaction with steam)"],
+          mcqs:[
+            {q:"Which isotope of hydrogen is radioactive?",opts:["Protium","Deuterium","Tritium","All of them"],ans:2,exp:"Tritium (³H) is radioactive. Protium and Deuterium are stable."},
+            {q:"Heavy water is used as:",opts:["Fuel in rockets","Moderator in nuclear reactors","Drinking water","Coolant in engines"],ans:1,exp:"D₂O (heavy water) is used as a moderator to slow neutrons in nuclear reactors."},
+            {q:"Nascent hydrogen is:",opts:["Hydrogen gas at high pressure","Hydrogen at moment of liberation","Liquid hydrogen","Hydrogen at high temperature"],ans:1,exp:"Nascent hydrogen is hydrogen at the very moment it is liberated from a reaction."}
+          ]
+        }
+      },
+      {id:"8.2",title:"Oxygen",
+        content:{
+          overview:"Oxygen (O) has atomic number 8, electronic configuration 2,6. It is the most abundant element in Earth's crust (~46%). It exists as O₂ (dioxygen) and O₃ (ozone). Discovered by Joseph Priestley and Carl Wilhelm Scheele.",
+          subtopics:[
+            {title:"8.2.1 Allotropy",body:"Allotropy: same element existing in two or more physical forms in the same physical state. (Greek: allos = other, tropos = forms). Each form is called an allotrope."},
+            {title:"8.2.2 Allotropes of Oxygen",body:"• <b>Dioxygen (O₂)</b>: colorless, odorless gas, paramagnetic (2 unpaired e⁻), supports combustion, essential for life.<br>• <b>Ozone (O₃)</b>: pale blue gas with pungent smell, 3 oxygen atoms in angular shape (116.8° bond angle), stronger oxidizing agent than O₂."},
+            {title:"8.2.3 Types of Oxides",body:"<b>Acidic oxides</b>: oxides of non-metals, react with base → salt+water. E.g., SO₂, CO₂, NO₂<br><b>Basic oxides</b>: oxides of active metals, react with acid → salt+water. E.g., Na₂O, CaO, MgO<br><b>Amphoteric oxides</b>: react with both acid and base. E.g., Al₂O₃, ZnO<br><b>Neutral oxides</b>: react with neither. E.g., CO, NO, N₂O"}
+          ],
+          tricks:["Trick for oxides: 'Acid-base Ampho-Neutral' — A, B, A+B, Neither (ABAN)","Non-metals → Acidic oxides | Active metals → Basic oxides | Zn, Al → Amphoteric","O₂ is paramagnetic due to 2 unpaired electrons — remember MOT!"],
+          formulas:["2H₂O → 2H₂ + O₂ (electrolysis)","2KClO₃ →(MnO₂, heat) 2KCl + 3O₂ (lab preparation)","SO₂ + H₂O → H₂SO₃ (acidic oxide)","Na₂O + H₂O → 2NaOH (basic oxide)"],
+          mcqs:[
+            {q:"Which of the following is an amphoteric oxide?",opts:["Na₂O","CO₂","Al₂O₃","SO₃"],ans:2,exp:"Al₂O₃ reacts with both acids and bases, making it amphoteric."},
+            {q:"Oxygen is paramagnetic because:",opts:["It has 8 protons","It has 2 unpaired electrons","It is a gas","It forms O₃"],ans:1,exp:"O₂ has 2 unpaired electrons in its π* antibonding orbitals (MOT), making it paramagnetic."},
+            {q:"Which is a neutral oxide?",opts:["SO₂","CaO","CO","Al₂O₃"],ans:2,exp:"CO is a neutral oxide — it neither reacts with acids nor bases."}
+          ]
+        }
+      },
+      {id:"8.3",title:"Ozone (O₃)",
+        content:{
+          overview:"Ozone is an allotrope of oxygen with formula O₃. It is pale blue, has a pungent smell, and is found mainly in the stratosphere (ozone layer, 20–50 km above Earth). It protects us from harmful UV radiation.",
+          subtopics:[
+            {title:"8.3.1 Occurrence",body:"Ozone occurs naturally in the stratosphere. It absorbs UV-B and UV-C radiation. Its concentration is measured in Dobson Units (DU). Normal level ~300 DU."},
+            {title:"8.3.2 Preparation from Oxygen",body:"Ozone is prepared by passing silent electric discharge through dry oxygen: 3O₂ → 2O₃ (ΔH = +142 kJ/mol). The apparatus used is called an Ozonizer. Siemen's Ozonizer uses two coaxial glass tubes with electrodes."},
+            {title:"8.3.3 Structure of Ozone",body:"O₃ is angular/bent shaped. Bond angle = 116.8°. It is a resonance hybrid of two structures. The O–O bond length (1.28 Å) is intermediate between O–O single bond (1.48 Å) and O=O double bond (1.21 Å)."},
+            {title:"8.3.4 Test for Ozone",body:"Ozone turns moist starch-iodide paper blue (oxidizes I⁻ to I₂). Also bleaches indigo. Lead sulfide (PbS) is converted to lead sulfate (PbSO₄, white) — this is a specific test for O₃."},
+            {title:"8.3.5 Ozone Layer Depletion",body:"CFCs (chlorofluorocarbons) are major culprits. UV breaks CFCs → Cl• radicals → Cl• + O₃ → ClO + O₂ (chain reaction). The ozone hole is largest over Antarctica (discovered 1985). Montreal Protocol (1987) banned CFCs."},
+            {title:"8.3.6 Uses of Ozone",body:"• Purification of drinking water (better than Cl₂, leaves no taste)<br>• Bleaching of oils, silk, ivory, starch<br>• Sterilization of air in hospitals<br>• Used in manufacturing H₂O₂, KMnO₄<br>• Ozone therapy in medicine"}
+          ],
+          tricks:["Remember Ozone preparation: 3O₂ → 2O₃ (silent electric discharge, NOT spark — spark gives O atoms)","Starch-iodide paper test = blue color → confirms ozone","CFCs → Cl• → destroys O₃ (chain reaction, 1 Cl atom destroys 10⁵ O₃ molecules!)","Bond angle 116.8° — bent shape, sp² hybridized central O"],
+          formulas:["3O₂ →(silent electric discharge) 2O₃","PbS + 4O₃ → PbSO₄ + 4O₂ (ozone test)","2KI + O₃ + H₂O → 2KOH + I₂ + O₂ (iodide test)","Cl• + O₃ → ClO• + O₂ (ozone depletion)"],
+          mcqs:[
+            {q:"Which paper turns blue in presence of ozone?",opts:["Litmus paper","Moist starch-iodide paper","pH paper","Filter paper"],ans:1,exp:"Ozone oxidizes I⁻ to I₂, which turns starch blue."},
+            {q:"Ozone is prepared by passing through oxygen:",opts:["Spark discharge","Silent electric discharge","UV light","Heat"],ans:1,exp:"Silent electric discharge (not spark) is used because spark would completely dissociate O₂ into atoms."},
+            {q:"The bond angle in O₃ is:",opts:["180°","120°","116.8°","109.5°"],ans:2,exp:"O₃ has an angular shape with bond angle 116.8°."},
+            {q:"Which protocol banned CFCs?",opts:["Kyoto Protocol","Montreal Protocol","Paris Agreement","Geneva Protocol"],ans:1,exp:"The Montreal Protocol (1987) internationally banned substances that deplete the ozone layer."}
+          ]
+        }
+      },
+      {id:"8.4",title:"Nitrogen",
+        content:{
+          overview:"Nitrogen (N) has atomic number 7, electronic configuration 2,5. It makes up ~78% of the atmosphere. It is a diatomic gas (N₂) with a very strong triple bond (N≡N, bond energy = 945 kJ/mol), making it very unreactive.",
+          subtopics:[
+            {title:"8.4.1 Reasons for Inertness",body:"• Very high bond dissociation energy of N≡N (945 kJ/mol)<br>• Large ionization energy<br>• Absence of d-orbitals (can't expand octet)<br>• Small atomic size with high electronegativity<br>• Non-polar molecule"},
+            {title:"8.4.2 Active Nitrogen",body:"Active nitrogen is an excited, highly reactive form of nitrogen produced by passing electric discharge through N₂ at low pressure. It contains free N atoms in excited state. It can combine with metals, phosphorus, sulfur, and many non-metals directly."},
+            {title:"8.4.3 Ammonia (NH₃)",body:"Prepared industrially by Haber's process: N₂ + 3H₂ ⇌ 2NH₃ (450°C, 200 atm, Fe catalyst with Al₂O₃ and K₂O promoters). Lab: Ca(OH)₂ + 2NH₄Cl → CaCl₂ + 2H₂O + 2NH₃↑. Properties: colorless, pungent smell, basic gas, lighter than air, highly soluble in water."},
+            {title:"8.4.4 Applications of Ammonia",body:"• Manufacture of fertilizers (urea, ammonium nitrate)<br>• Manufacture of HNO₃ (Ostwald's process)<br>• Refrigerant (liquid ammonia)<br>• Manufacture of explosive (nitroglycerine, TNT)<br>• Cleaning agent"},
+            {title:"8.4.5 Harmful Effects of Ammonia",body:"• Irritates respiratory tract<br>• Can cause bronchitis and lung damage<br>• Toxic to aquatic life<br>• Contributes to acid rain (through reactions)<br>• Eye irritant at high concentrations"},
+            {title:"8.4.6 Nitric Acid (HNO₃)",body:"Prepared by Ostwald's process: 4NH₃ + 5O₂ → 4NO + 6H₂O (Pt/Rh catalyst, 900°C). 2NO + O₂ → 2NO₂. 3NO₂ + H₂O → 2HNO₃ + NO. Concentrated HNO₃: strong oxidizing acid, fuming, reacts with most metals."},
+            {title:"8.4.7 Application of Nitric Acid",body:"• Making fertilizers (ammonium nitrate)<br>• Making explosives (TNT, nitroglycerine, gun cotton)<br>• Making dyes and drugs (nitration of aromatic compounds)<br>• Purification of gold and silver<br>• Etching of metals"},
+            {title:"8.4.8 Ring Test for Nitrate Ion",body:"Fresh FeSO₄ solution + conc. H₂SO₄ carefully poured. A brown ring forms at the junction: FeSO₄ + NO → [Fe(NO)]²⁺SO₄ (brown ring complex). This confirms presence of NO₃⁻ (nitrate ion)."}
+          ],
+          tricks:["N₂ inertness: Remember HALEN = High bond energy, Absence of d-orbitals, Large ionization energy, Electronegativity high, Non-polar","Haber's process: N₂ + 3H₂ → 2NH₃ at '450°C and 200 atm' — remember '4-5-2' (450°C, 200atm, 2NH₃)","Ostwald's: NH₃ → NO → NO₂ → HNO₃ (three steps)","Ring test: Brown ring = Fe²⁺ + NO complex = confirms NO₃⁻"],
+          formulas:["N₂ + 3H₂ ⇌ 2NH₃ (Haber's process)","4NH₃ + 5O₂ → 4NO + 6H₂O (Ostwald's step 1)","2NO + O₂ → 2NO₂","3NO₂ + H₂O → 2HNO₃ + NO","Cu + 4HNO₃(conc) → Cu(NO₃)₂ + 2NO₂ + 2H₂O"],
+          mcqs:[
+            {q:"Haber's process conditions are:",opts:["200°C, 450 atm, Pt catalyst","450°C, 200 atm, Fe catalyst","300°C, 100 atm, Ni catalyst","500°C, 50 atm, V₂O₅ catalyst"],ans:1,exp:"Haber's process: N₂ + 3H₂ → 2NH₃ at 450°C, 200 atm, with Fe catalyst and Al₂O₃/K₂O as promoters."},
+            {q:"The brown ring in ring test is due to:",opts:["Fe³⁺ ion","[Fe(NO)]²⁺ complex","Fe(NO₃)₂","FeO compound"],ans:1,exp:"The brown ring is formed by [Fe(NO)]SO₄, a nitroso-iron complex."},
+            {q:"Which gas makes up 78% of atmosphere?",opts:["Oxygen","Carbon dioxide","Nitrogen","Argon"],ans:2,exp:"Nitrogen (N₂) constitutes about 78% of Earth's atmosphere."},
+            {q:"Ammonia is tested by:",opts:["Red litmus paper (turns blue)","Blue litmus paper (turns red)","Starch paper","Lime water"],ans:0,exp:"Ammonia is alkaline/basic so it turns red litmus paper blue."}
+          ]
+        }
+      },
+      {id:"8.5",title:"Halogens",
+        content:{
+          overview:"Halogens are Group VIIA (17) elements: F, Cl, Br, I, At. The name means 'salt-forming' (Greek: halos = salt, gen = forming). They are the most reactive non-metals and are all diatomic (F₂, Cl₂, Br₂, I₂).",
+          subtopics:[
+            {title:"8.5.1 General Characteristics",body:"• All have 7 valence electrons (ns²np⁵), 1 electron short of noble gas<br>• High electronegativity (F is highest of all elements)<br>• Exist as diatomic molecules<br>• Strong oxidizing agents (F₂ strongest)<br>• Reactivity decreases: F > Cl > Br > I<br>• Color: F₂=pale yellow, Cl₂=yellow-green, Br₂=red-brown, I₂=violet"},
+            {title:"8.5.2 Preparation of Halogens",body:"<b>Fluorine</b>: By electrolysis of KF·2HF (Moissan's method). Cannot be made by chemical oxidation.<br><b>Chlorine</b>: By Deacon's process: 4HCl + O₂ → 2Cl₂ + 2H₂O (CuCl₂ catalyst). Lab: MnO₂ + 4HCl → MnCl₂ + 2H₂O + Cl₂<br><b>Bromine</b>: By oxidation of Br⁻ with Cl₂: 2Br⁻ + Cl₂ → Br₂ + 2Cl⁻<br><b>Iodine</b>: By oxidation of I⁻ with Cl₂ or by oxidation with HNO₃"},
+            {title:"8.5.3 Chemical Properties",body:"<b>With H₂</b>: All form HX. H₂ + F₂ → 2HF (even in dark, explosive). H₂ + Cl₂ → 2HCl (in sunlight). H₂ + Br₂ → 2HBr (on heating). H₂ + I₂ ⇌ 2HI (reversible, needs Pt)<br><b>With water</b>: F₂ + H₂O → 2HF + O (reacts violently). Cl₂ + H₂O ⇌ HCl + HOCl (chlorine water — bleaching).<br><b>Displacement</b>: More reactive halogen displaces less reactive from its salt."},
+            {title:"8.5.4 Test for Halogens",body:"<b>Cl₂</b>: Turns moist starch-iodide paper blue; bleaches litmus paper<br><b>Br₂</b>: Gives brown fumes; turns starch paper orange-brown<br><b>I₂</b>: Turns starch solution blue-black (most specific test)<br><b>F₂</b>: Etches glass (SiO₂ + 2F₂ → SiF₄ + O₂)"}
+          ],
+          tricks:["Halogen colors: 'Please Call Brian Ivan' = Pale yellow, Chlorine green, Brown, Indigo/Violet (F, Cl, Br, I)","Reactivity F>Cl>Br>I (top to bottom decreases)","I₂ + starch = blue-black: most important identification test","Electronegativity F=4.0 (highest in all elements!)"],
+          formulas:["MnO₂ + 4HCl → MnCl₂ + 2H₂O + Cl₂↑ (lab prep of Cl₂)","Cl₂ + H₂O ⇌ HCl + HOCl (bleaching mechanism)","2KI + Cl₂ → 2KCl + I₂ (halogen displacement)","H₂ + F₂ → 2HF (spontaneous, explosive)"],
+          mcqs:[
+            {q:"Which halogen is the strongest oxidizing agent?",opts:["Iodine","Bromine","Chlorine","Fluorine"],ans:3,exp:"Fluorine is the strongest oxidizing agent and most electronegative element (EN=4.0)."},
+            {q:"The color of iodine vapor is:",opts:["Red-brown","Pale yellow","Violet/Purple","Yellow-green"],ans:2,exp:"I₂ vapor is violet/purple in color."},
+            {q:"Starch turns blue-black with:",opts:["Cl₂","Br₂","I₂","F₂"],ans:2,exp:"Iodine (I₂) forms a blue-black colored complex with starch — the classic iodine test."},
+            {q:"Chlorine is prepared in the lab by:",opts:["Heating KMnO₄","MnO₂ + conc. HCl","Electrolysis of NaCl","Deacon's process"],ans:1,exp:"Lab preparation: MnO₂ + 4HCl → MnCl₂ + 2H₂O + Cl₂↑"}
+          ]
+        }
+      },
+      {id:"8.6",title:"Carbon",
+        content:{
+          overview:"Carbon (C) has atomic number 6, electronic configuration 2,4. It shows allotropy, catenation (self-linking), and forms millions of organic compounds. Carbon forms 4 covalent bonds (tetravalent).",
+          subtopics:[
+            {title:"8.6.1 Introduction",body:"Carbon is unique due to:<br>• Catenation: ability to form long chains with itself<br>• Tetravalency: forms 4 bonds<br>• Multiple bonding: can form single, double, and triple bonds<br>• Small atomic size with high bond energy (C-C bond = 347 kJ/mol)"},
+            {title:"8.6.2 Allotropes of Carbon",body:"<b>Diamond</b>: Each C bonded to 4 others in 3D tetrahedral structure. Hardest natural substance, non-conductor, very high melting point. sp³ hybridized.<br><b>Graphite</b>: Layered structure, each C bonded to 3 others (sp² hybrid), hexagonal rings. Good conductor (free electrons), lubricant, used in pencils.<br><b>Buckminsterfullerene (C₆₀)</b>: Spherical, 60 C atoms forming pentagons and hexagons (like football). Named after Buckminster Fuller. Superconductor at low temperatures.<br><b>Carbon nanotubes</b>: Cylindrical form, stronger than steel, good conductor."}
+          ],
+          tricks:["Diamond = sp³ = hardest, non-conductor, 4 bonds each","Graphite = sp² = soft, conductor, 3 bonds + free electron","C₆₀ (Buckminster) = looks like football = 20 hexagons + 12 pentagons","Graphite conducts because of delocalized π electrons between layers"],
+          formulas:["C + O₂ → CO₂ (complete combustion)","2C + O₂ → 2CO (incomplete combustion)","C + H₂O → CO + H₂ (water gas, 1000°C)","CO₂ + C → 2CO (reduction)"],
+          mcqs:[
+            {q:"Which allotrope of carbon is the hardest?",opts:["Graphite","Fullerene","Diamond","Carbon nanotube"],ans:2,exp:"Diamond is the hardest natural substance due to its 3D covalent network structure (sp³ hybridization)."},
+            {q:"Graphite conducts electricity because:",opts:["It has ionic bonds","It has delocalized π electrons","It is soft","It has metallic bonds"],ans:1,exp:"Each carbon in graphite is sp² hybridized, leaving one delocalized π electron per carbon that conducts electricity."},
+            {q:"Buckminsterfullerene has how many carbon atoms?",opts:["32","60","72","48"],ans:1,exp:"C₆₀ (Buckminsterfullerene) has 60 carbon atoms arranged in 20 hexagons and 12 pentagons."}
+          ]
+        }
+      },
+      {id:"8.7",title:"Sulphur",
+        content:{
+          overview:"Sulphur (S) has atomic number 16, electronic configuration 2,8,6. It shows allotropy and forms many important compounds (SO₂, SO₃, H₂SO₄, H₂S). Found in volcanic regions, underground deposits.",
+          subtopics:[
+            {title:"8.7.1 Allotropes of Sulphur",body:"<b>Rhombic Sulphur (α-S)</b>: Stable below 96°C. Yellow, rhombic crystals. MP = 113°C. S₈ ring molecules.<br><b>Monoclinic Sulphur (β-S)</b>: Stable between 96°C and 119°C. Needle-shaped crystals, pale yellow. Converts to rhombic below 96°C.<br><b>Plastic Sulphur</b>: Formed by pouring molten sulphur into cold water. Amorphous, elastic like rubber. Unstable, converts to rhombic on standing."},
+            {title:"8.7.2 Uses of Sulphur",body:"• Manufacture of H₂SO₄ (most important industrial chemical)<br>• Vulcanization of rubber (adds strength to natural rubber)<br>• Fungicide in agriculture<br>• Manufacture of gunpowder<br>• Making fireworks and matches<br>• Treatment of skin diseases"},
+            {title:"8.7.3 Hydrogen Sulphide (H₂S)",body:"Preparation: FeS + H₂SO₄(dil) → FeSO₄ + H₂S↑ (Kipp's apparatus). Properties: colorless, rotten egg smell, poisonous gas, weak diprotic acid. Uses: analytical chemistry (precipitation of metal sulfides), test for oxidizing/reducing agents."}
+          ],
+          tricks:["Rhombic = stable at RT (room temperature). Monoclinic = stable above 96°C","96°C is the transition temperature of sulphur allotropes","H₂S smell = rotten eggs (never forget!)","S₈ is the ring structure of common sulphur"],
+          formulas:["FeS + H₂SO₄ → FeSO₄ + H₂S↑ (lab prep)","S + O₂ → SO₂ (burning sulphur)","2SO₂ + O₂ ⇌ 2SO₃ (Contact process)","SO₃ + H₂O → H₂SO₄"],
+          mcqs:[
+            {q:"The stable form of sulphur at room temperature is:",opts:["Monoclinic","Plastic","Rhombic","Amorphous"],ans:2,exp:"Rhombic sulphur is the stable form below 96°C (room temperature)."},
+            {q:"H₂S smells like:",opts:["Burnt rubber","Rotten eggs","Garlic","Almonds"],ans:1,exp:"H₂S (hydrogen sulphide) has a characteristic rotten egg smell."},
+            {q:"The transition temperature of sulphur allotropes is:",opts:["100°C","113°C","96°C","119°C"],ans:2,exp:"96°C is the transition temperature between rhombic and monoclinic sulphur."}
+          ]
+        }
+      }
+    ]
+  },
+  ch9: {
+    id:"ch9", num:"9", title:"Chemistry of Metals",
+    color:"#3B6D11", bg:"#EAF3DE",
+    topics:[
+      {id:"9.1",title:"Alkali Metals",
+        content:{
+          overview:"Alkali metals are Group IA (1) elements: Li, Na, K, Rb, Cs, Fr. They have 1 valence electron, are highly reactive, and always form +1 ions. They react vigorously with water, air, and most non-metals.",
+          subtopics:[
+            {title:"9.1.1 Introduction",body:"Alkali metals: Li (Lithium), Na (Sodium), K (Potassium), Rb (Rubidium), Cs (Caesium), Fr (Francium). Named 'alkali' metals because they react with water to form alkalis (strong bases). All are soft, silvery, and stored under kerosene oil (except Li, stored in liquid paraffin)."},
+            {title:"9.1.2 General Characteristics",body:"• Softest metals (can be cut with knife)<br>• Lowest ionization energies<br>• Highest electropositivity<br>• Smallest ionic radii in their period<br>• Form +1 ions only<br>• React with water: 2M + 2H₂O → 2MOH + H₂↑<br>• React with O₂: Na forms Na₂O₂ (peroxide), K forms KO₂ (superoxide), Li forms Li₂O (oxide)<br>• Flame colors: Li=crimson, Na=golden yellow, K=lilac/violet, Rb=red-violet, Cs=blue"},
+            {title:"9.1.3 Sodium (Na)",body:"Sodium is the most important alkali metal. Extracted by Down's cell (electrolysis of molten NaCl at 600°C). Cathode: Na is deposited. Anode: Cl₂ is released. Uses: in liquid form as coolant in nuclear reactors, making NaOH, Na₂O₂, as reducing agent."},
+            {title:"9.1.4 Sodium Hydroxide (NaOH)",body:"Also called caustic soda. Prepared industrially by Nelson's cell or Castner-Kellner cell (electrolysis of brine). Cathode: 2H₂O + 2e⁻ → H₂ + 2OH⁻. Properties: white solid, highly soluble in water, strong base, deliquescent. Uses: soap making (saponification), paper making, petroleum refining, making rayon, as drain cleaner."},
+            {title:"9.1.5 Sodium Carbonate (Na₂CO₃)",body:"Also called washing soda (Na₂CO₃·10H₂O = decahydrate). Prepared by Solvay process: NaCl + NH₃ + CO₂ + H₂O → NaHCO₃ → Na₂CO₃. Properties: white crystalline solid, alkaline solution, used as water softener. Uses: glass making, paper industry, water softening (removes Ca²⁺, Mg²⁺), as laboratory reagent."}
+          ],
+          tricks:["Alkali metals flame colors: 'Little Naughty Kids Run Crazy Fast' = Li(red), Na(yellow), K(lilac), Rb(red-violet), Cs(blue), Fr","Na forms peroxide Na₂O₂, K forms superoxide KO₂, Li forms oxide Li₂O — reactivity with O₂ increases down the group","Down's cell for Na extraction: cathode=Na, anode=Cl₂","Solvay process for Na₂CO₃: 'Salty Ammonia Creates Soda' (NaCl + NH₃ + CO₂ → Na₂CO₃)"],
+          formulas:["2Na + 2H₂O → 2NaOH + H₂↑","Down's cell: 2NaCl → 2Na + Cl₂","2NaOH + CO₂ → Na₂CO₃ + H₂O","Na₂CO₃ + H₂O + CO₂ → 2NaHCO₃ (Solvay process)"],
+          mcqs:[
+            {q:"Sodium is stored under:",opts:["Water","Alcohol","Kerosene oil","Air"],ans:2,exp:"Sodium is stored under kerosene oil to prevent reaction with moisture and oxygen in air."},
+            {q:"The flame color of sodium is:",opts:["Crimson red","Golden yellow","Lilac","Blue"],ans:1,exp:"Sodium gives a characteristic golden yellow flame color used in flame tests."},
+            {q:"NaOH is prepared industrially by:",opts:["Solvay process","Down's cell","Electrolysis of brine","Haber's process"],ans:2,exp:"NaOH is prepared by electrolysis of brine (concentrated NaCl solution) using Nelson's or Castner-Kellner cell."},
+            {q:"Washing soda is:",opts:["NaOH","NaCl","Na₂CO₃·10H₂O","Na₂SO₄"],ans:2,exp:"Washing soda is sodium carbonate decahydrate: Na₂CO₃·10H₂O."}
+          ]
+        }
+      },
+      {id:"9.2",title:"Alkaline Earth Metals",
+        content:{
+          overview:"Alkaline earth metals are Group IIA (2) elements: Be, Mg, Ca, Sr, Ba, Ra. They have 2 valence electrons, form +2 ions, and are harder and denser than alkali metals. Less reactive than Group 1 but still quite reactive.",
+          subtopics:[
+            {title:"9.2.1 Introduction",body:"Members: Be (Beryllium), Mg (Magnesium), Ca (Calcium), Sr (Strontium), Ba (Barium), Ra (Radium). Called 'alkaline earth' because their oxides (earths) are alkaline. Ra is radioactive. All are silvery-white metals."},
+            {title:"General Properties",body:"• 2 valence electrons in s-orbital (ns²)<br>• Form +2 ions (lose both valence electrons)<br>• Higher melting points than alkali metals<br>• Less reactive than alkali metals<br>• React with water (Mg slowly, Ca vigorously): Ca + 2H₂O → Ca(OH)₂ + H₂↑<br>• Flame colors: Ca=brick red, Sr=crimson, Ba=apple green<br>• Be is anomalous (behaves like Al — diagonal relationship)"}
+          ],
+          tricks:["Alkaline earth flame colors: 'Ca-SrBa = Brick-CrimsonBaGreen' = Ca(brick red), Sr(crimson), Ba(apple green)","Be is anomalous — diagonal relationship with Al (both form amphoteric oxides)","Group 2 → always +2 ions, Group 1 → always +1 ions","Mg burns brilliantly in air: 2Mg + O₂ → 2MgO (white powder)"],
+          formulas:["Ca + 2H₂O → Ca(OH)₂ + H₂↑","2Mg + O₂ → 2MgO","CaCO₃ →(heat) CaO + CO₂ (quicklime)","CaO + H₂O → Ca(OH)₂ (slaked lime)"],
+          mcqs:[
+            {q:"Flame color of calcium is:",opts:["Golden yellow","Crimson red","Brick red","Apple green"],ans:2,exp:"Calcium gives a brick red flame color in the flame test."},
+            {q:"Which Group 2 element is radioactive?",opts:["Barium","Strontium","Radium","Beryllium"],ans:2,exp:"Radium (Ra) is the radioactive member of alkaline earth metals."},
+            {q:"Quicklime is:",opts:["Ca(OH)₂","CaCO₃","CaO","CaCl₂"],ans:2,exp:"Quicklime is calcium oxide (CaO), produced by heating limestone (CaCO₃)."}
+          ]
+        }
+      }
+    ]
+  }
+};
+
+let currentChapter = null;
+let currentTopic = null;
+let currentView = 'home';
+let answeredMcqs = {};
+
+function render(){
+  const root = document.getElementById('root');
+  if(currentView==='home') renderHome(root);
+  else if(currentView==='chapter') renderChapter(root);
+  else if(currentView==='topic') renderTopic(root);
+}
+
+function renderHome(root){
+  root.innerHTML = `
+    <h2 class="sr-only">NEB Class 11 Chemistry — Chapters 8 and 9 Study Guide</h2>
+    <div class="home-view">
+      <h1>NEB Class 11 Chemistry</h1>
+      <p class="intro">Your complete study guide for Chapters 8 & 9. Click a chapter to explore all topics, subtopics, formulas, tricks, and MCQs.</p>
+      ${Object.values(DATA).map(ch=>`
+        <button class="chapter-btn" onclick="openChapter('${ch.id}')">
+          <div>
+            <div class="chapter-title">Chapter ${ch.num}: ${ch.title}</div>
+            <div class="chapter-sub">${ch.topics.length} topics · Formulas · MCQs · Short tricks</div>
+          </div>
+          <i class="ti ti-chevron-right chevron" aria-hidden="true"></i>
+        </button>
+      `).join('')}
+    </div>`;
+}
+
+function renderChapter(root){
+  const ch = DATA[currentChapter];
+  root.innerHTML = `
+    <button class="back-btn" onclick="goHome()"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back</button>
+    <div style="margin-bottom:1rem">
+      <h1 style="font-size:22px;font-weight:500;color:${ch.color};margin-bottom:4px">Chapter ${ch.num}: ${ch.title}</h1>
+      <p style="font-size:13px;color:var(--color-text-secondary)">${ch.topics.length} topics — click any topic to study it in detail</p>
+    </div>
+    <div class="topics-list">
+      ${ch.topics.map(t=>`
+        <button class="topic-btn" onclick="openTopic('${t.id}')">
+          <b>${t.id}</b> — ${t.title}
+        </button>
+      `).join('')}
+    </div>
+    <div style="padding:10px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);font-size:13px;color:var(--color-text-secondary)">
+      <i class="ti ti-info-circle" aria-hidden="true"></i> Each topic contains: overview, subtopics, formulas, memory tricks, and MCQ practice.
+    </div>`;
+}
+
+function renderTopic(root){
+  const ch = DATA[currentChapter];
+  const topic = ch.topics.find(t=>t.id===currentTopic);
+  const c = topic.content;
+  const mcqKey = currentChapter+'_'+currentTopic;
+  if(!answeredMcqs[mcqKey]) answeredMcqs[mcqKey]={};
+
+  root.innerHTML = `
+    <button class="back-btn" onclick="goChapter()"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back to Chapter ${ch.num}</button>
+    <div class="content-panel">
+      <h2>${topic.id} — ${topic.title}</h2>
+      <div class="breadcrumb">Chapter ${ch.num} › ${topic.title}</div>
+      
+      <div class="tab-bar" id="tabBar">
+        <button class="tab active" onclick="showTab('overview')">Overview</button>
+        <button class="tab" onclick="showTab('subtopics')">Subtopics</button>
+        <button class="tab" onclick="showTab('formulas')">Formulas</button>
+        <button class="tab" onclick="showTab('tricks')">Memory Tricks</button>
+        <button class="tab" onclick="showTab('mcq')">MCQ Practice</button>
+      </div>
+      
+      <div id="tabContent">
+        <div id="tab-overview">
+          <div class="section">
+            <h3>Overview</h3>
+            <p>${c.overview}</p>
+          </div>
+        </div>
+        <div id="tab-subtopics" style="display:none">
+          ${c.subtopics.map(s=>`
+            <div class="section">
+              <h3>${s.title}</h3>
+              <p>${s.body}</p>
+            </div>
+          `).join('')}
+        </div>
+        <div id="tab-formulas" style="display:none">
+          <div class="section">
+            <h3>Key Formulas & Reactions</h3>
+            ${c.formulas.map(f=>`<div class="formula-box">${f}</div>`).join('')}
+          </div>
+        </div>
+        <div id="tab-tricks" style="display:none">
+          <div class="section">
+            <h3>Memory Tricks & Mnemonics</h3>
+            ${c.tricks.map(t=>`<div class="trick-box"><div class="trick-title">✦ TRICK</div><p>${t}</p></div>`).join('')}
+          </div>
+        </div>
+        <div id="tab-mcq" style="display:none">
+          <div class="mcq-section">
+            <h3>MCQ Practice Questions</h3>
+            ${c.mcqs.map((m,i)=>`
+              <div class="mcq" id="mcq-${i}">
+                <div class="q">Q${i+1}. ${m.q}</div>
+                ${m.opts.map((o,j)=>`
+                  <button class="opt" id="opt-${i}-${j}" onclick="answerMcq(${i},${j},'${mcqKey}',${m.ans},'${m.exp.replace(/'/g,"\\'")}')">
+                    ${String.fromCharCode(65+j)}. ${o}
+                  </button>
+                `).join('')}
+                <div id="feedback-${i}"></div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  
+  // restore answered state
+  const ans = answeredMcqs[mcqKey];
+  Object.keys(ans).forEach(i=>{
+    const {chosen, correct} = ans[i];
+    styleAnswered(parseInt(i), chosen, correct, c.mcqs[parseInt(i)].exp, c.mcqs[parseInt(i)]);
+  });
+}
+
+function showTab(name){
+  const tabs = ['overview','subtopics','formulas','tricks','mcq'];
+  tabs.forEach(t=>{
+    const el = document.getElementById('tab-'+t);
+    if(el) el.style.display = (t===name?'block':'none');
+  });
+  document.querySelectorAll('.tab').forEach((btn,i)=>{
+    btn.classList.toggle('active', tabs[i]===name);
+  });
+}
+
+function answerMcq(qi, chosen, key, correct, exp){
+  if(answeredMcqs[key] && answeredMcqs[key][qi]) return;
+  if(!answeredMcqs[key]) answeredMcqs[key]={};
+  answeredMcqs[key][qi]={chosen, correct};
+  styleAnswered(qi, chosen, correct, exp);
+}
+
+function styleAnswered(qi, chosen, correct, exp, mcqObj){
+  const ch = DATA[currentChapter];
+  const topic = ch.topics.find(t=>t.id===currentTopic);
+  const c = topic.content;
+  const m = mcqObj || c.mcqs[qi];
+  for(let j=0;j<m.opts.length;j++){
+    const btn = document.getElementById(`opt-${qi}-${j}`);
+    if(!btn) continue;
+    btn.disabled = true;
+    if(j===correct) btn.classList.add('correct');
+    else if(j===chosen && chosen!==correct) btn.classList.add('wrong');
+  }
+  const fb = document.getElementById(`feedback-${qi}`);
+  if(fb){
+    const isCorrect = chosen===correct;
+    fb.className = 'ans-feedback '+(isCorrect?'correct':'wrong');
+    fb.textContent = (isCorrect?'✓ Correct! ':'✗ Wrong! ')+exp;
+  }
+}
+
+function openChapter(id){ currentChapter=id; currentView='chapter'; render(); }
+function openTopic(id){ currentTopic=id; currentView='topic'; render(); }
+function goHome(){ currentView='home'; render(); }
+function goChapter(){ currentView='chapter'; render(); }
+
+render();
+</script>
