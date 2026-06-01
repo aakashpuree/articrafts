@@ -1,0 +1,655 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);color:var(--color-text-primary);background:transparent}
+.tab-bar{display:flex;gap:6px;flex-wrap:wrap;padding:1rem 0 0.75rem;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:1.5rem}
+.tab{padding:6px 14px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);font-size:13px;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);transition:all 0.15s}
+.tab.active{background:var(--color-background-info);color:var(--color-text-info);border-color:var(--color-border-info);font-weight:500}
+.tab:hover:not(.active){background:var(--color-background-secondary)}
+.panel{display:none}.panel.active{display:block}
+h2{font-size:18px;font-weight:500;margin-bottom:1rem}
+h3{font-size:15px;font-weight:500;margin-bottom:0.5rem;color:var(--color-text-secondary)}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1rem}
+.badge{display:inline-block;padding:2px 8px;border-radius:var(--border-radius-md);font-size:11px;font-weight:500}
+.badge-info{background:var(--color-background-info);color:var(--color-text-info)}
+.badge-warn{background:var(--color-background-warning);color:var(--color-text-warning)}
+.badge-danger{background:var(--color-background-danger);color:var(--color-text-danger)}
+.badge-success{background:var(--color-background-success);color:var(--color-text-success)}
+ul{padding-left:1.2rem;margin:0.5rem 0}
+li{margin:0.3rem 0;font-size:14px;line-height:1.6}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:0.5rem 0}
+th{background:var(--color-background-secondary);padding:6px 10px;text-align:left;font-weight:500;border:0.5px solid var(--color-border-tertiary)}
+td{padding:6px 10px;border:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+.tree{padding-left:1rem;border-left:2px solid var(--color-border-secondary)}
+.tree-item{margin:0.4rem 0;font-size:13px}
+.tree-branch{padding-left:1rem;border-left:2px solid var(--color-border-tertiary);margin-left:0.5rem}
+.tree-leaf{padding-left:1rem;border-left:2px solid var(--color-background-secondary);margin-left:0.5rem;color:var(--color-text-secondary);font-size:12px}
+.mcq{margin-bottom:0.8rem}
+.mcq-q{font-size:14px;font-weight:500;margin-bottom:0.3rem}
+.mcq-opts{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.opt{font-size:12px;padding:5px 10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);cursor:pointer;background:var(--color-background-primary);color:var(--color-text-primary)}
+.opt:hover{background:var(--color-background-secondary)}
+.opt.correct{background:var(--color-background-success);color:var(--color-text-success);border-color:var(--color-border-success)}
+.opt.wrong{background:var(--color-background-danger);color:var(--color-text-danger);border-color:var(--color-border-danger)}
+.cheatrow{display:flex;gap:8px;align-items:flex-start;padding:4px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:13px}
+.cheatkey{min-width:140px;font-weight:500;color:var(--color-text-info)}
+.trick{background:var(--color-background-warning);border-left:3px solid var(--color-border-warning);padding:8px 12px;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;margin:6px 0;font-size:13px;color:var(--color-text-warning)}
+.score-bar{height:6px;border-radius:3px;background:var(--color-background-secondary);overflow:hidden;margin:2px 0}
+.score-fill{height:100%;background:var(--color-text-info);border-radius:3px;transition:width 0.4s}
+#mcq-score{font-size:14px;font-weight:500;margin-top:0.5rem;color:var(--color-text-success)}
+.q-imp{padding:8px 12px;border-left:3px solid var(--color-border-info);background:var(--color-background-secondary);border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;margin:6px 0;font-size:13px}
+</style>
+
+<h2 style="font-size:22px;font-weight:500;padding:1rem 0 0.25rem">Operating System — Exam Prep 🎯</h2>
+<p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:0.5rem">All 6 units covered · MCQs · Mind Map · Cheat Sheet · Important Questions</p>
+
+<div class="tab-bar">
+  <button class="tab active" onclick="showTab('mindmap')">🌿 Mind Map</button>
+  <button class="tab" onclick="showTab('notes')">📒 Quick Notes</button>
+  <button class="tab" onclick="showTab('mcq')">✅ MCQ Quiz</button>
+  <button class="tab" onclick="showTab('imp')">⭐ Imp Questions</button>
+  <button class="tab" onclick="showTab('cheat')">📄 Cheat Sheet</button>
+  <button class="tab" onclick="showTab('tricks')">💡 Tricks</button>
+</div>
+
+<!-- MIND MAP -->
+<div id="mindmap" class="panel active">
+  <h2>Chapter Mind Map — All 6 Units</h2>
+  <div class="grid2">
+
+    <div class="card">
+      <span class="badge badge-info">Unit 1</span>
+      <div class="tree-item" style="font-size:15px;font-weight:500;margin:6px 0">Introduction to OS</div>
+      <div class="tree">
+        <div class="tree-item">📌 Definition &amp; History</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">1956 – GM first OS on IBM</div>
+          <div class="tree-leaf">1960s – Unix (written in C)</div>
+          <div class="tree-leaf">Microsoft OS by IBM request</div>
+        </div>
+        <div class="tree-item">📌 Internal Structure</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Kernel (core, in RAM always)</div>
+          <div class="tree-leaf">Utility Software (housekeeping)</div>
+          <div class="tree-leaf">Application Software</div>
+        </div>
+        <div class="tree-item">📌 Functions</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">I/O, Memory, Processor Management</div>
+          <div class="tree-leaf">File, Device, Security</div>
+          <div class="tree-leaf">Error detection, Job Accounting</div>
+        </div>
+        <div class="tree-item">📌 Types (by Processing)</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Batch → Time-Sharing → Multiprocessing</div>
+          <div class="tree-leaf">Multitasking → Real-Time → Distributed</div>
+        </div>
+        <div class="tree-item">📌 Types (by UI)</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">CLI (text-based commands)</div>
+          <div class="tree-leaf">GUI (icons, mouse – Xerox 1970s)</div>
+        </div>
+        <div class="tree-item">📌 Types (by User)</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Single-user / Multi-user</div>
+          <div class="tree-leaf">Single-tasking / Multi-tasking</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="badge badge-warn">Unit 2</span>
+      <div class="tree-item" style="font-size:15px;font-weight:500;margin:6px 0">Process &amp; Scheduling</div>
+      <div class="tree">
+        <div class="tree-item">📌 Program vs Process</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Program = passive, in secondary memory</div>
+          <div class="tree-leaf">Process = active, in RAM, has PCB</div>
+        </div>
+        <div class="tree-item">📌 Process in Memory</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Stack – local vars, return addr</div>
+          <div class="tree-leaf">Heap – dynamic memory</div>
+          <div class="tree-leaf">Text – program counter, registers</div>
+          <div class="tree-leaf">Data – global &amp; static vars</div>
+        </div>
+        <div class="tree-item">📌 Process States (5)</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">New → Ready → Running → Wait → Terminated</div>
+          <div class="tree-leaf">[+Suspend Ready]</div>
+        </div>
+        <div class="tree-item">📌 PCB Contents</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">PID, Program Counter, Registers</div>
+          <div class="tree-leaf">State, Memory limits, Open files</div>
+        </div>
+        <div class="tree-item">📌 Schedulers (3)</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Long-Term (Job Scheduler)</div>
+          <div class="tree-leaf">Short-Term (CPU Scheduler)</div>
+          <div class="tree-leaf">Medium-Term (Swapping)</div>
+        </div>
+        <div class="tree-item">📌 Scheduling Types</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Preemptive: RR, Priority, SRTF</div>
+          <div class="tree-leaf">Non-Preemptive: SJF, Non-pre Priority</div>
+        </div>
+        <div class="tree-item">📌 Thread</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Light-weight process within a process</div>
+          <div class="tree-leaf">Born→Ready→Running→Blocked→Dead</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="badge badge-success">Unit 3</span>
+      <div class="tree-item" style="font-size:15px;font-weight:500;margin:6px 0">Memory Management</div>
+      <div class="tree">
+        <div class="tree-item">📌 Memory Hierarchy (Top→Bottom)</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Registers → Cache → RAM → Disk</div>
+          <div class="tree-leaf">Speed ↓, Capacity ↑, Cost ↓</div>
+        </div>
+        <div class="tree-item">📌 Mono vs Multiprogramming</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Mono: 1 program, CPU idle on I/O</div>
+          <div class="tree-leaf">Multi: many programs, better CPU use</div>
+        </div>
+        <div class="tree-item">📌 Logical vs Physical Address</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Logical = CPU-generated (virtual)</div>
+          <div class="tree-leaf">Physical = actual RAM address (by MMU)</div>
+        </div>
+        <div class="tree-item">📌 Allocation Methods</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Fixed Partition → internal fragmentation</div>
+          <div class="tree-leaf">Dynamic/Variable → external fragmentation</div>
+        </div>
+        <div class="tree-item">📌 Fragmentation</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Internal = wasted inside allocated block</div>
+          <div class="tree-leaf">External = free but non-contiguous</div>
+        </div>
+        <div class="tree-item">📌 Virtual Memory &amp; Paging</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">VM = program larger than physical RAM</div>
+          <div class="tree-leaf">Paging: process→pages, RAM→frames</div>
+          <div class="tree-leaf">Page size = Frame size always</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="badge badge-danger">Unit 4</span>
+      <div class="tree-item" style="font-size:15px;font-weight:500;margin:6px 0">Deadlock Management</div>
+      <div class="tree">
+        <div class="tree-item">📌 4 Necessary Conditions (ALL needed)</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">1. Mutual Exclusion</div>
+          <div class="tree-leaf">2. Hold and Wait</div>
+          <div class="tree-leaf">3. No Preemption</div>
+          <div class="tree-leaf">4. Circular Wait</div>
+        </div>
+        <div class="tree-item">📌 Handling Methods (3)</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Prevention – break one condition</div>
+          <div class="tree-leaf">Avoidance – safe/unsafe state check</div>
+          <div class="tree-leaf">Detection &amp; Recovery – let it happen, fix</div>
+        </div>
+        <div class="tree-item">📌 Prevention Techniques</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Hold &amp; Wait → request all at once</div>
+          <div class="tree-leaf">No Preemption → release held resources</div>
+          <div class="tree-leaf">Circular Wait → total resource ordering</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="badge badge-info">Unit 5</span>
+      <div class="tree-item" style="font-size:15px;font-weight:500;margin:6px 0">File Management</div>
+      <div class="tree">
+        <div class="tree-item">📌 File Operations (6)</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Create, Open, Read, Delete, Close, Rename</div>
+        </div>
+        <div class="tree-item">📌 File Extension</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Identifies file type (e.g. .jpg, .docx)</div>
+          <div class="tree-leaf">Helps OS pick right application</div>
+        </div>
+        <div class="tree-item">📌 File System Layout</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Sector 0 = MBR (Master Boot Record)</div>
+          <div class="tree-leaf">Boot block, Superblock, Bitmaps, I-nodes</div>
+        </div>
+        <div class="tree-item">📌 File Allocation (3)</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Contiguous – simple, fast, fragmentation</div>
+          <div class="tree-leaf">Linked – flexible, no random access</div>
+          <div class="tree-leaf">Indexed – index block holds all pointers</div>
+        </div>
+        <div class="tree-item">📌 Free Space Management</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Bitmap / Bit Vector</div>
+          <div class="tree-leaf">Linked List, Grouping, Counting</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="badge" style="background:var(--color-background-secondary);color:var(--color-text-secondary)">Unit 6</span>
+      <div class="tree-item" style="font-size:15px;font-weight:500;margin:6px 0">Linux</div>
+      <div class="tree">
+        <div class="tree-item">📌 Introduction</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Released by Linus Torvalds – Sep 17, 1991</div>
+          <div class="tree-leaf">Open source – GPL license</div>
+          <div class="tree-leaf">600+ distributions available</div>
+        </div>
+        <div class="tree-item">📌 Features</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Portable, Open Source, Multi-User</div>
+          <div class="tree-leaf">Multiprogramming, Hierarchical FS, Shell, Security</div>
+        </div>
+        <div class="tree-item">📌 Architecture (Layers)</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Hardware → Kernel → Shell → System Utilities</div>
+        </div>
+        <div class="tree-item">📌 Major Distros</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Ubuntu (easiest), Debian (stable)</div>
+          <div class="tree-leaf">Fedora, Red Hat, CentOS, Linux Mint</div>
+        </div>
+        <div class="tree-item">📌 Key Commands</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">pwd, mkdir, rmdir, cd, rm, cp</div>
+          <div class="tree-leaf">ping, ip addr (networking)</div>
+        </div>
+        <div class="tree-item">📌 Linux vs Windows</div>
+        <div class="tree-branch">
+          <div class="tree-leaf">Linux: open, secure, C + Assembly</div>
+          <div class="tree-leaf">Windows: closed, easy GUI, C++ + Assembly</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- QUICK NOTES -->
+<div id="notes" class="panel">
+  <h2>Quick Notes — Key Concepts Per Unit</h2>
+  <div class="grid2">
+    <div class="card">
+      <span class="badge badge-info">Unit 1</span><br><br>
+      <b style="font-size:14px">OS Types Summary</b>
+      <table style="margin-top:8px">
+        <tr><th>Type</th><th>Key Feature</th><th>Example</th></tr>
+        <tr><td>Batch</td><td>No direct interaction</td><td>Payroll</td></tr>
+        <tr><td>Time-Sharing</td><td>Quantum per task</td><td>Unix, Multics</td></tr>
+        <tr><td>Multiprocessing</td><td>Multiple CPUs</td><td>Unix</td></tr>
+        <tr><td>Multitasking</td><td>Multiple tasks at once</td><td>Windows</td></tr>
+        <tr><td>Real-Time</td><td>Fixed deadline</td><td>Flight control</td></tr>
+        <tr><td>Distributed</td><td>Networked computers</td><td>Cluster OS</td></tr>
+      </table>
+      <br>
+      <b style="font-size:14px">Hard vs Soft Real-Time</b>
+      <ul><li>Hard: miss deadline = system failure (robot welding)</li><li>Soft: some relaxation allowed (multimedia)</li></ul>
+    </div>
+    <div class="card">
+      <span class="badge badge-warn">Unit 2</span><br><br>
+      <b style="font-size:14px">Schedulers Comparison</b>
+      <table style="margin-top:8px">
+        <tr><th>Scheduler</th><th>Also Called</th><th>Function</th></tr>
+        <tr><td>Long-term</td><td>Job Scheduler</td><td>New→Ready, controls multiprogramming degree</td></tr>
+        <tr><td>Short-term</td><td>CPU Scheduler</td><td>Ready→Running, fastest</td></tr>
+        <tr><td>Medium-term</td><td>Swapper</td><td>Swaps processes in/out of memory</td></tr>
+      </table>
+      <br>
+      <b style="font-size:14px">Preemptive vs Non-Preemptive</b>
+      <table>
+        <tr><th>Preemptive</th><th>Non-Preemptive</th></tr>
+        <tr><td>Can interrupt process</td><td>Runs till done/wait</td></tr>
+        <tr><td>RR, Priority, SRTF</td><td>SJF, Non-pre Priority</td></tr>
+        <tr><td>More overhead</td><td>Less overhead</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <span class="badge badge-success">Unit 3</span><br><br>
+      <b style="font-size:14px">Memory Partitioning</b>
+      <table style="margin-top:8px">
+        <tr><th>Method</th><th>Advantage</th><th>Problem</th></tr>
+        <tr><td>Fixed Partition</td><td>Simple</td><td>Internal fragmentation</td></tr>
+        <tr><td>Dynamic Partition</td><td>No internal frag</td><td>External fragmentation</td></tr>
+        <tr><td>Paging</td><td>No external frag</td><td>Internal frag possible</td></tr>
+      </table>
+      <br>
+      <b style="font-size:14px">Paging Key Points</b>
+      <ul>
+        <li>Process divided into <b>pages</b>, RAM into <b>frames</b></li>
+        <li>Page size = Frame size (always equal)</li>
+        <li>MMU maps logical → physical address</li>
+        <li>Virtual memory uses disk as extended RAM</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="badge badge-danger">Unit 4</span><br><br>
+      <b style="font-size:14px">Deadlock Conditions (All 4 must exist)</b>
+      <ul style="margin-top:8px">
+        <li><b>Mutual Exclusion</b> – only one process uses resource</li>
+        <li><b>Hold &amp; Wait</b> – holds one, waits for another</li>
+        <li><b>No Preemption</b> – resource not forcibly taken</li>
+        <li><b>Circular Wait</b> – P1→R1→P2→R2→P1 cycle</li>
+      </ul>
+      <br>
+      <b style="font-size:14px">Handling Approach</b>
+      <ul>
+        <li><b>Prevention</b> – break one of 4 conditions</li>
+        <li><b>Avoidance</b> – safe state checking (Banker's algo)</li>
+        <li><b>Detection &amp; Recovery</b> – detect then recover</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="badge badge-info">Unit 5</span><br><br>
+      <b style="font-size:14px">File Allocation Comparison</b>
+      <table style="margin-top:8px">
+        <tr><th>Method</th><th>Access</th><th>Problem</th></tr>
+        <tr><td>Contiguous</td><td>Direct, fast</td><td>Both fragmentations</td></tr>
+        <tr><td>Linked</td><td>Sequential only</td><td>No direct access</td></tr>
+        <tr><td>Indexed</td><td>Direct via index</td><td>Overhead for small files</td></tr>
+      </table>
+      <br>
+      <b style="font-size:14px">Free Space Methods</b>
+      <ul>
+        <li>Bitmap: 0=free, 1=allocated, very compact</li>
+        <li>Linked List: free blocks chained</li>
+        <li>Grouping: address of n free blocks in first free block</li>
+        <li>Counting: first free block + count of contiguous free blocks</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="badge" style="background:var(--color-background-secondary);color:var(--color-text-secondary)">Unit 6</span><br><br>
+      <b style="font-size:14px">Linux Key Commands</b>
+      <table style="margin-top:8px">
+        <tr><th>Command</th><th>Purpose</th></tr>
+        <tr><td>pwd</td><td>Print working directory</td></tr>
+        <tr><td>mkdir</td><td>Make new directory</td></tr>
+        <tr><td>rmdir</td><td>Remove directory</td></tr>
+        <tr><td>cd</td><td>Change directory</td></tr>
+        <tr><td>rm</td><td>Remove file</td></tr>
+        <tr><td>cp</td><td>Copy file/directory</td></tr>
+        <tr><td>ping</td><td>Check connectivity</td></tr>
+        <tr><td>ip addr</td><td>Show IP address</td></tr>
+      </table>
+      <br>
+      <b style="font-size:14px">Open terminal shortcut</b>
+      <p style="font-size:13px;margin-top:4px">CTRL + ALT + T</p>
+    </div>
+  </div>
+</div>
+
+<!-- MCQ QUIZ -->
+<div id="mcq" class="panel">
+  <h2>Interactive MCQ Quiz — All Units</h2>
+  <p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:1rem">Tap an option to check your answer instantly.</p>
+  <div id="mcq-score"></div>
+  <div id="quiz-container"></div>
+</div>
+
+<!-- IMPORTANT QUESTIONS -->
+<div id="imp" class="panel">
+  <h2>⭐ Important Exam Questions</h2>
+  <div class="card">
+    <h3>Unit 1 — Introduction to OS</h3>
+    <div class="q-imp">Define Operating System. What are its main functions? (5 marks)</div>
+    <div class="q-imp">Explain different types of OS with examples. (5-8 marks)</div>
+    <div class="q-imp">What is the difference between Hard Real-Time and Soft Real-Time OS? Give examples.</div>
+    <div class="q-imp">Compare CLI and GUI. What are advantages of GUI? (4 marks)</div>
+    <div class="q-imp">Explain internal structure of OS (Kernel, Utility, Application).</div>
+    <div class="q-imp">What is Distributed OS? What are its advantages and disadvantages?</div>
+  </div>
+  <div class="card">
+    <h3>Unit 2 — Process &amp; Scheduling</h3>
+    <div class="q-imp">Differentiate between Program and Process with a table. (4 marks)</div>
+    <div class="q-imp">Explain the 5 states of a process with a state diagram. (5 marks)</div>
+    <div class="q-imp">What is PCB? List all its components. (4 marks)</div>
+    <div class="q-imp">Explain Long-term, Short-term, and Medium-term schedulers. (6 marks)</div>
+    <div class="q-imp">Compare Preemptive and Non-Preemptive scheduling. Which algorithms belong to each?</div>
+    <div class="q-imp">What is a thread? How is it different from a process? What is its life cycle?</div>
+    <div class="q-imp">What are Job Queue, Ready Queue, and Waiting Queue? (3 marks)</div>
+  </div>
+  <div class="card">
+    <h3>Unit 3 — Memory Management</h3>
+    <div class="q-imp">Explain memory hierarchy with diagram. (5 marks)</div>
+    <div class="q-imp">What is the difference between logical and physical address? What is MMU? (4 marks)</div>
+    <div class="q-imp">Explain Fixed and Dynamic partitioning with their advantages/disadvantages.</div>
+    <div class="q-imp">What is internal and external fragmentation? How can they be solved?</div>
+    <div class="q-imp">Explain Virtual Memory. What are its two main purposes?</div>
+    <div class="q-imp">What is paging? Explain with an example. Why must page size = frame size?</div>
+  </div>
+  <div class="card">
+    <h3>Unit 4 — Deadlock</h3>
+    <div class="q-imp">What is deadlock? Explain with an example using processes and resources. (5 marks)</div>
+    <div class="q-imp">What are the 4 necessary conditions for deadlock? Explain each. (8 marks)</div>
+    <div class="q-imp">Explain three methods of handling deadlock. (6 marks)</div>
+    <div class="q-imp">How can Circular Wait condition be prevented?</div>
+    <div class="q-imp">What is the difference between deadlock prevention and deadlock avoidance?</div>
+  </div>
+  <div class="card">
+    <h3>Unit 5 — File Management</h3>
+    <div class="q-imp">List and explain all file operations. (6 marks)</div>
+    <div class="q-imp">What is a file extension? Why is it important? Give 5 examples.</div>
+    <div class="q-imp">Compare Contiguous, Linked, and Indexed file allocation methods. (6 marks)</div>
+    <div class="q-imp">What is free space management? Explain Bitmap and Linked List methods.</div>
+    <div class="q-imp">What is MBR? What is the role of file system layout?</div>
+  </div>
+  <div class="card">
+    <h3>Unit 6 — Linux</h3>
+    <div class="q-imp">What is Linux? Who created it and when? What license does it use? (3 marks)</div>
+    <div class="q-imp">List and explain features of Linux OS. (5 marks)</div>
+    <div class="q-imp">Compare Linux and Windows with at least 6 differences. (6 marks)</div>
+    <div class="q-imp">Explain the architecture of Linux (all 4 layers). (5 marks)</div>
+    <div class="q-imp">Write the names and purpose of at least 6 Linux commands.</div>
+    <div class="q-imp">What are Linux distributions? Name 5 with their use case.</div>
+  </div>
+</div>
+
+<!-- CHEAT SHEET -->
+<div id="cheat" class="panel">
+  <h2>📄 One-Page Cheat Sheet</h2>
+  <p style="font-size:12px;color:var(--color-text-secondary);margin-bottom:1rem">Read this 10 minutes before your exam!</p>
+  <div class="card">
+    <h3>UNIT 1</h3>
+    <div class="cheatrow"><span class="cheatkey">OS defined as</span><span>Interface between user and hardware; manages resources</span></div>
+    <div class="cheatrow"><span class="cheatkey">First OS</span><span>1956, General Motors on IBM</span></div>
+    <div class="cheatrow"><span class="cheatkey">Unix year</span><span>1960s, written in C</span></div>
+    <div class="cheatrow"><span class="cheatkey">OS Layers</span><span>Kernel → Utility Software → Application Software</span></div>
+    <div class="cheatrow"><span class="cheatkey">GUI invented by</span><span>Xerox Palo Alto (1970s)</span></div>
+    <div class="cheatrow"><span class="cheatkey">Real-time types</span><span>Hard (strict deadline) vs Soft (relaxed)</span></div>
+    <div class="cheatrow"><span class="cheatkey">Distributed OS</span><span>Loosely coupled systems via single channel</span></div>
+  </div>
+  <div class="card">
+    <h3>UNIT 2</h3>
+    <div class="cheatrow"><span class="cheatkey">Process sections</span><span>Stack, Heap, Text, Data</span></div>
+    <div class="cheatrow"><span class="cheatkey">Process states (5)</span><span>New→Ready→Running→Wait→Terminated (+Suspend Ready)</span></div>
+    <div class="cheatrow"><span class="cheatkey">PCB = identified by</span><span>PID (Process ID)</span></div>
+    <div class="cheatrow"><span class="cheatkey">Long-term scheduler</span><span>New→Ready; controls degree of multiprogramming</span></div>
+    <div class="cheatrow"><span class="cheatkey">Short-term scheduler</span><span>Ready→Running; fastest scheduler</span></div>
+    <div class="cheatrow"><span class="cheatkey">Medium-term</span><span>Handles swapping (moves to secondary memory)</span></div>
+    <div class="cheatrow"><span class="cheatkey">Preemptive algos</span><span>Round Robin, Priority, SRTF</span></div>
+    <div class="cheatrow"><span class="cheatkey">Non-preemptive algos</span><span>SJF, Non-preemptive Priority</span></div>
+    <div class="cheatrow"><span class="cheatkey">Thread lifecycle</span><span>Born→Ready→Running→Blocked→Sleep→Dead</span></div>
+  </div>
+  <div class="card">
+    <h3>UNIT 3</h3>
+    <div class="cheatrow"><span class="cheatkey">Memory hierarchy</span><span>Register→Cache→RAM→Disk (speed↓, size↑)</span></div>
+    <div class="cheatrow"><span class="cheatkey">Logical address</span><span>Generated by CPU; also called virtual address</span></div>
+    <div class="cheatrow"><span class="cheatkey">Physical address</span><span>Actual RAM address; computed by MMU</span></div>
+    <div class="cheatrow"><span class="cheatkey">MMU</span><span>Hardware device mapping virtual→physical address</span></div>
+    <div class="cheatrow"><span class="cheatkey">Internal fragmentation</span><span>Wasted space inside allocated block (Fixed partition)</span></div>
+    <div class="cheatrow"><span class="cheatkey">External fragmentation</span><span>Enough free space but non-contiguous (Dynamic partition)</span></div>
+    <div class="cheatrow"><span class="cheatkey">Paging rule</span><span>Page size MUST equal Frame size</span></div>
+    <div class="cheatrow"><span class="cheatkey">Virtual memory</span><span>Disk used to extend RAM; allows programs larger than RAM</span></div>
+  </div>
+  <div class="card">
+    <h3>UNIT 4</h3>
+    <div class="cheatrow"><span class="cheatkey">Deadlock = </span><span>Circular wait for resources; no progress</span></div>
+    <div class="cheatrow"><span class="cheatkey">4 conditions</span><span>Mutual Exclusion, Hold &amp; Wait, No Preemption, Circular Wait</span></div>
+    <div class="cheatrow"><span class="cheatkey">Prevention</span><span>Break one of the 4 conditions</span></div>
+    <div class="cheatrow"><span class="cheatkey">Avoidance</span><span>Stay in safe state; OS checks each step</span></div>
+    <div class="cheatrow"><span class="cheatkey">Detection+Recovery</span><span>Let deadlock occur; periodically check and recover</span></div>
+    <div class="cheatrow"><span class="cheatkey">Circular wait fix</span><span>Total ordering of resource types</span></div>
+  </div>
+  <div class="card">
+    <h3>UNIT 5</h3>
+    <div class="cheatrow"><span class="cheatkey">File operations (6)</span><span>Create, Open, Read, Delete, Close, Rename</span></div>
+    <div class="cheatrow"><span class="cheatkey">Sector 0 of disk</span><span>MBR (Master Boot Record) – used to boot system</span></div>
+    <div class="cheatrow"><span class="cheatkey">Contiguous alloc</span><span>Fast sequential access; suffers both fragmentations</span></div>
+    <div class="cheatrow"><span class="cheatkey">Indexed alloc</span><span>Index block holds all pointers; direct access</span></div>
+    <div class="cheatrow"><span class="cheatkey">Bitmap free space</span><span>0=free, 1=used; very compact and simple</span></div>
+  </div>
+  <div class="card">
+    <h3>UNIT 6</h3>
+    <div class="cheatrow"><span class="cheatkey">Linux creator</span><span>Linus Torvalds – Sep 17, 1991</span></div>
+    <div class="cheatrow"><span class="cheatkey">License</span><span>GPL (GNU General Public License)</span></div>
+    <div class="cheatrow"><span class="cheatkey">Distros count</span><span>600+; popular: Ubuntu, Debian, Fedora, Mint</span></div>
+    <div class="cheatrow"><span class="cheatkey">Linux written in</span><span>C and Assembly language</span></div>
+    <div class="cheatrow"><span class="cheatkey">Windows written in</span><span>C++ and Assembly language</span></div>
+    <div class="cheatrow"><span class="cheatkey">Linux architecture</span><span>Hardware → Kernel → Shell → System Utilities</span></div>
+    <div class="cheatrow"><span class="cheatkey">Open terminal</span><span>CTRL + ALT + T</span></div>
+    <div class="cheatrow"><span class="cheatkey">Linux commands</span><span>pwd, mkdir, rmdir, cd, rm, cp, ping, ip addr</span></div>
+  </div>
+</div>
+
+<!-- TRICKS -->
+<div id="tricks" class="panel">
+  <h2>💡 Tricks, Mnemonics &amp; Exam Tips</h2>
+  <div class="card">
+    <h3>Memory Tricks (Mnemonics)</h3>
+    <div class="trick">🔑 Deadlock 4 conditions → <b>"MHNc"</b> = <b>M</b>utual exclusion, <b>H</b>old &amp; wait, <b>N</b>o preemption, <b>C</b>ircular wait</div>
+    <div class="trick">🔑 Process memory sections → <b>"SHDT"</b> = <b>S</b>tack, <b>H</b>eap, <b>D</b>ata, <b>T</b>ext</div>
+    <div class="trick">🔑 File operations → <b>"CORDCR"</b> = <b>C</b>reate, <b>O</b>pen, <b>R</b>ead, <b>D</b>elete, <b>C</b>lose, <b>R</b>ename</div>
+    <div class="trick">🔑 Process states → <b>"NRRWT"</b> = <b>N</b>ew → <b>R</b>eady → <b>R</b>unning → <b>W</b>ait → <b>T</b>erminated</div>
+    <div class="trick">🔑 3 Schedulers → <b>"LSM"</b> = <b>L</b>ong-term (Job), <b>S</b>hort-term (CPU), <b>M</b>edium-term (Swap)</div>
+    <div class="trick">🔑 Memory hierarchy order → <b>"Registers Come Running Dangerously"</b> = Registers, Cache, RAM, Disk</div>
+    <div class="trick">🔑 Linux distro order → <b>"UFD-FR-CO"</b> = Ubuntu, Fedora, Debian, Fedora, Red hat, CentOS, openSUSE</div>
+  </div>
+  <div class="card">
+    <h3>Common Traps in MCQs</h3>
+    <ul>
+      <li>PCB is identified by <b>PID</b> — not program name or state</li>
+      <li>Short-term scheduler is the <b>fastest</b> (not most important — that's long-term)</li>
+      <li>In paging: page size MUST equal frame size — NEVER different</li>
+      <li>Internal fragmentation = Fixed partition | External = Dynamic partition</li>
+      <li>ALL 4 deadlock conditions must exist simultaneously — not just 2 or 3</li>
+      <li>Linux was created in <b>1991</b> — not 1956 (that's GM's first OS)</li>
+      <li>GUI was invented by <b>Xerox</b>, not Apple or Microsoft</li>
+      <li>Linux is written in C + Assembly (NOT C++); Windows is C++ + Assembly</li>
+      <li>Distributed OS nodes = loosely coupled (not tightly coupled)</li>
+      <li>Thread blocking <b>blocks the entire process</b>; process blocking does NOT block other processes</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Pro Exam Strategy</h3>
+    <ul>
+      <li>Definitions always get marks — always write a crisp 2-line definition first</li>
+      <li>Comparison questions: always use a table (3-4 points minimum)</li>
+      <li>Diagram questions: OS structure, Process states, Paging, Memory hierarchy — draw clearly</li>
+      <li>For "explain with example" → give a real-world example (robot for RTOS, browser tabs for threads)</li>
+      <li>In deadlock questions, write all 4 conditions — examiners check each one</li>
+      <li>Linux question: always mention Linus Torvalds + 1991 + GPL license</li>
+      <li>End long answers with a one-line conclusion for full marks</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Numbers to Remember</h3>
+    <table>
+      <tr><th>Fact</th><th>Number/Detail</th></tr>
+      <tr><td>First OS year</td><td>1956 (GM + IBM)</td></tr>
+      <tr><td>Unix first version</td><td>1960s, written in C</td></tr>
+      <tr><td>Linux release date</td><td>September 17, 1991</td></tr>
+      <tr><td>Linux distributions</td><td>600+</td></tr>
+      <tr><td>Process states minimum</td><td>5 states</td></tr>
+      <tr><td>Deadlock conditions</td><td>4 (all must exist)</td></tr>
+      <tr><td>File allocation methods</td><td>3 (Contiguous, Linked, Indexed)</td></tr>
+      <tr><td>Free space methods</td><td>4 (Bitmap, Linked, Grouping, Counting)</td></tr>
+      <tr><td>Open terminal (Linux)</td><td>CTRL + ALT + T</td></tr>
+    </table>
+  </div>
+</div>
+
+<script>
+var tabs = document.querySelectorAll('.tab');
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
+  tabs.forEach(function(t){t.classList.remove('active')});
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+var questions = [
+  {q:"What is the primary function of an Operating System?",opts:["Play multimedia","Interface between user and hardware","Connect to internet","Compile code"],ans:1},
+  {q:"In which year was the first OS developed by General Motors?",opts:["1946","1951","1956","1960"],ans:2},
+  {q:"Which part of OS always remains in main memory?",opts:["Shell","Kernel","Utility Software","Application Software"],ans:1},
+  {q:"Which is NOT a process state?",opts:["Ready","Running","Suspended","Compiling"],ans:3},
+  {q:"PCB stands for?",opts:["Program Control Block","Process Control Block","Processor Clock Base","Primary Control Bit"],ans:1},
+  {q:"Which scheduler is called the CPU Scheduler?",opts:["Long-term","Medium-term","Short-term","Job scheduler"],ans:2},
+  {q:"Internal fragmentation occurs in which allocation?",opts:["Dynamic partition","Paging only","Fixed partition","Indexed allocation"],ans:2},
+  {q:"In paging, which must ALWAYS be equal?",opts:["Process size and frame size","Page size and frame size","Heap size and stack size","Logical and physical address"],ans:1},
+  {q:"How many conditions are necessary for deadlock?",opts:["2","3","4","5"],ans:2},
+  {q:"Which is NOT a deadlock necessary condition?",opts:["Mutual Exclusion","Hold and Wait","Circular Wait","Time Sharing"],ans:3},
+  {q:"Linux was released by Linus Torvalds in which year?",opts:["1985","1991","1998","2001"],ans:1},
+  {q:"What license does Linux use?",opts:["MIT","BSD","GPL","Proprietary"],ans:2},
+  {q:"Which Linux command shows current directory?",opts:["ls","cd","pwd","mkdir"],ans:2},
+  {q:"GUI was invented by which organization?",opts:["Apple","Microsoft","Xerox Palo Alto","IBM"],ans:2},
+  {q:"Which file allocation method uses an index block?",opts:["Contiguous","Linked","Indexed","Bitmap"],ans:2},
+  {q:"Which scheduler handles swapping?",opts:["Long-term","Short-term","Medium-term","CPU scheduler"],ans:2},
+  {q:"Sector 0 of a disk is called?",opts:["Boot Block","Superblock","MBR","I-node"],ans:2},
+  {q:"In bitmap free space: 0 means?",opts:["Allocated","Free","Error","Unknown"],ans:1},
+  {q:"Thread blocking affects?",opts:["Only that thread","Entire process","Other processes","Kernel only"],ans:1},
+  {q:"Which OS type has a fixed deadline?",opts:["Batch","Time-sharing","Real-Time","Distributed"],ans:2}
+];
+
+var answered = {};
+function buildQuiz() {
+  var html = '';
+  questions.forEach(function(q, i) {
+    html += '<div class="card mcq">';
+    html += '<div class="mcq-q">'+(i+1)+'. '+q.q+'</div>';
+    html += '<div class="mcq-opts">';
+    q.opts.forEach(function(o, j) {
+      html += '<button class="opt" onclick="checkAns(this,'+i+','+j+')" id="opt-'+i+'-'+j+'">'+String.fromCharCode(65+j)+'. '+o+'</button>';
+    });
+    html += '</div></div>';
+  });
+  document.getElementById('quiz-container').innerHTML = html;
+  updateScore();
+}
+
+function checkAns(btn, qi, oi) {
+  if (answered[qi] !== undefined) return;
+  answered[qi] = oi;
+  var q = questions[qi];
+  for (var j = 0; j < q.opts.length; j++) {
+    var el = document.getElementById('opt-'+qi+'-'+j);
+    if (j === q.ans) el.classList.add('correct');
+    else if (j === oi) el.classList.add('wrong');
+  }
+  updateScore();
+}
+
+function updateScore() {
+  var done = Object.keys(answered).length;
+  var correct = 0;
+  for (var k in answered) { if (parseInt(answered[k]) === questions[k].ans) correct++; }
+  if (done > 0) {
+    var pct = Math.round((correct/done)*100);
+    document.getElementById('mcq-score').innerHTML = 'Score: '+correct+'/'+done+' answered ('+pct+'% correct)';
+  }
+}
+
+buildQuiz();
+</script>
