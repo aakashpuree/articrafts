@@ -1,425 +1,1198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grade 11 Physics - Pre-Board Exam Q&A</title>
-    <!-- MathJax for rendering math formulas -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-        }
-        h1, h2, h3 {
-            color: #2c3e50;
-        }
-        h1 {
-            border-bottom: 2px solid #2c3e50;
-            padding-bottom: 10px;
-        }
-        h2 {
-            background-color: #f4f6f7;
-            padding: 8px 15px;
-            border-left: 4px solid #2980b9;
-            margin-top: 40px;
-        }
-        hr {
-            border: 0;
-            height: 1px;
-            background: #ccc;
-            margin: 30px 0;
-        }
-        .question {
-            font-weight: bold;
-            margin-top: 20px;
-            color: #2c3e50;
-        }
-        .answer {
-            background-color: #eafaf1;
-            border-left: 4px solid #27ae60;
-            padding: 10px 20px;
-            margin: 10px 0 30px 0;
-            border-radius: 0 5px 5px 0;
-        }
-        .note {
-            background-color: #fef9e7;
-            border-left: 4px solid #f1c40f;
-            padding: 10px 20px;
-            margin: 20px 0;
-            font-style: italic;
-        }
-        .options {
-            margin-left: 20px;
-            margin-top: 5px;
-        }
-        @media print {
-            body {
-                padding: 0;
-                max-width: 100%;
-            }
-            h2 {
-                background-color: none;
-                color: #000;
-                border-left: 4px solid #000;
-            }
-            .answer {
-                background-color: #f9f9f9;
-                border-left: 4px solid #333;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operating System — Exam Prep</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --bg:#F4F1EA;--bg2:#EBE8E0;--card:#FFFFFF;--fg:#1A1A2E;--muted:#6B6B80;
+  --dim:#9A9AAF;--accent:#0D7377;--accent-l:#E0F4F4;--accent-d:#095456;
+  --amber:#B87A1B;--amber-l:#FFF7E2;--green:#2D8F4E;--green-l:#E8F5ED;
+  --red:#C93B3B;--red-l:#FDECEC;--purple:#5E35B1;--purple-l:#EDE7F6;
+  --teal:#00695C;--teal-l:#E0F2F1;--border:#DDD9CE;--border-l:#EDEBE4;
+  --shadow:0 2px 10px rgba(0,0,0,.05);--shadow-h:0 6px 20px rgba(0,0,0,.09);
+  --r:14px;--rs:10px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;color:var(--fg);background:var(--bg);line-height:1.6}
+.wrap{max-width:1100px;margin:0 auto;padding:1.5rem 1.25rem 3rem}
+
+/* Header */
+.hero{background:linear-gradient(135deg,#0D7377,#145E5A 50%,#1A4D4B);border-radius:20px;padding:2rem 2.25rem;margin-bottom:1.75rem;color:#fff;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%);border-radius:50%}
+.hero::after{content:'';position:absolute;bottom:-30%;left:20%;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.05),transparent 70%);border-radius:50%}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;margin-bottom:.3rem;position:relative}
+.hero p{font-size:13px;opacity:.85;position:relative}
+
+/* Tabs */
+.tab-bar{display:flex;gap:6px;flex-wrap:wrap;padding:0 0 .75rem;border-bottom:2px solid var(--border);margin-bottom:1.75rem}
+.tab{padding:8px 16px;border-radius:var(--rs);border:1.5px solid transparent;font-size:13px;font-weight:500;cursor:pointer;background:0;color:var(--muted);transition:.2s;font-family:inherit}
+.tab:hover{background:var(--bg2);color:var(--fg)}
+.tab.on{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 2px 8px rgba(13,115,119,.25)}
+
+/* Panels */
+.pnl{display:none}.pnl.on{display:block;animation:fi .3s ease}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+h2{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;margin-bottom:1rem}
+h3{font-size:15px;font-weight:600;margin-bottom:.5rem}
+
+/* Card */
+.cd{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:1rem;box-shadow:var(--shadow);transition:box-shadow .25s}
+.cd:hover{box-shadow:var(--shadow-h)}
+
+/* Badges */
+.bg{display:inline-block;padding:3px 10px;border-radius:6px;font-size:11px;font-weight:600;letter-spacing:.3px}
+.bg1{background:var(--accent-l);color:var(--accent)}.bg2{background:var(--amber-l);color:var(--amber)}
+.bg3{background:var(--green-l);color:var(--green)}.bg4{background:var(--red-l);color:var(--red)}
+.bg5{background:var(--purple-l);color:var(--purple)}.bg6{background:var(--teal-l);color:var(--teal)}
+
+/* Grid */
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem}
+
+/* Unit cards */
+.uc{border-left:4px solid var(--accent)}.uc2{border-left-color:var(--amber)}.uc3{border-left-color:var(--green)}.uc4{border-left-color:var(--red)}.uc5{border-left-color:var(--purple)}.uc6{border-left-color:var(--teal)}
+.ut{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:600;margin:8px 0 4px}
+
+/* Expandable topic */
+.tp{border:1px solid var(--border-l);border-radius:var(--rs);margin:8px 0;overflow:hidden;transition:border-color .25s,box-shadow .25s}
+.tp.open{border-color:var(--accent);box-shadow:0 2px 8px rgba(13,115,119,.08)}
+.tp-h{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;user-select:none;transition:background .15s}
+.tp-h:hover{background:var(--bg2)}
+.tp-ic{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;background:var(--accent-l);color:var(--accent);transition:.2s}
+.tp.open .tp-ic{background:var(--accent);color:#fff}
+.tp-n{flex:1;font-size:14px;font-weight:500}
+.tp-ch{font-size:11px;color:var(--dim);transition:transform .35s,color .2s}
+.tp.open .tp-ch{transform:rotate(180deg);color:var(--accent)}
+.tp-d{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
+.tp-di{padding:0 14px 14px;border-top:1px solid var(--border-l)}
+
+/* Detail styles */
+.d-intro{font-size:14px;line-height:1.7;margin:12px 0;padding:10px 14px;background:var(--bg);border-radius:8px;border-left:3px solid var(--accent)}
+.d-sec{margin:10px 0}
+.d-lbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--accent);margin-bottom:6px}
+.d-sec ul{padding-left:1.2rem;margin:4px 0}.d-sec li{margin:5px 0;font-size:13.5px;line-height:1.65}
+.d-sec li strong{color:var(--accent-d)}
+.d-ex{background:var(--amber-l);border:1px solid #F0D89A;border-radius:8px;padding:10px 14px;margin:10px 0;font-size:13px;line-height:1.6}
+.d-ex::before{content:'Example';display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--amber);margin-bottom:4px}
+.d-tip{background:var(--green-l);border:1px solid #B2DFDB;border-radius:8px;padding:10px 14px;margin:10px 0;font-size:13px;line-height:1.6;color:#1B5E20}
+.d-tip i{color:var(--green);margin-right:4px}
+.d-tbl{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;border-radius:8px;overflow:hidden}
+.d-tbl th{background:var(--accent);color:#fff;padding:8px 12px;text-align:left;font-weight:600;font-size:12px}
+.d-tbl td{padding:7px 12px;border-bottom:1px solid var(--border-l);vertical-align:top}
+.d-tbl tr:last-child td{border-bottom:0}.d-tbl tr:nth-child(even) td{background:#FAFAF7}
+.tl-i{display:flex;align-items:flex-start;gap:10px;margin:6px 0;font-size:13px}
+.tl-y{background:var(--accent);color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;flex-shrink:0;min-width:44px;text-align:center}
+
+.ea-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:8px;border:1.5px solid var(--accent);background:0;color:var(--accent);font-size:12px;font-weight:600;cursor:pointer;transition:.2s;font-family:inherit;margin-bottom:1rem}
+.ea-btn:hover{background:var(--accent);color:#fff}
+
+/* Notes / other panels */
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th{background:var(--accent);color:#fff;padding:8px 10px;text-align:left;font-weight:600;font-size:12px}
+td{padding:7px 10px;border-bottom:1px solid var(--border-l);vertical-align:top}
+tr:nth-child(even) td{background:#FAFAF7}
+
+.mcq{margin-bottom:.6rem}.mcq-q{font-size:14px;font-weight:600;margin-bottom:8px}
+.mcq-o{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.opt{font-size:13px;padding:8px 12px;border-radius:8px;border:1.5px solid var(--border);cursor:pointer;background:var(--card);color:var(--fg);font-family:inherit;transition:.15s;text-align:left}
+.opt:hover:not(.ok):not(.no){background:var(--bg2);border-color:var(--accent)}
+.opt.ok{background:var(--green-l);color:#1B5E20;border-color:var(--green);font-weight:600}
+.opt.no{background:var(--red-l);color:#B71C1C;border-color:var(--red)}
+#mcq-sc{font-size:15px;font-weight:600;margin-bottom:1rem;color:var(--green);padding:10px 16px;background:var(--green-l);border-radius:var(--rs);display:inline-block}
+
+.q-i{padding:10px 14px;border-left:3px solid var(--accent);background:var(--bg);border-radius:0 8px 8px 0;margin:6px 0;font-size:13.5px;line-height:1.6}
+.ch-r{display:flex;gap:10px;align-items:flex-start;padding:5px 0;border-bottom:1px solid var(--border-l);font-size:13px}
+.ch-k{min-width:150px;font-weight:600;color:var(--accent);flex-shrink:0}
+.trk{background:var(--amber-l);border-left:3px solid var(--amber);padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0;font-size:13px;line-height:1.6}
+ul{padding-left:1.2rem;margin:6px 0}li{margin:4px 0;font-size:13.5px;line-height:1.6}
+
+@media(max-width:640px){
+  .wrap{padding:1rem .75rem 2rem}.hero{padding:1.25rem;border-radius:14px}.hero h1{font-size:20px}
+  .g2{grid-template-columns:1fr}.mcq-o{grid-template-columns:1fr}.tp-n{font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
 </head>
 <body>
+<div class="wrap">
 
-    <h1>Shree Siddhababa Secondary School</h1>
-    <p><strong>Resungga-08, Khanigaun, Gulmi | Pre-Board Practice Examination – 2082</strong><br>
-    Grade: 11 (Science) | Subject: Physics (PHY 8131)<br>
-    Full Marks: 75 | Pass Marks: 27 | Time: 3 Hours</p>
+<header class="hero">
+  <h1>Operating System — Exam Prep</h1>
+  <p>All 6 units covered · Interactive Mind Map · MCQs · Cheat Sheet · Important Questions &amp; Tricks</p>
+</header>
 
-    <div class="note">
-        <strong>Note:</strong> Some questions in the paper contain printing mistakes or missing data/figures. Wherever necessary, the correct concept has been applied, and the limitation has been mentioned in the answer section.
-    </div>
+<nav class="tab-bar" role="tablist" id="tabbar"></nav>
 
-    <hr>
+<!-- MIND MAP -->
+<section id="p-mindmap" class="pnl on" role="tabpanel">
+  <h2>Interactive Mind Map — All 6 Units</h2>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:.75rem">Click any topic to expand its detailed explanation, key points, examples, and exam tips.</p>
+  <button class="ea-btn" onclick="toggleAll()"><i class="fa-solid fa-arrows-up-down"></i> <span id="ea-lbl">Expand All Topics</span></button>
+  <div class="g2" id="mm-box"></div>
+</section>
 
-    <h2>Group A — Multiple Choice Questions [11 × 1 = 11 marks]</h2>
+<!-- QUICK NOTES -->
+<section id="p-notes" class="pnl" role="tabpanel">
+  <h2>Quick Notes — Key Concepts Per Unit</h2>
+  <div class="g2" id="notes-box"></div>
+</section>
 
-    <div class="question">1. Which physical quantity has the dimensional formula \([M L^{-1} T^{-2}]\)?</div>
-    <div class="options">a. Work &nbsp;&nbsp; b. Power &nbsp;&nbsp; c. Pressure &nbsp;&nbsp; d. Force</div>
-    <div class="answer">
-        <strong>Answer:</strong> c. Pressure<br>
-        <strong>Reason:</strong> Pressure \(= \frac{\text{Force}}{\text{Area}}\)<br>
-        \([P] = \frac{[MLT^{-2}]}{[L^2]} = [ML^{-1}T^{-2}]\)
-    </div>
+<!-- MCQ QUIZ -->
+<section id="p-mcq" class="pnl" role="tabpanel">
+  <h2>Interactive MCQ Quiz — All Units</h2>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:.5rem">Tap an option to check your answer instantly. Green = correct, Red = wrong.</p>
+  <div id="mcq-sc"></div>
+  <div id="qz-box"></div>
+</section>
 
-    <div class="question">2. If the vector \(\vec A = 3\hat i + 4\hat j\), its magnitude is:</div>
-    <div class="options">a. 5 &nbsp;&nbsp; b. 7 &nbsp;&nbsp; c. 25 &nbsp;&nbsp; d. None of these</div>
-    <div class="answer">
-        <strong>Answer:</strong> a. 5<br>
-        \(|\vec A| = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5\)
-    </div>
+<!-- IMPORTANT QUESTIONS -->
+<section id="p-imp" class="pnl" role="tabpanel">
+  <h2>Important Exam Questions</h2>
+  <div id="imp-box"></div>
+</section>
 
-    <div class="question">3. The SI unit of impulse is same as that of:</div>
-    <div class="options">a. Force &nbsp;&nbsp; b. Momentum &nbsp;&nbsp; c. Energy &nbsp;&nbsp; d. Power</div>
-    <div class="answer">
-        <strong>Answer:</strong> b. Momentum<br>
-        <strong>Reason:</strong> Impulse, \(I = F \times t\). Unit: \(N s = kg\,m\,s^{-1}\), which is also the SI unit of momentum.
-    </div>
+<!-- CHEAT SHEET -->
+<section id="p-cheat" class="pnl" role="tabpanel">
+  <h2>One-Page Cheat Sheet</h2>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:1rem">Read this 10 minutes before your exam!</p>
+  <div id="cht-box"></div>
+</section>
 
-    <div class="question">4. A 2 kg object moving at 3 m/s strikes a wall and stops in 0.1 s. The average force exerted by the wall is:</div>
-    <div class="options">a. 6 N &nbsp;&nbsp; b. 30 N &nbsp;&nbsp; c. 60 N &nbsp;&nbsp; d. 120 N</div>
-    <div class="answer">
-        <strong>Answer:</strong> c. 60 N<br>
-        Given, \(m = 2\,kg,\quad u = 3\,m/s,\quad v = 0,\quad t = 0.1\,s\)<br>
-        Average force, \(F = \frac{\Delta p}{t} = \frac{m(v-u)}{t} = \frac{2(0-3)}{0.1} = -60\,N\)<br>
-        Magnitude of force: \(F = 60\,N\)
-    </div>
+<!-- TRICKS -->
+<section id="p-tricks" class="pnl" role="tabpanel">
+  <h2>Tricks, Mnemonics &amp; Exam Tips</h2>
+  <div id="trk-box"></div>
+</section>
 
-    <div class="question">5. In uniform circular motion, which of the following quantities remains constant?</div>
-    <div class="options">a. 0° &nbsp;&nbsp; b. 45° &nbsp;&nbsp; c. 90° &nbsp;&nbsp; d. 180°</div>
-    <div class="answer">
-        <strong>Answer:</strong> Speed remains constant.<br>
-        <strong>Explanation:</strong> The options provided in the question paper are incorrect/printing mistakes. In uniform circular motion, the magnitude of velocity (speed) remains constant but the direction of velocity changes continuously.
-    </div>
+</div>
 
-    <div class="question">6. Work done is maximum when the angle between force and displacement is:</div>
-    <div class="options">a. 0° &nbsp;&nbsp; b. 45° &nbsp;&nbsp; c. 90° &nbsp;&nbsp; d. 180°</div>
-    <div class="answer">
-        <strong>Answer:</strong> a. 0°<br>
-        Work done, \(W = Fs\cos\theta\). Work is maximum when \(\cos\theta\) is maximum. \(\cos 0^\circ = 1\). Therefore, work done is maximum when force and displacement are in the same direction.
-    </div>
+<script>
+/* =====================================================
+   DATA — All content organized by tabs
+   ===================================================== */
 
-    <div class="question">7. A particle of mass \(m\) has momentum \(p\). What is its kinetic energy?</div>
-    <div class="options">a. 2mp &nbsp;&nbsp; b. \(\frac{p^2}{2m}\) &nbsp;&nbsp; c. 2mp² &nbsp;&nbsp; d. \(\frac{2m}{p^2}\)</div>
-    <div class="answer">
-        <strong>Answer:</strong> b. \(\frac{p^2}{2m}\)<br>
-        We know, \(p = mv \implies v = \frac{p}{m}\)<br>
-        Kinetic energy, \(K.E. = \frac12 mv^2 = \frac12 m\left(\frac{p}{m}\right)^2 = \frac{p^2}{2m}\)
-    </div>
+/* Tab definitions */
+const TABS = [
+  {id:'mindmap', icon:'fa-diagram-project', label:'Mind Map'},
+  {id:'notes',   icon:'fa-book-open',       label:'Quick Notes'},
+  {id:'mcq',     icon:'fa-circle-check',     label:'MCQ Quiz'},
+  {id:'imp',     icon:'fa-star',             label:'Imp Questions'},
+  {id:'cheat',   icon:'fa-file-lines',       label:'Cheat Sheet'},
+  {id:'tricks',  icon:'fa-lightbulb',        label:'Tricks'}
+];
 
-    <div class="question">8. At what height above the Earth's surface does the acceleration due to gravity become one-fourth of its value on the surface?</div>
-    <div class="options">a. R/4 &nbsp;&nbsp; b. R/2 &nbsp;&nbsp; c. R &nbsp;&nbsp; d. 2R</div>
-    <div class="answer">
-        <strong>Answer:</strong> c. R<br>
-        At height \(h\), \(g_h = g\left(\frac{R}{R+h}\right)^2\). Given \(g_h = \frac g4\):<br>
-        \(\frac g4 = g\left(\frac{R}{R+h}\right)^2 \implies \frac12 = \frac{R}{R+h} \implies R+h = 2R \implies h = R\)
-    </div>
+/* Mind Map data — 6 units, each with expandable topics */
+const MM = [
+  {unit:1,bg:'bg1',uc:'uc',title:'Introduction to OS',topics:[
+    {name:'Definition & History',icon:'fa-circle-info',detail:`
+      <p class="d-intro">An <strong>Operating System</strong> is system software that acts as an intermediary between the user and computer hardware. It provides an environment in which a user can execute programs conveniently and efficiently.</p>
+      <div class="d-sec"><div class="d-lbl">Core Definitions</div><ul>
+        <li><strong>Resource Manager:</strong> OS manages all computer resources (CPU, memory, I/O devices) and allocates them to programs</li>
+        <li><strong>Extended Machine:</strong> OS provides a virtual machine interface that is easier to use than bare hardware</li>
+        <li><strong>Interface:</strong> OS bridges the gap between user/application and hardware components</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Timeline</div>
+        <div class="tl-i"><span class="tl-y">1956</span> GM-NAA OS — first OS, created by General Motors for IBM 704</div>
+        <div class="tl-i"><span class="tl-y">1960s</span> Unix developed at Bell Labs by Ken Thompson &amp; Dennis Ritchie, written in C</div>
+        <div class="tl-i"><span class="tl-y">1981</span> MS-DOS — Microsoft creates DOS for IBM PC</div>
+        <div class="tl-i"><span class="tl-y">1985</span> Windows 1.0 — first graphical Microsoft OS</div>
+        <div class="tl-i"><span class="tl-y">1991</span> Linux kernel created by Linus Torvalds</div>
+      </div>
+      <div class="d-ex">In a car, the driver (user) doesn't directly control the engine (hardware). The accelerator, steering wheel, and dashboard (OS) provide an easy interface between driver and engine.</div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Always define OS as "interface between user and hardware" + "resource manager" for full marks. Mention both roles.</div>
+    `},
+    {name:'Internal Structure of OS',icon:'fa-layer-group',detail:`
+      <p class="d-intro">The OS is structured in layers, with the <strong>Kernel</strong> at the core. Each layer has a specific responsibility, and they work together to manage the entire system.</p>
+      <div class="d-sec"><div class="d-lbl">The 3 Layers</div><ul>
+        <li><strong>Kernel (Core):</strong> Always resides in RAM. Manages processes, memory, devices, and system calls. It is the most privileged part of the OS.</li>
+        <li><strong>Utility Software:</strong> Performs housekeeping tasks like disk cleanup, defragmentation, antivirus scanning. Not always in RAM.</li>
+        <li><strong>Application Software:</strong> User programs like browsers, editors, games. These run on top of the OS and use OS services through system calls.</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Kernel Types</div><ul>
+        <li><strong>Monolithic Kernel:</strong> All OS services run in kernel space (faster but less secure). Example: Linux</li>
+        <li><strong>Microkernel:</strong> Only essential services in kernel, rest in user space (more secure but slower). Example: MINIX</li>
+      </ul></div>
+      <div class="d-ex">Think of the Kernel as the engine of a car (always running), Utility Software as the maintenance crew (oil change, tire check), and Applications as the passengers using the car.</div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> "Kernel always stays in RAM" is a frequently asked MCQ point. Remember it!</div>
+    `},
+    {name:'Functions of OS',icon:'fa-gears',detail:`
+      <p class="d-intro">The OS performs <strong>7 major functions</strong> to manage the computer's resources and provide services to users and applications.</p>
+      <div class="d-sec"><div class="d-lbl">All 7 Functions</div><ul>
+        <li><strong>Processor Management:</strong> Allocates CPU to processes, decides which process runs when (scheduling)</li>
+        <li><strong>Memory Management:</strong> Tracks which part of memory is used by whom, allocates and deallocates memory</li>
+        <li><strong>I/O Device Management:</strong> Controls all input/output devices, manages device drivers and buffers</li>
+        <li><strong>File Management:</strong> Organizes files into directories, handles create/delete/read/write operations</li>
+        <li><strong>Security:</strong> Prevents unauthorized access via authentication (passwords) and authorization (permissions)</li>
+        <li><strong>Error Detection:</strong> Monitors for hardware and software errors, takes corrective action or alerts the user</li>
+        <li><strong>Job Accounting:</strong> Tracks resource usage per user/job — CPU time, memory used, I/O operations</li>
+      </ul></div>
+      <div class="d-ex">When you open a browser: OS allocates memory (Memory Management), assigns CPU time (Processor Management), renders to screen (I/O Management), and saves bookmarks (File Management).</div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Don't just list the functions — briefly explain each one. A 5-mark question needs 5 functions with 1-line explanations.</div>
+    `},
+    {name:'Types of OS (by Processing Method)',icon:'fa-microchip',detail:`
+      <p class="d-intro">OS can be classified into <strong>6 types</strong> based on how they process tasks and interact with users.</p>
+      <div class="d-sec"><div class="d-lbl">All 6 Types</div><ul>
+        <li><strong>Batch OS:</strong> Jobs collected in batches, no user interaction during processing. Example: payroll processing</li>
+        <li><strong>Time-Sharing OS:</strong> Each user/task gets a small time slice (quantum). CPU switches rapidly. Example: Unix, Multics</li>
+        <li><strong>Multiprocessing OS:</strong> Multiple CPUs/processors. True parallel execution. Example: Unix on SMP</li>
+        <li><strong>Multitasking OS:</strong> Appears to execute multiple tasks simultaneously (rapid switching). Example: Windows, macOS</li>
+        <li><strong>Real-Time OS:</strong> Guaranteed response within strict deadlines. Hard (miss = failure) and Soft (miss = degraded). Example: flight control</li>
+        <li><strong>Distributed OS:</strong> Multiple independent computers connected via network, appearing as one system. Example: LOCUS</li>
+      </ul></div>
+      <table class="d-tbl"><tr><th>Type</th><th>User Interaction</th><th>Key Advantage</th></tr>
+        <tr><td>Batch</td><td>None during processing</td><td>Efficient for repetitive jobs</td></tr>
+        <tr><td>Time-Sharing</td><td>Interactive</td><td>Multiple users share CPU</td></tr>
+        <tr><td>Multiprocessing</td><td>Interactive</td><td>True parallel execution</td></tr>
+        <tr><td>Multitasking</td><td>Interactive</td><td>Responsiveness</td></tr>
+        <tr><td>Real-Time</td><td>Depends on application</td><td>Guaranteed response time</td></tr>
+        <tr><td>Distributed</td><td>Transparent to user</td><td>Resource sharing &amp; reliability</td></tr>
+      </table>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Time-Sharing focuses on multiple users, Multitasking focuses on multiple tasks. Don't confuse these two!</div>
+    `},
+    {name:'Types of OS (by User Interface)',icon:'fa-display',detail:`
+      <p class="d-intro">OS can be classified based on how the user interacts with it — through text commands or graphical elements.</p>
+      <div class="d-sec"><div class="d-lbl">CLI vs GUI</div>
+      <table class="d-tbl"><tr><th>Feature</th><th>CLI</th><th>GUI</th></tr>
+        <tr><td>Input Method</td><td>Typed commands</td><td>Mouse clicks, icons, windows</td></tr>
+        <tr><td>Speed</td><td>Faster (for experts)</td><td>Slower but intuitive</td></tr>
+        <tr><td>Memory Usage</td><td>Very low</td><td>High (graphics rendering)</td></tr>
+        <tr><td>Learning Curve</td><td>Steep</td><td>Easy for beginners</td></tr>
+        <tr><td>Automation</td><td>Easy (scripts)</td><td>Difficult</td></tr>
+        <tr><td>Examples</td><td>MS-DOS, Unix shell, CMD</td><td>Windows, macOS, Ubuntu desktop</td></tr>
+      </table></div>
+      <div class="d-sec"><div class="d-lbl">History of GUI</div><ul>
+        <li>GUI was invented at <strong>Xerox PARC (Palo Alto Research Center)</strong> in the 1970s</li>
+        <li>Apple popularized GUI with the Macintosh in 1984</li>
+        <li>Microsoft followed with Windows 1.0 in 1985</li>
+      </ul></div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> "Who invented GUI?" → Xerox PARC, NOT Apple or Microsoft. Very common MCQ trap!</div>
+    `},
+    {name:'Types of OS (by User/Task Count)',icon:'fa-users',detail:`
+      <p class="d-intro">OS can also be classified by how many users and tasks it supports simultaneously.</p>
+      <div class="d-sec"><div class="d-lbl">4 Categories</div><ul>
+        <li><strong>Single-User, Single-Tasking:</strong> One user, one program at a time. Example: MS-DOS, Palm OS</li>
+        <li><strong>Single-User, Multi-Tasking:</strong> One user, multiple programs simultaneously. Example: Windows 10, macOS</li>
+        <li><strong>Multi-User, Single-Tasking:</strong> Multiple users, one task each at a time. Rare in practice.</li>
+        <li><strong>Multi-User, Multi-Tasking:</strong> Multiple users, multiple programs each. Example: Unix, Linux, Windows Server</li>
+      </ul></div>
+      <table class="d-tbl"><tr><th>Type</th><th>Users</th><th>Tasks</th><th>Example</th></tr>
+        <tr><td>Single-User Single-Task</td><td>1</td><td>1</td><td>MS-DOS</td></tr>
+        <tr><td>Single-User Multi-Task</td><td>1</td><td>Many</td><td>Windows 10</td></tr>
+        <tr><td>Multi-User Multi-Task</td><td>Many</td><td>Many</td><td>Unix, Linux</td></tr>
+      </table>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Most modern OS are Multi-User Multi-Tasking. DOS is the classic Single-User Single-Tasking example.</div>
+    `}
+  ]},
+  {unit:2,bg:'bg2',uc:'uc2',title:'Process & Scheduling',topics:[
+    {name:'Program vs Process',icon:'fa-code-compare',detail:`
+      <p class="d-intro">A <strong>program</strong> is a passive entity (file on disk), while a <strong>process</strong> is an active entity (program in execution, residing in RAM with a PCB).</p>
+      <table class="d-tbl"><tr><th>Feature</th><th>Program</th><th>Process</th></tr>
+        <tr><td>Nature</td><td>Passive (static)</td><td>Active (dynamic)</td></tr>
+        <tr><td>Storage</td><td>Secondary memory (disk)</td><td>Main memory (RAM)</td></tr>
+        <tr><td>Lifespan</td><td>Exists until deleted</td><td>Exists only during execution</td></tr>
+        <tr><td>Identification</td><td>File name</td><td>PID (Process ID)</td></tr>
+        <tr><td>Resources Needed</td><td>Only disk space</td><td>CPU, memory, I/O devices</td></tr>
+        <tr><td>PCB</td><td>Does NOT have one</td><td>Has a PCB</td></tr>
+      </table>
+      <div class="d-ex">A recipe written on paper = Program. Someone actually cooking from the recipe = Process. The recipe can exist forever, but cooking only happens while the chef is active.</div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Key difference is "passive vs active" and "on disk vs in RAM." Always mention PCB — only processes have one.</div>
+    `},
+    {name:'Process in Memory (4 Sections)',icon:'fa-memory',detail:`
+      <p class="d-intro">When a program becomes a process and is loaded into RAM, its memory is divided into <strong>4 distinct sections</strong> (SHDT).</p>
+      <div class="d-sec"><div class="d-lbl">The 4 Sections</div><ul>
+        <li><strong>Stack:</strong> Stores local variables, function parameters, and return addresses. Grows downward.</li>
+        <li><strong>Heap:</strong> Dynamically allocated memory at runtime (malloc, new). Grows upward.</li>
+        <li><strong>Text (Code):</strong> Contains the executable code, program counter, and processor registers. Read-only.</li>
+        <li><strong>Data:</strong> Global and static variables. Initialized at program start. Persists throughout execution.</li>
+      </ul></div>
+      <table class="d-tbl"><tr><th>Feature</th><th>Stack</th><th>Heap</th></tr>
+        <tr><td>Allocation</td><td>Automatic (compiler)</td><td>Manual (programmer)</td></tr>
+        <tr><td>Speed</td><td>Fast</td><td>Slower</td></tr>
+        <tr><td>Growth</td><td>Downward</td><td>Upward</td></tr>
+        <tr><td>Size</td><td>Limited</td><td>Larger</td></tr>
+        <tr><td>Problem</td><td>Stack overflow</td><td>Memory leak</td></tr>
+      </table>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Mnemonic <b>"SHDT"</b> — Stack, Heap, Data, Text. Stack grows down, Heap grows up — they grow toward each other!</div>
+    `},
+    {name:'Process States (5-State Model)',icon:'fa-arrows-spin',detail:`
+      <p class="d-intro">A process goes through <strong>5 states</strong> during its lifetime. Understanding these transitions is critical for scheduling questions.</p>
+      <div class="d-sec"><div class="d-lbl">The 5 States</div><ul>
+        <li><strong>New:</strong> Process is being created. OS is allocating resources and setting up PCB.</li>
+        <li><strong>Ready:</strong> Process is loaded in RAM, waiting for CPU assignment. All resources except CPU are available.</li>
+        <li><strong>Running:</strong> CPU is actively executing the process's instructions. Only one process per CPU at a time.</li>
+        <li><strong>Waiting (Blocked):</strong> Process cannot continue — it's waiting for an event (I/O completion, resource).</li>
+        <li><strong>Terminated:</strong> Process has finished execution or was killed. OS reclaims resources and deletes PCB.</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">State Transitions</div><ul>
+        <li>New → Ready: Admitted by Long-term scheduler</li>
+        <li>Ready → Running: Dispatched by Short-term scheduler</li>
+        <li>Running → Ready: Time quantum expires (preemption)</li>
+        <li>Running → Waiting: Needs I/O or resource</li>
+        <li>Waiting → Ready: I/O or event completes</li>
+        <li>Running → Terminated: Execution completes or killed</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Suspended State (7-State Model)</div><ul>
+        <li><strong>Suspended Ready:</strong> Process swapped out of memory to disk while in Ready state</li>
+        <li><strong>Suspended Blocked:</strong> Process swapped out while in Waiting state</li>
+      </ul></div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> "Running → Waiting" = I/O request. "Running → Ready" = time quantum expiry. Don't confuse these!</div>
+    `},
+    {name:'PCB (Process Control Block)',icon:'fa-id-card',detail:`
+      <p class="d-intro">The <strong>PCB</strong> is a data structure maintained by the OS for every process. It contains all information needed to manage and control the process.</p>
+      <div class="d-sec"><div class="d-lbl">PCB Contents</div><ul>
+        <li><strong>PID (Process ID):</strong> Unique identifier for each process</li>
+        <li><strong>Process State:</strong> Current state (New, Ready, Running, Waiting, Terminated)</li>
+        <li><strong>Program Counter:</strong> Address of next instruction to execute</li>
+        <li><strong>CPU Registers:</strong> Contents of all process-visible registers (saved during context switch)</li>
+        <li><strong>CPU Scheduling Info:</strong> Priority, scheduling queue pointers</li>
+        <li><strong>Memory Management Info:</strong> Base/limit registers, page tables, segment tables</li>
+        <li><strong>Accounting Info:</strong> CPU time used, time limits, process numbers</li>
+        <li><strong>I/O Status Info:</strong> List of I/O devices allocated, open files</li>
+      </ul></div>
+      <div class="d-ex">When a context switch occurs (process A → process B), the OS saves A's register values and PC into A's PCB, then loads B's saved values from B's PCB into the CPU.</div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> PCB is identified by <b>PID</b>, not by process name. Context switching = saving one PCB and loading another.</div>
+    `},
+    {name:'Schedulers (3 Types)',icon:'fa-clock-rotate-left',detail:`
+      <p class="d-intro">The OS uses <strong>3 schedulers</strong> to manage process movement between different queues and states.</p>
+      <div class="d-sec"><div class="d-lbl">Long-Term Scheduler (Job Scheduler)</div><ul>
+        <li>Selects processes from the pool and loads them into memory (New → Ready)</li>
+        <li><strong>Controls the degree of multiprogramming</strong></li>
+        <li>Invoked infrequently (seconds/minutes between)</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Short-Term Scheduler (CPU Scheduler)</div><ul>
+        <li>Selects which ready process gets the CPU next (Ready → Running)</li>
+        <li><strong>Fastest scheduler</strong> — invoked frequently (milliseconds)</li>
+        <li>Uses algorithms like FCFS, SJF, Round Robin, Priority</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Medium-Term Scheduler (Swapper)</div><ul>
+        <li>Removes processes from memory temporarily (swapping)</li>
+        <li>Reduces degree of multiprogramming when system is overloaded</li>
+      </ul></div>
+      <table class="d-tbl"><tr><th>Feature</th><th>Long-Term</th><th>Short-Term</th><th>Medium-Term</th></tr>
+        <tr><td>Frequency</td><td>Low</td><td>High (fastest)</td><td>Medium</td></tr>
+        <tr><td>Transition</td><td>New → Ready</td><td>Ready → Running</td><td>Swap in/out</td></tr>
+        <tr><td>Controls</td><td>Multiprogramming degree</td><td>CPU allocation</td><td>Memory usage</td></tr>
+      </table>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Short-term is the <b>fastest</b> scheduler. Long-term controls multiprogramming <b>degree</b>. Asked in almost every exam!</div>
+    `},
+    {name:'Scheduling Types: Preemptive vs Non-Preemptive',icon:'fa-hand',detail:`
+      <p class="d-intro">CPU scheduling algorithms are classified into two broad categories based on whether a running process can be interrupted.</p>
+      <div class="d-sec"><div class="d-lbl">Non-Preemptive</div><ul>
+        <li>Once a process gets the CPU, it keeps it until it <strong>voluntarily releases</strong> it</li>
+        <li>Algorithms: <strong>SJF</strong>, <strong>Non-preemptive Priority</strong>, FCFS</li>
+        <li>Less overhead, but poor responsiveness</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Preemptive</div><ul>
+        <li>OS can <strong>forcefully take away</strong> CPU from a running process</li>
+        <li>Algorithms: <strong>Round Robin (RR)</strong>, <strong>Preemptive Priority</strong>, <strong>SRTF</strong></li>
+        <li>More overhead, but better responsiveness</li>
+      </ul></div>
+      <table class="d-tbl"><tr><th>Feature</th><th>Preemptive</th><th>Non-Preemptive</th></tr>
+        <tr><td>CPU can be taken?</td><td>Yes, forcefully</td><td>No, only voluntary</td></tr>
+        <tr><td>Context Switch</td><td>Frequent</td><td>Less frequent</td></tr>
+        <tr><td>Overhead</td><td>High</td><td>Low</td></tr>
+        <tr><td>Responsiveness</td><td>Better</td><td>Poorer</td></tr>
+        <tr><td>Algorithms</td><td>RR, Priority, SRTF</td><td>SJF, Non-pre Priority</td></tr>
+      </table>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> SRTF = SJF + preemption. Round Robin is the most common preemptive algorithm.</div>
+    `},
+    {name:'Threads',icon:'fa-diagram-project',detail:`
+      <p class="d-intro">A <strong>thread</strong> is the smallest unit of execution within a process. A process can have multiple threads sharing the same resources but executing independently.</p>
+      <table class="d-tbl"><tr><th>Feature</th><th>Thread</th><th>Process</th></tr>
+        <tr><td>Also called</td><td>Light-weight process</td><td>Heavy-weight process</td></tr>
+        <tr><td>Creation time</td><td>Fast</td><td>Slow</td></tr>
+        <tr><td>Context switch</td><td>Fast</td><td>Slow</td></tr>
+        <tr><td>Memory</td><td>Shares code/data with peers</td><td>Has own memory space</td></tr>
+        <tr><td>Communication</td><td>Easy (shared memory)</td><td>Hard (IPC needed)</td></tr>
+        <tr><td>Blocking effect</td><td>Blocks entire process</td><td>Blocks only itself</td></tr>
+      </table>
+      <div class="d-sec"><div class="d-lbl">Thread Lifecycle</div><ul>
+        <li><strong>Born:</strong> Thread is created by parent thread</li>
+        <li><strong>Ready:</strong> Waiting for CPU assignment</li>
+        <li><strong>Running:</strong> Currently executing on CPU</li>
+        <li><strong>Blocked:</strong> Waiting for I/O or event</li>
+        <li><strong>Dead:</strong> Execution complete or terminated</li>
+      </ul></div>
+      <div class="d-ex">A web browser: each tab is a separate thread. They all share the browser's memory (cache, cookies) but run independently. If one tab crashes, it can affect the whole browser.</div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Thread blocking = <b>entire process blocks</b>. Process blocking = <b>only that process is affected</b>. Crucial difference!</div>
+    `}
+  ]},
+  {unit:3,bg:'bg3',uc:'uc3',title:'Memory Management',topics:[
+    {name:'Memory Hierarchy',icon:'fa-sort-amount-down',detail:`
+      <p class="d-intro">Computer memory is organized in a <strong>hierarchy</strong> from fastest/smallest to slowest/largest.</p>
+      <div class="d-sec"><div class="d-lbl">From Top to Bottom</div><ul>
+        <li><strong>CPU Registers:</strong> Fastest, smallest, most expensive. Inside CPU. Few hundred bytes.</li>
+        <li><strong>Cache Memory (L1, L2, L3):</strong> Very fast, small. KB to MB.</li>
+        <li><strong>Main Memory (RAM):</strong> Moderate speed, GB range. Volatile.</li>
+        <li><strong>Secondary Memory (Disk/SSD):</strong> Slowest, cheapest, largest. TB range. Non-volatile.</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Key Trends Going Down</div><ul>
+        <li>Speed: Decreases</li><li>Capacity: Increases</li><li>Cost per bit: Decreases</li><li>Access time: Increases</li>
+      </ul></div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Mnemonic <b>"RiCRaD"</b> = Registers, Cache, RAM, Disk. Always draw the pyramid diagram with arrows showing speed decreasing and capacity increasing.</div>
+    `},
+    {name:'Mono vs Multiprogramming',icon:'fa-left-right',detail:`
+      <p class="d-intro">Two approaches to how many programs the OS keeps in memory at the same time.</p>
+      <table class="d-tbl"><tr><th>Feature</th><th>Monoprogramming</th><th>Multiprogramming</th></tr>
+        <tr><td>Programs in RAM</td><td>Only 1 at a time</td><td>Multiple simultaneously</td></tr>
+        <tr><td>CPU Utilization</td><td>Very low (CPU idle during I/O)</td><td>High</td></tr>
+        <tr><td>Memory Use</td><td>Wasteful</td><td>Efficient</td></tr>
+        <tr><td>Throughput</td><td>Low</td><td>High</td></tr>
+        <tr><td>Example</td><td>MS-DOS</td><td>Windows, Linux</td></tr>
+      </table>
+      <div class="d-ex">Monoprogramming: You read a book, put it down to eat, the desk sits empty. Multiprogramming: You keep 3 books open, while one is being delivered, you read another — the desk is always busy.</div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> The key advantage of multiprogramming is <b>better CPU utilization</b> — when one process waits for I/O, another uses the CPU.</div>
+    `},
+    {name:'Logical vs Physical Address',icon:'fa-map-location-dot',detail:`
+      <p class="d-intro">Programs use <strong>logical addresses</strong> (virtual), but hardware uses <strong>physical addresses</strong> (real RAM). The <strong>MMU</strong> converts between them.</p>
+      <table class="d-tbl"><tr><th>Feature</th><th>Logical Address</th><th>Physical Address</th></tr>
+        <tr><td>Generated by</td><td>CPU</td><td>MMU</td></tr>
+        <tr><td>Also called</td><td>Virtual address</td><td>Real address</td></tr>
+        <tr><td>Visible to</td><td>User/Program</td><td>OS and Hardware only</td></tr>
+        <tr><td>Changes?</td><td>Never for a process</td><td>Can change (swapping)</td></tr>
+      </table>
+      <div class="d-sec"><div class="d-lbl">MMU (Memory Management Unit)</div><ul>
+        <li>Hardware that maps logical → physical addresses</li>
+        <li>Physical Address = Logical Address + Relocation Register Value</li>
+        <li>Enables programs to run regardless of actual position in RAM</li>
+      </ul></div>
+      <div class="d-ex">If a program generates address 500 and the relocation register is 10000, the physical address is 10500. The program "thinks" it's at 500, but MMU translates it.</div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Logical = CPU generated = Virtual. Physical = MMU generated = Real. "Physical = Logical + Base Register."</div>
+    `},
+    {name:'Allocation Methods (Fixed vs Dynamic Partitioning)',icon:'fa-table-cells',detail:`
+      <p class="d-intro">The OS must decide how to divide RAM among competing processes.</p>
+      <div class="d-sec"><div class="d-lbl">Fixed (Static) Partitioning</div><ul>
+        <li>Memory divided into fixed-size partitions at system startup</li>
+        <li>Each partition holds exactly one process</li>
+        <li><strong>Problem:</strong> Internal fragmentation — if process is smaller than partition, space is wasted</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Dynamic (Variable) Partitioning</div><ul>
+        <li>Partitions created dynamically, sized exactly to fit each process</li>
+        <li>No internal fragmentation</li>
+        <li><strong>Problem:</strong> External fragmentation — free space exists but is not contiguous</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Compaction (Solution to External Fragmentation)</div><ul>
+        <li>Moves all processes together to create one large free block</li>
+        <li>Expensive operation — requires moving processes and updating addresses</li>
+      </ul></div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Internal frag = Fixed partition. External frag = Dynamic partition. Paging solves external fragmentation.</div>
+    `},
+    {name:'Fragmentation: Internal vs External',icon:'fa-puzzle-piece',detail:`
+      <p class="d-intro">Fragmentation is memory that is wasted because it cannot be used effectively.</p>
+      <table class="d-tbl"><tr><th>Feature</th><th>Internal Fragmentation</th><th>External Fragmentation</th></tr>
+        <tr><td>Definition</td><td>Wasted space <strong>inside</strong> an allocated block</td><td>Free space exists but <strong>scattered/non-contiguous</strong></td></tr>
+        <tr><td>Occurs in</td><td>Fixed partitioning, Paging</td><td>Dynamic partitioning</td></tr>
+        <tr><td>Cause</td><td>Process size &lt; Partition size</td><td>Processes loaded/removed create gaps</td></tr>
+        <tr><td>Solution</td><td>Dynamic partitioning or smaller page size</td><td>Compaction or Paging</td></tr>
+      </table>
+      <div class="d-ex">Internal: You book a hotel room for 2 but only 1 stays. The empty bed is wasted inside your room. External: 3 empty rooms exist but none are adjacent, so a family of 3 can't stay together.</div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Internal = waste INSIDE. External = free but SCATTERED. Compaction fixes external, paging fixes external, smaller partitions fix internal.</div>
+    `},
+    {name:'Virtual Memory & Paging',icon:'fa-expand',detail:`
+      <p class="d-intro"><strong>Virtual Memory</strong> allows programs larger than physical RAM to execute by using disk space as an extension of RAM. <strong>Paging</strong> is the technique that makes this possible.</p>
+      <div class="d-sec"><div class="d-lbl">Virtual Memory</div><ul>
+        <li>Program doesn't need to be entirely in RAM — only the parts currently needed</li>
+        <li>Unused parts stay on disk (swap space)</li>
+        <li>Two main purposes: (1) Run programs larger than RAM (2) Increase degree of multiprogramming</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Paging Mechanism</div><ul>
+        <li>Process is divided into fixed-size blocks called <strong>pages</strong></li>
+        <li>RAM is divided into same-size blocks called <strong>frames</strong></li>
+        <li><strong>Page size = Frame size</strong> (ALWAYS equal — critical!)</li>
+        <li>A <strong>Page Table</strong> maps each page number to the frame number</li>
+        <li>Pages loaded into any available frame (no need for contiguous frames)</li>
+        <li>Eliminates external fragmentation completely</li>
+        <li>Internal fragmentation possible only in the last page</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Address Translation</div><ul>
+        <li>Logical Address = Page Number + Page Offset</li>
+        <li>Physical Address = Frame Number + Page Offset</li>
+        <li>Offset remains the same in both logical and physical addresses</li>
+      </ul></div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> "Page size MUST equal Frame size" — the #1 MCQ question on paging. Paging eliminates external fragmentation but may cause slight internal fragmentation in the last page.</div>
+    `}
+  ]},
+  {unit:4,bg:'bg4',uc:'uc4',title:'Deadlock Management',topics:[
+    {name:'4 Necessary Conditions for Deadlock',icon:'fa-lock',detail:`
+      <p class="d-intro"><strong>Deadlock</strong> is a situation where a set of processes are blocked forever, each waiting for a resource held by another process. ALL 4 conditions must hold simultaneously.</p>
+      <div class="d-sec"><div class="d-lbl">Condition 1: Mutual Exclusion</div><ul>
+        <li>At least one resource must be held in a non-sharable mode</li>
+        <li>Only one process can use the resource at a time</li>
+        <li>Example: A printer can only print one document at a time</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Condition 2: Hold and Wait</div><ul>
+        <li>A process holds at least one resource AND is waiting for additional resources</li>
+        <li>The held resources are not released while waiting</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Condition 3: No Preemption</div><ul>
+        <li>Resources cannot be forcibly taken away from a process</li>
+        <li>A resource can only be released voluntarily</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Condition 4: Circular Wait</div><ul>
+        <li>A circular chain of processes exists: P1 waits for R1 (held by P2), P2 waits for R2 (held by P3), ..., Pn waits for Rn (held by P1)</li>
+      </ul></div>
+      <div class="d-ex">Two people need both a pen and paper. Person A holds the pen and waits for paper. Person B holds the paper and waits for the pen. Neither will give up their item. This is deadlock.</div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Mnemonic <b>"MHNc"</b>. ALL 4 must exist at the same time. Breaking ANY one prevents deadlock. Always a 5-8 mark question!</div>
+    `},
+    {name:'Deadlock Handling Methods',icon:'fa-shield-halved',detail:`
+      <p class="d-intro">There are 3 strategies for dealing with deadlock, each with different trade-offs.</p>
+      <div class="d-sec"><div class="d-lbl">1. Deadlock Prevention</div><ul>
+        <li>Ensure at least one of the 4 conditions can NEVER hold</li>
+        <li><strong>Mutual Exclusion:</strong> Can't negate (some resources inherently non-sharable)</li>
+        <li><strong>Hold & Wait:</strong> Request ALL resources before execution</li>
+        <li><strong>No Preemption:</strong> Release all held resources if can't get new one</li>
+        <li><strong>Circular Wait:</strong> Assign total ordering to resource types</li>
+        <li><strong>Drawback:</strong> Low resource utilization, reduced throughput</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">2. Deadlock Avoidance</div><ul>
+        <li>Dynamically check before granting resources</li>
+        <li>Uses <strong>Banker's Algorithm</strong> — checks safe vs unsafe state</li>
+        <li><strong>Safe State:</strong> System CAN allocate resources to all processes in some order</li>
+        <li><strong>Unsafe State:</strong> System MIGHT deadlock</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">3. Deadlock Detection & Recovery</div><ul>
+        <li>Let deadlock happen, then detect and recover</li>
+        <li><strong>Detection:</strong> Wait-for graph — cycle exists = deadlock</li>
+        <li><strong>Recovery:</strong> Process termination, resource preemption, or checkpoint &amp; rollback</li>
+      </ul></div>
+      <table class="d-tbl"><tr><th>Method</th><th>When to Check</th><th>Overhead</th><th>Resource Utilization</th></tr>
+        <tr><td>Prevention</td><td>At design time</td><td>Low</td><td>Low (restrictive)</td></tr>
+        <tr><td>Avoidance</td><td>At each request</td><td>High</td><td>Medium</td></tr>
+        <tr><td>Detection</td><td>Periodically</td><td>Medium</td><td>High (least restrictive)</td></tr>
+      </table>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Prevention = break a condition. Avoidance = check safe state (Banker's). Detection = let it happen, then fix.</div>
+    `},
+    {name:'Prevention Techniques in Detail',icon:'fa-ban',detail:`
+      <p class="d-intro">Deadlock prevention works by ensuring at least one of the 4 necessary conditions can never occur.</p>
+      <div class="d-sec"><div class="d-lbl">Breaking Hold & Wait</div><ul>
+        <li><strong>Method 1:</strong> Process must request ALL needed resources before execution begins</li>
+        <li><strong>Method 2:</strong> Process must release all currently held resources before requesting any new one</li>
+        <li><strong>Drawback:</strong> Starvation possible, low resource utilization</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Breaking No Preemption</div><ul>
+        <li>If a process requests a resource that's not available, it must release all held resources</li>
+        <li><strong>Drawback:</strong> Practical only for resources whose state can be easily saved and restored</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Breaking Circular Wait</div><ul>
+        <li>Assign a <strong>total ordering</strong> to all resource types (e.g., R1=1, R2=2, R3=3)</li>
+        <li>Processes can only request resources in <strong>increasing order</strong></li>
+        <li>This makes circular wait impossible by construction</li>
+        <li><strong>Most practical</strong> prevention technique</li>
+      </ul></div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Mutual Exclusion CANNOT be negated. Circular wait prevention via resource ordering is the most practical technique.</div>
+    `}
+  ]},
+  {unit:5,bg:'bg5',uc:'uc5',title:'File Management',topics:[
+    {name:'File Operations (6 Operations)',icon:'fa-file-circle-plus',detail:`
+      <p class="d-intro">The OS provides <strong>6 fundamental operations</strong> that users and programs can perform on files.</p>
+      <div class="d-sec"><div class="d-lbl">All 6 Operations</div><ul>
+        <li><strong>Create:</strong> Allocate space, create directory entry with file name and attributes</li>
+        <li><strong>Open:</strong> Make file available for access. OS loads metadata, returns file descriptor</li>
+        <li><strong>Read:</strong> Transfer data from file to process's memory</li>
+        <li><strong>Delete:</strong> Release all file space, remove directory entry permanently</li>
+        <li><strong>Close:</strong> Free OS tables, flush buffers, release file descriptor</li>
+        <li><strong>Rename:</strong> Change the file's name. Does NOT move or copy data</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Operation Sequence</div><ul>
+        <li>Typical: Create → Open → Read → Close → Delete</li>
+        <li>You MUST <strong>Open</strong> before reading, and <strong>Close</strong> when done</li>
+      </ul></div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Mnemonic <b>"CORDCR"</b> = Create, Open, Read, Delete, Close, Rename. You MUST open before reading!</div>
+    `},
+    {name:'File Extensions',icon:'fa-file-signature',detail:`
+      <p class="d-intro">A <strong>file extension</strong> is a suffix appended to the file name that indicates the file's type and format.</p>
+      <div class="d-sec"><div class="d-lbl">Purpose</div><ul>
+        <li>Identifies the file type</li>
+        <li>Helps the OS select the correct application to open the file</li>
+        <li>Indicates the data format/structure inside</li>
+      </ul></div>
+      <table class="d-tbl"><tr><th>Type</th><th>Extensions</th></tr>
+        <tr><td>Documents</td><td>.txt, .docx, .pdf</td></tr>
+        <tr><td>Images</td><td>.jpg, .png, .gif, .bmp</td></tr>
+        <tr><td>Audio</td><td>.mp3, .wav, .flac</td></tr>
+        <tr><td>Video</td><td>.mp4, .avi, .mkv</td></tr>
+        <tr><td>Executables</td><td>.exe (Windows), .sh (Linux)</td></tr>
+        <tr><td>Source Code</td><td>.c, .py, .java, .html</td></tr>
+      </table>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Extensions help OS choose the right app, but Linux checks file content (magic numbers), not just extension.</div>
+    `},
+    {name:'File System Layout',icon:'fa-hard-drive',detail:`
+      <p class="d-intro">The disk is organized into specific blocks/sectors, each serving a purpose.</p>
+      <div class="d-sec"><div class="d-lbl">Disk Layout</div><ul>
+        <li><strong>Sector 0 — MBR (Master Boot Record):</strong> Boot loader code and partition table. First thing BIOS reads.</li>
+        <li><strong>Boot Block:</strong> Code to load the OS kernel into memory.</li>
+        <li><strong>Superblock:</strong> Metadata about the file system — total blocks, free blocks, inode count. Critical for mounting.</li>
+        <li><strong>Bitmaps:</strong> Two bitmaps — one for used/free inodes, one for used/free data blocks.</li>
+        <li><strong>Inodes:</strong> Each inode describes one file — size, permissions, timestamps, pointers to data blocks.</li>
+        <li><strong>Data Blocks:</strong> Actual file content stored here.</li>
+      </ul></div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> MBR is at <b>Sector 0</b> — always asked. Boot sequence: BIOS → MBR → Boot Block → Kernel. Superblock damage = entire file system inaccessible.</div>
+    `},
+    {name:'File Allocation Methods (3 Types)',icon:'fa-table-cells-large',detail:`
+      <p class="d-intro">The OS must decide how to allocate disk blocks to store file data. There are <strong>3 methods</strong>.</p>
+      <div class="d-sec"><div class="d-lbl">1. Contiguous Allocation</div><ul>
+        <li>File occupies <strong>consecutive</strong> disk blocks</li>
+        <li>Supports <strong>direct/random access</strong></li>
+        <li><strong>Problems:</strong> Both internal and external fragmentation</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">2. Linked Allocation</div><ul>
+        <li>Each block contains a <strong>pointer to the next block</strong></li>
+        <li>No external fragmentation</li>
+        <li><strong>Problems:</strong> No random access, one broken pointer = lost file</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">3. Indexed Allocation</div><ul>
+        <li>An <strong>index block</strong> stores all pointers to data blocks</li>
+        <li>Supports <strong>direct access</strong></li>
+        <li><strong>Problems:</strong> Index block overhead for small files</li>
+      </ul></div>
+      <table class="d-tbl"><tr><th>Feature</th><th>Contiguous</th><th>Linked</th><th>Indexed</th></tr>
+        <tr><td>Random Access</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+        <tr><td>Fragmentation</td><td>Both types</td><td>None</td><td>Minimal</td></tr>
+        <tr><td>File Extension</td><td>Difficult</td><td>Easy</td><td>Easy</td></tr>
+        <tr><td>Overhead</td><td>None</td><td>Pointer per block</td><td>Index block</td></tr>
+      </table>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Contiguous = fast but fragments. Linked = flexible but no random access. Indexed = best of both but overhead. Know this comparison table!</div>
+    `},
+    {name:'Free Space Management',icon:'fa-warehouse',detail:`
+      <p class="d-intro">The OS must track which disk blocks are free. There are <strong>4 methods</strong>.</p>
+      <div class="d-sec"><div class="d-lbl">1. Bitmap / Bit Vector</div><ul>
+        <li>Each block = 1 bit: <strong>0 = free, 1 = allocated</strong></li>
+        <li>Very compact and simple</li>
+        <li>Easy to find contiguous free blocks</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">2. Linked List</div><ul>
+        <li>Free blocks linked together in a chain</li>
+        <li>No space overhead for tracking</li>
+        <li>Disadvantage: Traversing is slow</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">3. Grouping</div><ul>
+        <li>First free block stores addresses of <strong>n free blocks</strong></li>
+        <li>Faster than linked list — find n free blocks in one step</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">4. Counting</div><ul>
+        <li>Keeps: <strong>first free block address + count of contiguous free blocks</strong></li>
+        <li>Very efficient when there are large contiguous free areas</li>
+      </ul></div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Bitmap is most common in exams. 0=free, 1=allocated. Grouping and Counting improve on the basic linked list.</div>
+    `}
+  ]},
+  {unit:6,bg:'bg6',uc:'uc6',title:'Linux',topics:[
+    {name:'Introduction & History',icon:'fa-linux',detail:`
+      <p class="d-intro"><strong>Linux</strong> is a free, open-source operating system kernel created by <strong>Linus Torvalds</strong> in 1991. It powers everything from smartphones (Android) to supercomputers.</p>
+      <div class="d-sec"><div class="d-lbl">Key Facts</div><ul>
+        <li><strong>Creator:</strong> Linus Torvalds (Finnish-American software engineer)</li>
+        <li><strong>Release Date:</strong> September 17, 1991</li>
+        <li><strong>License:</strong> GPL (GNU General Public License) — free to use, modify, distribute</li>
+        <li><strong>Written in:</strong> C language and Assembly</li>
+        <li><strong>Distributions:</strong> 600+ available</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Why Linux Matters</div><ul>
+        <li>Android (world's most popular mobile OS) is based on Linux kernel</li>
+        <li>90%+ of world's servers run Linux</li>
+        <li>All top 500 supercomputers run Linux</li>
+      </ul></div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Always mention: Linus Torvalds + 1991 + GPL license + written in C. These 4 facts appear in almost every Linux question!</div>
+    `},
+    {name:'Features of Linux',icon:'fa-star',detail:`
+      <p class="d-intro">Linux has <strong>8 key features</strong> that make it one of the most popular and reliable operating systems.</p>
+      <div class="d-sec"><div class="d-lbl">All 8 Features</div><ul>
+        <li><strong>Portable:</strong> Can run on many hardware platforms (x86, ARM, MIPS)</li>
+        <li><strong>Open Source:</strong> Source code is freely available — anyone can view, modify, redistribute</li>
+        <li><strong>Multi-User:</strong> Multiple users can use the system simultaneously with separate accounts</li>
+        <li><strong>Multiprogramming:</strong> Multiple programs can run simultaneously</li>
+        <li><strong>Hierarchical File System:</strong> Tree-like directory structure starting from root (/)</li>
+        <li><strong>Shell:</strong> Command-line interpreter that executes user commands</li>
+        <li><strong>Security:</strong> Strong file permissions, user authentication, firewall built-in</li>
+        <li><strong>Communication:</strong> Built-in networking support, inter-process communication</li>
+      </ul></div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> For "features of Linux" questions, list at least 5-6 with one-line explanations. Don't just write names — explain each briefly.</div>
+    `},
+    {name:'Architecture (4 Layers)',icon:'fa-building',detail:`
+      <p class="d-intro">Linux follows a <strong>layered architecture</strong> with 4 distinct layers, each building on the one below.</p>
+      <div class="d-sec"><div class="d-lbl">Layer 1: Hardware</div><ul>
+        <li>Physical components: CPU, RAM, disk, network card, peripherals</li>
+        <li>Kernel interacts directly with hardware via device drivers</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Layer 2: Kernel</div><ul>
+        <li>Core of the OS — manages CPU, memory, devices, file systems</li>
+        <li>Runs in privileged mode (kernel space)</li>
+        <li>Only component that can directly access hardware</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Layer 3: Shell</div><ul>
+        <li>Command-line interpreter between user and kernel</li>
+        <li>Translates user commands into kernel calls</li>
+        <li>Types: Bourne Shell (sh), Bash, C Shell, Zsh</li>
+      </ul></div>
+      <div class="d-sec"><div class="d-lbl">Layer 4: System Utilities &amp; Applications</div><ul>
+        <li>Programs users actually run: editors, browsers, compilers</li>
+        <li>Use shell or GUI to communicate with kernel</li>
+      </ul></div>
+      <div class="d-ex">User types "ls" in terminal → Shell interprets it → Kernel reads directory from disk → Shell displays results to user.</div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> The order is always: Hardware → Kernel → Shell → Utilities. Kernel is the ONLY layer that touches hardware directly.</div>
+    `},
+    {name:'Major Distributions',icon:'fa-compact-disc',detail:`
+      <p class="d-intro">A <strong>Linux distribution (distro)</strong> is a complete OS built on the Linux kernel, bundled with software, package managers, and configuration tools. There are <strong>600+ distributions</strong>.</p>
+      <table class="d-tbl"><tr><th>Distribution</th><th>Best For</th><th>Key Trait</th></tr>
+        <tr><td>Ubuntu</td><td>Beginners, desktops</td><td>Most popular, easiest to use</td></tr>
+        <tr><td>Debian</td><td>Servers, stability</td><td>Very stable, basis for Ubuntu</td></tr>
+        <tr><td>Fedora</td><td>Developers, cutting-edge</td><td>Latest software, Red Hat sponsored</td></tr>
+        <tr><td>Red Hat (RHEL)</td><td>Enterprise servers</td><td>Commercial, paid support</td></tr>
+        <tr><td>CentOS</td><td>Enterprise (free)</td><td>Community version of RHEL</td></tr>
+        <tr><td>Linux Mint</td><td>Windows switchers</td><td>Very user-friendly desktop</td></tr>
+        <tr><td>Arch Linux</td><td>Advanced users</td><td>DIY, rolling release</td></tr>
+        <tr><td>Kali Linux</td><td>Security testing</td><td>Pre-loaded with hacking tools</td></tr>
+      </table>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Name at least 5 distros with their use case. Ubuntu = easiest, Debian = most stable, RHEL = enterprise.</div>
+    `},
+    {name:'Key Commands',icon:'fa-terminal',detail:`
+      <p class="d-intro">Linux provides powerful <strong>command-line tools</strong> for file, directory, and network management.</p>
+      <table class="d-tbl"><tr><th>Command</th><th>Purpose</th><th>Example</th></tr>
+        <tr><td>pwd</td><td>Print working directory</td><td>pwd → /home/user</td></tr>
+        <tr><td>mkdir</td><td>Make new directory</td><td>mkdir projects</td></tr>
+        <tr><td>rmdir</td><td>Remove empty directory</td><td>rmdir old_folder</td></tr>
+        <tr><td>cd</td><td>Change directory</td><td>cd /home/user</td></tr>
+        <tr><td>rm</td><td>Remove file/directory</td><td>rm file.txt</td></tr>
+        <tr><td>cp</td><td>Copy file/directory</td><td>cp a.txt b.txt</td></tr>
+        <tr><td>mv</td><td>Move or rename</td><td>mv old.txt new.txt</td></tr>
+        <tr><td>ls</td><td>List directory contents</td><td>ls -la</td></tr>
+        <tr><td>cat</td><td>Display file content</td><td>cat readme.txt</td></tr>
+        <tr><td>ping</td><td>Check network connectivity</td><td>ping google.com</td></tr>
+        <tr><td>ip addr</td><td>Show IP address</td><td>ip addr show</td></tr>
+      </table>
+      <div class="d-sec"><div class="d-lbl">Open Terminal Shortcut</div><ul>
+        <li><strong>Ctrl + Alt + T</strong> — opens terminal in most Linux distros</li>
+      </ul></div>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> Know at least 6-8 commands with their purpose. "Ctrl+Alt+T" for terminal is a common 1-mark question.</div>
+    `},
+    {name:'Linux vs Windows',icon:'fa-circle-half-stroke',detail:`
+      <p class="d-intro">A detailed comparison between Linux and Windows — one of the most frequently asked questions.</p>
+      <table class="d-tbl"><tr><th>Feature</th><th>Linux</th><th>Windows</th></tr>
+        <tr><td>Source Code</td><td>Open source</td><td>Proprietary (closed source)</td></tr>
+        <tr><td>Cost</td><td>Free (mostly)</td><td>Paid license</td></tr>
+        <tr><td>Security</td><td>More secure (fewer viruses)</td><td>More vulnerable</td></tr>
+        <tr><td>Written In</td><td>C + Assembly</td><td>C++ + Assembly</td></tr>
+        <tr><td>File System</td><td>ext4, Btrfs, XFS</td><td>NTFS, FAT32</td></tr>
+        <tr><td>Default UI</td><td>CLI (shell) primary</td><td>GUI primary</td></tr>
+        <tr><td>Customization</td><td>Highly customizable</td><td>Limited customization</td></tr>
+        <tr><td>Server Market</td><td>Dominant (90%+)</td><td>Minority</td></tr>
+        <tr><td>Gaming</td><td>Improving (Steam/Proton)</td><td>Dominant</td></tr>
+        <tr><td>Updates</td><td>User-controlled</td><td>Often forced</td></tr>
+      </table>
+      <div class="d-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Exam Tip:</strong> For a 6-mark comparison, write at least 6 differences in a table. Always mention: Open vs Closed source, C vs C++, Security difference.</div>
+    `}
+  ]}
+];
 
-    <div class="question">9. What is the value of bulk modulus for an incompressible liquid?</div>
-    <div class="options">a. Zero &nbsp;&nbsp; b. Less than 1 &nbsp;&nbsp; c. Unity &nbsp;&nbsp; d. Infinity</div>
-    <div class="answer">
-        <strong>Answer:</strong> d. Infinity<br>
-        For an incompressible liquid, volume change is zero. \(K = -\frac{\text{Pressure stress}}{\text{Volume strain}}\). If volume strain is zero, bulk modulus becomes infinite.
-    </div>
+/* Notes data */
+const NOTES = [
+  {unit:1,bg:'bg1',title:'OS Types Summary',html:`
+    <table><tr><th>Type</th><th>Key Feature</th><th>Example</th></tr>
+    <tr><td>Batch</td><td>No direct interaction</td><td>Payroll</td></tr>
+    <tr><td>Time-Sharing</td><td>Quantum per task</td><td>Unix, Multics</td></tr>
+    <tr><td>Multiprocessing</td><td>Multiple CPUs</td><td>Unix SMP</td></tr>
+    <tr><td>Multitasking</td><td>Multiple tasks at once</td><td>Windows, macOS</td></tr>
+    <tr><td>Real-Time</td><td>Fixed deadline</td><td>Flight control</td></tr>
+    <tr><td>Distributed</td><td>Networked computers</td><td>Cluster OS</td></tr></table>
+    <br><b style="font-size:14px">Hard vs Soft Real-Time</b>
+    <ul><li>Hard: miss deadline = system failure (robot welding, airbags)</li><li>Soft: some relaxation allowed (multimedia, streaming)</li></ul>`},
+  {unit:2,bg:'bg2',title:'Schedulers Comparison',html:`
+    <table><tr><th>Scheduler</th><th>Also Called</th><th>Function</th></tr>
+    <tr><td>Long-term</td><td>Job Scheduler</td><td>New→Ready, controls multiprogramming degree</td></tr>
+    <tr><td>Short-term</td><td>CPU Scheduler</td><td>Ready→Running, fastest</td></tr>
+    <tr><td>Medium-term</td><td>Swapper</td><td>Swaps processes in/out of memory</td></tr></table>
+    <br><b style="font-size:14px">Preemptive vs Non-Preemptive</b>
+    <table><tr><th>Preemptive</th><th>Non-Preemptive</th></tr>
+    <tr><td>Can interrupt process</td><td>Runs till done/wait</td></tr>
+    <tr><td>RR, Priority, SRTF</td><td>SJF, Non-pre Priority</td></tr>
+    <tr><td>More overhead</td><td>Less overhead</td></tr>
+    <tr><td>Better responsiveness</td><td>Simpler implementation</td></tr></table>`},
+  {unit:3,bg:'bg3',title:'Memory Partitioning',html:`
+    <table><tr><th>Method</th><th>Advantage</th><th>Problem</th></tr>
+    <tr><td>Fixed Partition</td><td>Simple</td><td>Internal fragmentation</td></tr>
+    <tr><td>Dynamic Partition</td><td>No internal frag</td><td>External fragmentation</td></tr>
+    <tr><td>Paging</td><td>No external frag</td><td>Internal frag possible</td></tr></table>
+    <br><b style="font-size:14px">Paging Key Points</b>
+    <ul><li>Process divided into <b>pages</b>, RAM into <b>frames</b></li>
+    <li>Page size = Frame size (always equal)</li>
+    <li>MMU maps logical → physical address</li>
+    <li>Virtual memory uses disk as extended RAM</li>
+    <li>Page Table stores page-to-frame mapping</li></ul>`},
+  {unit:4,bg:'bg4',title:'Deadlock Conditions & Handling',html:`
+    <b style="font-size:14px">All 4 conditions must exist</b>
+    <ul><li><b>Mutual Exclusion</b> — only one process uses resource</li>
+    <li><b>Hold &amp; Wait</b> — holds one, waits for another</li>
+    <li><b>No Preemption</b> — resource not forcibly taken</li>
+    <li><b>Circular Wait</b> — P1→R1→P2→R2→P1 cycle</li></ul>
+    <br><b style="font-size:14px">Handling Approaches</b>
+    <ul><li><b>Prevention</b> — break one of 4 conditions</li>
+    <li><b>Avoidance</b> — safe state checking (Banker's algo)</li>
+    <li><b>Detection &amp; Recovery</b> — detect then recover</li></ul>`},
+  {unit:5,bg:'bg5',title:'File Allocation Comparison',html:`
+    <table><tr><th>Method</th><th>Access</th><th>Problem</th></tr>
+    <tr><td>Contiguous</td><td>Direct, fast</td><td>Both fragmentations</td></tr>
+    <tr><td>Linked</td><td>Sequential only</td><td>No direct access</td></tr>
+    <tr><td>Indexed</td><td>Direct via index</td><td>Overhead for small files</td></tr></table>
+    <br><b style="font-size:14px">Free Space Methods</b>
+    <ul><li>Bitmap: 0=free, 1=allocated — compact and simple</li>
+    <li>Linked List: free blocks chained together</li>
+    <li>Grouping: address of n free blocks in first free block</li>
+    <li>Counting: first free block + count of contiguous free blocks</li></ul>`},
+  {unit:6,bg:'bg6',title:'Linux Key Commands',html:`
+    <table><tr><th>Command</th><th>Purpose</th></tr>
+    <tr><td>pwd</td><td>Print working directory</td></tr>
+    <tr><td>mkdir</td><td>Make new directory</td></tr>
+    <tr><td>rmdir</td><td>Remove empty directory</td></tr>
+    <tr><td>cd</td><td>Change directory</td></tr>
+    <tr><td>rm</td><td>Remove file</td></tr>
+    <tr><td>cp</td><td>Copy file/directory</td></tr>
+    <tr><td>mv</td><td>Move or rename</td></tr>
+    <tr><td>ls</td><td>List directory contents</td></tr>
+    <tr><td>cat</td><td>Display file content</td></tr>
+    <tr><td>ping</td><td>Check connectivity</td></tr>
+    <tr><td>ip addr</td><td>Show IP address</td></tr></table>
+    <br><b style="font-size:14px">Open terminal shortcut</b>
+    <p style="font-size:13px;margin-top:4px">CTRL + ALT + T</p>`}
+];
 
-    <div class="question">10. If the emissivity \(e\) of a body is less than 1, the body is considered:</div>
-    <div class="options">a. A perfect black body &nbsp;&nbsp; b. Not a perfectly black body &nbsp;&nbsp; c. An impossible body &nbsp;&nbsp; d. A perfect reflectctor</div>
-    <div class="answer">
-        <strong>Answer:</strong> b. Not a perfectly black body<br>
-        A perfect black body has emissivity \(e = 1\). If \(e < 1\), the body is not a perfect black body.
-    </div>
+/* Important questions */
+const IMP = [
+  {unit:1,title:'Unit 1 — Introduction to OS',qs:[
+    'Define Operating System. What are its main functions? (5 marks)',
+    'Explain different types of OS with examples. (5-8 marks)',
+    'What is the difference between Hard Real-Time and Soft Real-Time OS? Give examples.',
+    'Compare CLI and GUI. What are advantages of GUI? (4 marks)',
+    'Explain internal structure of OS (Kernel, Utility, Application).',
+    'What is Distributed OS? What are its advantages and disadvantages?']},
+  {unit:2,title:'Unit 2 — Process & Scheduling',qs:[
+    'Differentiate between Program and Process with a table. (4 marks)',
+    'Explain the 5 states of a process with a state diagram. (5 marks)',
+    'What is PCB? List all its components. (4 marks)',
+    'Explain Long-term, Short-term, and Medium-term schedulers. (6 marks)',
+    'Compare Preemptive and Non-Preemptive scheduling. Which algorithms belong to each?',
+    'What is a thread? How is it different from a process? What is its life cycle?',
+    'What are Job Queue, Ready Queue, and Waiting Queue? (3 marks)']},
+  {unit:3,title:'Unit 3 — Memory Management',qs:[
+    'Explain memory hierarchy with diagram. (5 marks)',
+    'What is the difference between logical and physical address? What is MMU? (4 marks)',
+    'Explain Fixed and Dynamic partitioning with their advantages/disadvantages.',
+    'What is internal and external fragmentation? How can they be solved?',
+    'Explain Virtual Memory. What are its two main purposes?',
+    'What is paging? Explain with an example. Why must page size = frame size?']},
+  {unit:4,title:'Unit 4 — Deadlock',qs:[
+    'What is deadlock? Explain with an example using processes and resources. (5 marks)',
+    'What are the 4 necessary conditions for deadlock? Explain each. (8 marks)',
+    'Explain three methods of handling deadlock. (6 marks)',
+    'How can Circular Wait condition be prevented?',
+    'What is the difference between deadlock prevention and deadlock avoidance?']},
+  {unit:5,title:'Unit 5 — File Management',qs:[
+    'List and explain all file operations. (6 marks)',
+    'What is a file extension? Why is it important? Give 5 examples.',
+    'Compare Contiguous, Linked, and Indexed file allocation methods. (6 marks)',
+    'What is free space management? Explain Bitmap and Linked List methods.',
+    'What is MBR? What is the role of file system layout?']},
+  {unit:6,title:'Unit 6 — Linux',qs:[
+    'What is Linux? Who created it and when? What license does it use? (3 marks)',
+    'List and explain features of Linux OS. (5 marks)',
+    'Compare Linux and Windows with at least 6 differences. (6 marks)',
+    'Explain the architecture of Linux (all 4 layers). (5 marks)',
+    'Write the names and purpose of at least 6 Linux commands.',
+    'What are Linux distributions? Name 5 with their use case.']}
+];
 
-    <div class="question">11. If a ray of light is incident normally on a plane surface, the angle of refraction is:</div>
-    <div class="options">a. 90° &nbsp;&nbsp; b. 45° &nbsp;&nbsp; c. 180° &nbsp;&nbsp; d. 0°</div>
-    <div class="answer">
-        <strong>Answer:</strong> d. 0°<br>
-        If the ray is incident normally, angle of incidence is zero. Therefore, angle of refraction is also zero.
-    </div>
+/* Cheat sheet data */
+const CHEAT = [
+  {unit:1,title:'UNIT 1',rows:[
+    ['OS defined as','Interface between user and hardware; manages resources'],
+    ['First OS','1956, General Motors on IBM'],
+    ['Unix year','1960s, written in C'],
+    ['OS Layers','Kernel → Utility Software → Application Software'],
+    ['GUI invented by','Xerox Palo Alto (1970s)'],
+    ['Real-time types','Hard (strict deadline) vs Soft (relaxed)'],
+    ['Distributed OS','Loosely coupled systems via single channel']]},
+  {unit:2,title:'UNIT 2',rows:[
+    ['Process sections','Stack, Heap, Text, Data'],
+    ['Process states (5)','New→Ready→Running→Wait→Terminated (+Suspend Ready)'],
+    ['PCB = identified by','PID (Process ID)'],
+    ['Long-term scheduler','New→Ready; controls degree of multiprogramming'],
+    ['Short-term scheduler','Ready→Running; fastest scheduler'],
+    ['Medium-term','Handles swapping (moves to secondary memory)'],
+    ['Preemptive algos','Round Robin, Priority, SRTF'],
+    ['Non-preemptive algos','SJF, Non-preemptive Priority'],
+    ['Thread lifecycle','Born→Ready→Running→Blocked→Sleep→Dead']]},
+  {unit:3,title:'UNIT 3',rows:[
+    ['Memory hierarchy','Register→Cache→RAM→Disk (speed↓, size↑)'],
+    ['Logical address','Generated by CPU; also called virtual address'],
+    ['Physical address','Actual RAM address; computed by MMU'],
+    ['MMU','Hardware device mapping virtual→physical address'],
+    ['Internal fragmentation','Wasted space inside allocated block (Fixed partition)'],
+    ['External fragmentation','Enough free space but non-contiguous (Dynamic partition)'],
+    ['Paging rule','Page size MUST equal Frame size'],
+    ['Virtual memory','Disk used to extend RAM; allows programs larger than RAM']]},
+  {unit:4,title:'UNIT 4',rows:[
+    ['Deadlock =','Circular wait for resources; no progress'],
+    ['4 conditions','Mutual Exclusion, Hold & Wait, No Preemption, Circular Wait'],
+    ['Prevention','Break one of the 4 conditions'],
+    ['Avoidance','Stay in safe state; OS checks each step'],
+    ['Detection+Recovery','Let deadlock occur; periodically check and recover'],
+    ['Circular wait fix','Total ordering of resource types']]},
+  {unit:5,title:'UNIT 5',rows:[
+    ['File operations (6)','Create, Open, Read, Delete, Close, Rename'],
+    ['Sector 0 of disk','MBR (Master Boot Record) – used to boot system'],
+    ['Contiguous alloc','Fast sequential access; suffers both fragmentations'],
+    ['Indexed alloc','Index block holds all pointers; direct access'],
+    ['Bitmap free space','0=free, 1=used; very compact and simple']]},
+  {unit:6,title:'UNIT 6',rows:[
+    ['Linux creator','Linus Torvalds – Sep 17, 1991'],
+    ['License','GPL (GNU General Public License)'],
+    ['Distros count','600+; popular: Ubuntu, Debian, Fedora, Mint'],
+    ['Linux written in','C and Assembly language'],
+    ['Windows written in','C++ and Assembly language'],
+    ['Linux architecture','Hardware → Kernel → Shell → System Utilities'],
+    ['Open terminal','CTRL + ALT + T'],
+    ['Linux commands','pwd, mkdir, rmdir, cd, rm, cp, ping, ip addr']]}
+];
 
-    <hr>
+/* Tricks data */
+const TRICKS_MNEMONICS = [
+  ['Deadlock 4 conditions','<b>"MHNc"</b> = <b>M</b>utual exclusion, <b>H</b>old &amp; wait, <b>N</b>o preemption, <b>C</b>ircular wait'],
+  ['Process memory sections','<b>"SHDT"</b> = <b>S</b>tack, <b>H</b>eap, <b>D</b>ata, <b>T</b>ext'],
+  ['File operations','<b>"CORDCR"</b> = <b>C</b>reate, <b>O</b>pen, <b>R</b>ead, <b>D</b>elete, <b>C</b>lose, <b>R</b>ename'],
+  ['Process states','<b>"NRRWT"</b> = <b>N</b>ew → <b>R</b>eady → <b>R</b>unning → <b>W</b>ait → <b>T</b>erminated'],
+  ['3 Schedulers','<b>"LSM"</b> = <b>L</b>ong-term (Job), <b>S</b>hort-term (CPU), <b>M</b>edium-term (Swap)'],
+  ['Memory hierarchy','<b>"RiCRaD"</b> = Registers, Cache, RAM, Disk'],
+  ['Linux distro order','<b>"UFD-RCO"</b> = Ubuntu, Fedora, Debian, Red Hat, CentOS, openSUSE']
+];
+const TRICKS_TRAPS = [
+  'PCB is identified by <b>PID</b> — not program name or state',
+  'Short-term scheduler is the <b>fastest</b> (not most important — that\'s long-term)',
+  'In paging: page size MUST equal frame size — NEVER different',
+  'Internal fragmentation = Fixed partition | External = Dynamic partition',
+  'ALL 4 deadlock conditions must exist simultaneously — not just 2 or 3',
+  'Linux was created in <b>1991</b> — not 1956 (that\'s GM\'s first OS)',
+  'GUI was invented by <b>Xerox</b>, not Apple or Microsoft',
+  'Linux is written in C + Assembly (NOT C++); Windows is C++ + Assembly',
+  'Distributed OS nodes = loosely coupled (not tightly coupled)',
+  'Thread blocking <b>blocks the entire process</b>; process blocking does NOT block other processes'
+];
+const TRICKS_NUMBERS = [
+  ['First OS year','1956 (GM + IBM)'],
+  ['Unix first version','1960s, written in C'],
+  ['Linux release date','September 17, 1991'],
+  ['Linux distributions','600+'],
+  ['Process states minimum','5 states'],
+  ['Deadlock conditions','4 (all must exist)'],
+  ['File allocation methods','3 (Contiguous, Linked, Indexed)'],
+  ['Free space methods','4 (Bitmap, Linked, Grouping, Counting)'],
+  ['Open terminal (Linux)','CTRL + ALT + T']
+];
 
-    <h2>Group B — Short Answer Questions [8 × 5 = 40 marks]</h2>
+/* MCQ data */
+const QS = [
+  {q:"What is the primary function of an Operating System?",o:["Play multimedia","Interface between user and hardware","Connect to internet","Compile code"],a:1},
+  {q:"In which year was the first OS developed by General Motors?",o:["1946","1951","1956","1960"],a:2},
+  {q:"Which part of OS always remains in main memory?",o:["Shell","Kernel","Utility Software","Application Software"],a:1},
+  {q:"Which is NOT a process state?",o:["Ready","Running","Suspended","Compiling"],a:3},
+  {q:"PCB stands for?",o:["Program Control Block","Process Control Block","Processor Clock Base","Primary Control Bit"],a:1},
+  {q:"Which scheduler is called the CPU Scheduler?",o:["Long-term","Medium-term","Short-term","Job scheduler"],a:2},
+  {q:"Internal fragmentation occurs in which allocation?",o:["Dynamic partition","Paging only","Fixed partition","Indexed allocation"],a:2},
+  {q:"In paging, which must ALWAYS be equal?",o:["Process size and frame size","Page size and frame size","Heap size and stack size","Logical and physical address"],a:1},
+  {q:"How many conditions are necessary for deadlock?",o:["2","3","4","5"],a:2},
+  {q:"Which is NOT a deadlock necessary condition?",o:["Mutual Exclusion","Hold and Wait","Circular Wait","Time Sharing"],a:3},
+  {q:"Linux was released by Linus Torvalds in which year?",o:["1985","1991","1998","2001"],a:1},
+  {q:"What license does Linux use?",o:["MIT","BSD","GPL","Proprietary"],a:2},
+  {q:"Which Linux command shows current directory?",o:["ls","cd","pwd","mkdir"],a:2},
+  {q:"GUI was invented by which organization?",o:["Apple","Microsoft","Xerox Palo Alto","IBM"],a:2},
+  {q:"Which file allocation method uses an index block?",o:["Contiguous","Linked","Indexed","Bitmap"],a:2},
+  {q:"Which scheduler handles swapping?",o:["Long-term","Short-term","Medium-term","CPU scheduler"],a:2},
+  {q:"Sector 0 of a disk is called?",o:["Boot Block","Superblock","MBR","I-node"],a:2},
+  {q:"In bitmap free space: 0 means?",o:["Allocated","Free","Error","Unknown"],a:1},
+  {q:"Thread blocking affects?",o:["Only that thread","Entire process","Other processes","Kernel only"],a:1},
+  {q:"Which OS type has a fixed deadline?",o:["Batch","Time-sharing","Real-Time","Distributed"],a:2}
+];
 
-    <div class="question">1. (a) State the principle of homogeneity. Find the dimension of K in the equation \(T = 2\pi\sqrt{\frac{m}{K}}\). [2+3]</div>
-    <div class="answer">
-        <strong>Principle of homogeneity:</strong> The principle of homogeneity states that in any correct physical equation, the dimensions of all terms on both sides must be the same.<br><br>
-        <strong>Dimension of K:</strong><br>
-        Given, \(T = 2\pi \sqrt{\frac{m}{K}}\). Here, \(2\pi\) is dimensionless.<br>
-        Squaring both sides: \(T^2 = \frac{m}{K} \implies K = \frac{m}{T^2}\)<br>
-        Dimension of mass \([m] = [M]\), Dimension of time \([T] = [T]\)<br>
-        Therefore, \([K] = \frac{[M]}{[T^2]} = [MT^{-2}]\)
-    </div>
+/* =====================================================
+   RENDER FUNCTIONS
+   ===================================================== */
 
-    <div class="question">2. (a) State the triangle law of vector addition. Two vectors \(\vec A\) and \(\vec B\) are such that \(\vec A - \vec B = \vec C\) and \(A = B = C\). Find the angle between them. [2+3]</div>
-    <div class="answer">
-        <strong>Triangle law of vector addition:</strong> If two vectors are represented by two sides of a triangle taken in the same order, then their resultant is represented by the third side of the triangle taken in the opposite order.<br><br>
-        <strong>Angle calculation:</strong><br>
-        Given, \(\vec A - \vec B = \vec C\) and \(A = B = C\). Let the angle between \(\vec A\) and \(\vec B\) be \(\theta\).<br>
-        Taking magnitude and squaring: \(C^2 = A^2 + B^2 - 2AB\cos\theta\)<br>
-        Since \(A = B = C = a\):<br>
-        \(a^2 = a^2 + a^2 - 2a^2\cos\theta \implies a^2 = 2a^2 - 2a^2\cos\theta\)<br>
-        Dividing by \(a^2\): \(1 = 2 - 2\cos\theta \implies 2\cos\theta = 1 \implies \cos\theta = \frac12\)<br>
-        Therefore, \(\theta = 60^\circ\)
-    </div>
+/* Build tab bar */
+function buildTabs(){
+  var h='';
+  TABS.forEach(function(t,i){
+    h+='<button class="tab'+(i===0?' on':'')+'" onclick="showTab(\''+t.id+'\',this)" role="tab"><i class="fa-solid '+t.icon+'"></i> '+t.label+'</button>';
+  });
+  document.getElementById('tabbar').innerHTML=h;
+}
 
-    <div class="question">3. (a) What is centripetal acceleration? Derive an expression for centripetal acceleration. [1+4]</div>
-    <div class="answer">
-        <strong>Centripetal acceleration:</strong> The acceleration directed towards the centre of a circular path in uniform circular motion is called centripetal acceleration.<br><br>
-        <strong>Derivation:</strong><br>
-        Let a body move in a circle of radius \(r\) with uniform speed \(v\). Suppose the body moves from point A to B in small time \(\Delta t\). The velocity changes from \(\vec v_1\) to \(\vec v_2\) (magnitude same, direction changes).<br>
-        Change in velocity \(\Delta v = v\Delta\theta\) (for small angular displacement \(\Delta \theta\)).<br>
-        Also, arc length \(\Delta s = r\Delta\theta\). But \(\Delta s = v\Delta t\), so \(\Delta\theta = \frac{v\Delta t}{r}\).<br>
-        Substituting: \(\Delta v = v\left(\frac{v\Delta t}{r}\right) = \frac{v^2\Delta t}{r}\)<br>
-        Acceleration, \(a = \frac{\Delta v}{\Delta t} = \frac{v^2}{r}\)<br>
-        Thus, centripetal acceleration \(a_c = \frac{v^2}{r}\). Since \(v = r\omega\), it can also be written as \(a_c = r\omega^2\).
-    </div>
+/* Switch tabs */
+function showTab(id,btn){
+  document.querySelectorAll('.pnl').forEach(function(p){p.classList.remove('on')});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
+  document.getElementById('p-'+id).classList.add('on');
+  if(btn)btn.classList.add('on');
+}
 
-    <div class="question">4. (a) State and prove the Work-Energy theorem. [2+3]</div>
-    <div class="answer">
-        <strong>Statement:</strong> The work-energy theorem states that the work done by a net force on a body is equal to the change in its kinetic energy. (\(W = \Delta K.E.\))<br><br>
-        <strong>Proof:</strong><br>
-        Let a body of mass \(m\) move with initial velocity \(u\). A constant force \(F\) acts on it through displacement \(s\), and its final velocity becomes \(v\).<br>
-        Work done, \(W = Fs\). According to Newton’s second law, \(F = ma\). So, \(W = mas\).<br>
-        From the equation of motion: \(v^2 = u^2 + 2as \implies as = \frac{v^2-u^2}{2}\)<br>
-        Therefore, \(W = m\left(\frac{v^2-u^2}{2}\right) = \frac12 mv^2 - \frac12 mu^2 = K.E._f - K.E._i = \Delta K.E.\)<br>
-        Hence proved.
-    </div>
+/* Build Mind Map */
+function buildMindMap(){
+  var h='';
+  MM.forEach(function(u){
+    h+='<div class="cd '+u.uc+'"><span class="bg '+u.bg+'">Unit '+u.unit+'</span>';
+    h+='<div class="ut">'+u.title+'</div>';
+    u.topics.forEach(function(t,i){
+      var uid='tp-'+u.unit+'-'+i;
+      h+='<div class="tp" id="'+uid+'">';
+      h+='<div class="tp-h" onclick="toggleTopic(\''+uid+'\')">';
+      h+='<span class="tp-ic"><i class="fa-solid '+t.icon+'"></i></span>';
+      h+='<span class="tp-n">'+t.name+'</span>';
+      h+='<span class="tp-ch"><i class="fa-solid fa-chevron-down"></i></span>';
+      h+='</div>';
+      h+='<div class="tp-d"><div class="tp-di">'+t.detail+'</div></div>';
+      h+='</div>';
+    });
+    h+='</div>';
+  });
+  document.getElementById('mm-box').innerHTML=h;
+}
 
-    <div class="question">5. (a) Define gravitational potential energy and explain why it is negative. Derive an expression for it. [1+4]</div>
-    <div class="answer">
-        <strong>Definition:</strong> The gravitational potential energy of a body at a point in a gravitational field is the work done in bringing the body from infinity to that point without acceleration.<br><br>
-        <strong>Why negative:</strong> Gravitational force is attractive. The zero level of gravitational potential energy is taken at infinity. When a body is brought from infinity to a point near earth, its potential energy decreases. Therefore, it is negative.<br><br>
-        <strong>Derivation:</strong><br>
-        Let a mass \(m\) be brought from infinity to a distance \(r\) from mass \(M\).<br>
-        Gravitational force, \(F = \frac{GMm}{r^2}\)<br>
-        Work done (Potential Energy), \(U = -\int_{\infty}^{r} \frac{GMm}{r^2}\,dr = -GMm\left[-\frac1r\right]_{\infty}^{r} = -\frac{GMm}{r}\)
-    </div>
+/* Toggle individual topic */
+function toggleTopic(uid){
+  var el=document.getElementById(uid);
+  if(!el)return;
+  var det=el.querySelector('.tp-d');
+  if(el.classList.contains('open')){
+    el.classList.remove('open');
+    det.style.maxHeight='0';
+  }else{
+    el.classList.add('open');
+    det.style.maxHeight=det.scrollHeight+'px';
+  }
+}
 
-    <div class="question">6. (a) Define Poisson's ratio. Derive the expression for it and find the expression for escape velocity of earth. [2+3]</div>
-    <div class="answer">
-        <strong>Poisson’s ratio (\(\sigma\)):</strong> It is defined as the ratio of lateral strain to longitudinal strain within elastic limit.<br>
-        \(\sigma = -\frac{\text{lateral strain}}{\text{longitudinal strain}} = -\frac{\Delta D/D}{\Delta L/L}\)<br><br>
-        <strong>Escape Velocity Derivation:</strong><br>
-        Escape velocity is the minimum velocity with which a body must be projected from the surface of earth so that it just escapes the gravitational field.<br>
-        At earth’s surface, Gravitational P.E. = \(-\frac{GMm}{R}\) and K.E. = \(\frac12 mv_e^2\)<br>
-        For escape, Total energy = 0 \(\implies \frac12 mv_e^2 - \frac{GMm}{R} = 0 \implies v_e^2 = \frac{2GM}{R}\)<br>
-        \(v_e = \sqrt{\frac{2GM}{R}}\). Since \(g = \frac{GM}{R^2}\), we get \(v_e = \sqrt{2gR}\).
-    </div>
+/* Expand/collapse all */
+var allExpanded=false;
+function toggleAll(){
+  allExpanded=!allExpanded;
+  document.querySelectorAll('.tp').forEach(function(el){
+    var det=el.querySelector('.tp-d');
+    if(allExpanded){
+      el.classList.add('open');
+      det.style.maxHeight=det.scrollHeight+'px';
+    }else{
+      el.classList.remove('open');
+      det.style.maxHeight='0';
+    }
+  });
+  document.getElementById('ea-lbl').textContent=allExpanded?'Collapse All Topics':'Expand All Topics';
+}
 
-    <div class="question">7. (a) Define moment of couple (torque). Find the expression for work done due to couple. (b) A cricketer moves his hand while catching the ball — why? Explain. [3+2]</div>
-    <div class="answer">
-        <strong>Moment of couple:</strong> A couple consists of two equal and opposite parallel forces acting at different points. The moment of couple (torque) is the product of one force and the perpendicular distance between them: \(\tau = Fd\).<br>
-        <strong>Work done by couple:</strong> If a couple produces angular displacement \(\theta\), work done is \(W = \tau \theta\).<br><br>
-        <strong>(b) Cricketer moving hands:</strong> A cricketer moves his hands backward while catching a fast ball to increase the time of impact (\(\Delta t\)). Impulse \(F \Delta t = \Delta p\). For a fixed change in momentum, if \(\Delta t\) increases, the average force \(F\) decreases, hurting the hands less.
-    </div>
+/* Build Notes */
+function buildNotes(){
+  var h='';
+  NOTES.forEach(function(n){
+    h+='<div class="cd"><span class="bg '+n.bg+'">Unit '+n.unit+'</span><br><br>';
+    h+='<b style="font-size:14px">'+n.title+'</b>'+n.html+'</div>';
+  });
+  document.getElementById('notes-box').innerHTML=h;
+}
 
-    <div class="question">8. (a) State Newton's law of cooling. (b) A steel wire 2 mm in diameter is stretched between two clamps. When its temperature falls to 30°C, calculate the tension. [\(\alpha_s = 11\times10^{-6} °C^{-1}, Y_s = 21\times10^{10} dyne/cm^2\)] [2+3]</div>
-    <div class="answer">
-        <strong>Newton’s law of cooling:</strong> The rate of loss of heat of a body is directly proportional to the excess temperature of the body over the surroundings, provided the temperature difference is small. (\(\frac{dQ}{dt} \propto (T - T_s)\))<br><br>
-        <strong>(b) Numerical:</strong><br>
-        Given: \(d = 2\,mm = 0.2\,cm \implies r = 0.1\,cm\). Area \(A = \pi r^2 = 0.0314\,cm^2\).<br>
-        Assuming the temperature falls by \(\Delta T = 30^\circ C\).<br>
-        Thermal stress = \(Y\alpha \Delta T\)<br>
-        Tension, \(F = \text{Stress} \times A = Y\alpha \Delta T \times A\)<br>
-        \(F = 21 \times 10^{10} \times 11 \times 10^{-6} \times 30 \times 0.0314 = 2.18 \times 10^6\,dyne\)<br>
-        Since \(1\,N = 10^5\,dyne\), \(F = \frac{2.18 \times 10^6}{10^5} = 21.8\,N \approx 22\,N\)
-    </div>
+/* Build Important Questions */
+function buildImp(){
+  var h='';
+  IMP.forEach(function(s){
+    h+='<div class="cd"><h3>'+s.title+'</h3>';
+    s.qs.forEach(function(q){h+='<div class="q-i">'+q+'</div>';});
+    h+='</div>';
+  });
+  document.getElementById('imp-box').innerHTML=h;
+}
 
-    <div class="question">9. (a) Why do pendulum clocks made of brass keep correct time at 15°C but lose time at higher temperatures? How many seconds per day will it lose at 20°C? [For brass \(\alpha = 0.000018 °C^{-1}\)] [2+3]</div>
-    <div class="answer">
-        <strong>Why it loses time:</strong> The time period of a simple pendulum is \(T = 2\pi \sqrt{\frac{l}{g}}\). At higher temperatures, the brass rod expands, so length \(l\) increases. Since \(T \propto \sqrt{l}\), the time period increases, making the clock slow.<br><br>
-        <strong>Numerical:</strong><br>
-        \(\Delta T = 20 - 15 = 5^\circ C\)<br>
-        Loss of time per day = \(\frac12 \alpha \Delta T \times 86400\)<br>
-        \(= \frac12 \times 0.000018 \times 5 \times 86400 = 3.888\,s \approx 3.9\,s/day\)
-    </div>
+/* Build Cheat Sheet */
+function buildCheat(){
+  var h='';
+  CHEAT.forEach(function(c){
+    h+='<div class="cd"><h3>'+c.title+'</h3>';
+    c.rows.forEach(function(r){h+='<div class="ch-r"><span class="ch-k">'+r[0]+'</span><span>'+r[1]+'</span></div>';});
+    h+='</div>';
+  });
+  document.getElementById('cht-box').innerHTML=h;
+}
 
-    <div class="question">10. (a) What is weightlessness? Derive an expression for escape velocity. (b) What is Angular displacement? Derive an expression for centripetal acceleration. [2+3]</div>
-    <div class="answer">
-        <strong>Weightlessness:</strong> Weightlessness is the condition in which the apparent weight of a body becomes zero (normal reaction is zero). E.g., an astronaut in a freely falling satellite.<br>
-        <strong>Escape velocity:</strong> As derived in Q6, \(v_e = \sqrt{\frac{2GM}{R}} = \sqrt{2gR}\).<br><br>
-        <strong>Angular displacement:</strong> Angular displacement is the angle swept by the radius vector of a particle moving in a circular path. \(\theta = \frac{s}{r}\).<br>
-        <strong>Centripetal acceleration:</strong> As derived in Q3, \(a_c = \frac{v^2}{r} = r\omega^2\).
-    </div>
+/* Build Tricks */
+function buildTricks(){
+  var h='';
+  h+='<div class="cd"><h3>Memory Tricks (Mnemonics)</h3>';
+  TRICKS_MNEMONICS.forEach(function(m){h+='<div class="trk"><i class="fa-solid fa-key" style="color:var(--amber);margin-right:4px"></i> '+m[0]+' → '+m[1]+'</div>';});
+  h+='</div>';
 
-    <hr>
+  h+='<div class="cd"><h3>Common Traps in MCQs</h3><ul>';
+  TRICKS_TRAPS.forEach(function(t){h+='<li>'+t+'</li>';});
+  h+='</ul></div>';
 
-    <h2>Group C — Long Answer Questions [3 × 8 = 24 marks]</h2>
+  h+='<div class="cd"><h3>Pro Exam Strategy</h3><ul>';
+  h+='<li>Definitions always get marks — always write a crisp 2-line definition first</li>';
+  h+='<li>Comparison questions: always use a table (3-4 points minimum)</li>';
+  h+='<li>Diagram questions: OS structure, Process states, Paging, Memory hierarchy — draw clearly</li>';
+  h+='<li>For "explain with example" → give a real-world example (robot for RTOS, browser tabs for threads)</li>';
+  h+='<li>In deadlock questions, write all 4 conditions — examiners check each one</li>';
+  h+='<li>Linux question: always mention Linus Torvalds + 1991 + GPL license</li>';
+  h+='<li>End long answers with a one-line conclusion for full marks</li>';
+  h+='</ul></div>';
 
-    <div class="question">1. Projectile Motion<br>
-    (a) Show that the path of a projectile fired from the ground by making angle \(\theta\) with horizontal is parabolic. [3]<br>
-    (b) Find the angle of projection at which horizontal range and maximum height is equal. [3]<br>
-    (c) Find the distance, displacement and acceleration at 20 seconds using the v-t graph given. [2]</div>
-    <div class="answer">
-        <strong>(a) Parabolic Path Derivation:</strong><br>
-        Let a projectile be projected with initial velocity \(u\) at an angle \(\theta\).<br>
-        Horizontal component: \(u_x = u\cos\theta\). Vertical component: \(u_y = u\sin\theta\).<br>
-        Horizontal displacement at time \(t\): \(x = u\cos\theta \, t \implies t = \frac{x}{u\cos\theta}\)<br>
-        Vertical displacement at time \(t\): \(y = u\sin\theta \, t - \frac12 gt^2\)<br>
-        Substituting \(t\):<br>
-        \(y = u\sin\theta \left(\frac{x}{u\cos\theta}\right) -\frac12 g\left(\frac{x}{u\cos\theta}\right)^2\)<br>
-        \(y = x\tan\theta - \frac{gx^2}{2u^2\cos^2\theta}\)<br>
-        This is of the form \(y = ax - bx^2\), which is the equation of a parabola.<br><br>
-        
-        <strong>(b) Angle when Range = Max Height:</strong><br>
-        Horizontal Range \(R = \frac{u^2\sin 2\theta}{g}\). Maximum Height \(H = \frac{u^2\sin^2\theta}{2g}\).<br>
-        Given \(R = H\):<br>
-        \(\frac{u^2\sin 2\theta}{g} = \frac{u^2\sin^2\theta}{2g} \implies \sin 2\theta = \frac{\sin^2\theta}{2}\)<br>
-        \(2\sin\theta\cos\theta = \frac{\sin^2\theta}{2} \implies 4\sin\theta\cos\theta = \sin^2\theta\)<br>
-        \(4\cos\theta = \sin\theta \implies \tan\theta = 4\)<br>
-        \(\theta = \tan^{-1}(4) \approx 76^\circ\)<br><br>
+  h+='<div class="cd"><h3>Numbers to Remember</h3><table><tr><th>Fact</th><th>Number / Detail</th></tr>';
+  TRICKS_NUMBERS.forEach(function(n){h+='<tr><td>'+n[0]+'</td><td>'+n[1]+'</td></tr>';});
+  h+='</table></div>';
 
-        <strong>(c) From v-t graph:</strong><br>
-        <em>Note: The v-t graph is missing in the question paper.</em><br>
-        Conceptually, from any velocity-time graph:<br>
-        1. Displacement = Algebraic area under the v-t graph.<br>
-        2. Distance = Total area under the speed-time graph (absolute area).<br>
-        3. Acceleration = Slope of the v-t graph (\(a = \frac{\Delta v}{\Delta t}\)).<br><br>
+  document.getElementById('trk-box').innerHTML=h;
+}
 
-        <strong>OR: Ball thrown upward</strong><br>
-        Given: \(u = 20\,m/s\), \(v = 0\) at max height, \(g = 10\,m/s^2\)<br>
-        Using \(v^2 = u^2 - 2gH\):<br>
-        \(0 = 20^2 - 2 \times 10 \times H \implies 20H = 400 \implies H = 20\,m\)
-    </div>
+/* Build MCQ Quiz */
+var answered={};
+function buildQuiz(){
+  var h='';
+  QS.forEach(function(q,i){
+    h+='<div class="cd mcq"><div class="mcq-q">'+(i+1)+'. '+q.q+'</div><div class="mcq-o">';
+    q.o.forEach(function(o,j){
+      h+='<button class="opt" onclick="checkAns(this,'+i+','+j+')" id="o-'+i+'-'+j+'">'+String.fromCharCode(65+j)+'. '+o+'</button>';
+    });
+    h+='</div></div>';
+  });
+  document.getElementById('qz-box').innerHTML=h;
+  updateScore();
+}
 
-    <div class="question">2. Satellite and Orbital Velocity<br>
-    (a) A satellite revolves close to the surface of a planet. How is its orbital velocity related to the velocity of escape from that planet? Derive an expression for orbital velocity. [4]<br>
-    (b) A satellite revolves close to the surface of the planet. Calculate the magnitude and direction of velocity after 5 seconds. [2]<br>
-    (c) An earth satellite moves in a circular orbit at distance 3400 km from earth. Find the period of revolution and orbital velocity. [R = 6400 km, g = 9.8 m/s²] [2]</div>
-    <div class="answer">
-        <strong>(a) Derivation & Relation:</strong><br>
-        Let a satellite of mass \(m\) revolve around a planet of mass \(M\) in a circular orbit of radius \(r\). Gravitational force provides centripetal force:<br>
-        \(\frac{GMm}{r^2} = \frac{mv_o^2}{r} \implies v_o^2 = \frac{GM}{r} \implies v_o = \sqrt{\frac{GM}{r}}\)<br>
-        For a satellite close to the surface, \(r = R\), so \(v_o = \sqrt{\frac{GM}{R}}\).<br>
-        Escape velocity \(v_e = \sqrt{\frac{2GM}{R}} = \sqrt{2} \sqrt{\frac{GM}{R}} = \sqrt{2}\,v_o\).<br>
-        Therefore, \(v_e = \sqrt{2}\,v_o\) or \(v_o = \frac{v_e}{\sqrt{2}}\).<br><br>
+function checkAns(btn,qi,oi){
+  if(answered[qi]!==undefined)return;
+  answered[qi]=oi;
+  var q=QS[qi];
+  for(var j=0;j<q.o.length;j++){
+    var el=document.getElementById('o-'+qi+'-'+j);
+    if(j===q.a)el.classList.add('ok');
+    else if(j===oi)el.classList.add('no');
+  }
+  updateScore();
+}
 
-        <strong>(b) Velocity after 5 seconds:</strong><br>
-        <em>Note: Numerical data is missing in the question.</em><br>
-        Conceptually, for uniform circular motion: The magnitude of velocity remains constant. The direction of velocity is always tangential to the circular path at that specific point. So after 5 seconds, it will be tangential to its new position.<br><br>
+function updateScore(){
+  var done=Object.keys(answered).length;
+  var correct=0;
+  for(var k in answered){if(parseInt(answered[k])===QS[k].a)correct++;}
+  if(done>0){
+    var pct=Math.round((correct/done)*100);
+    document.getElementById('mcq-sc').innerHTML='Score: '+correct+'/'+done+' answered ('+pct+'% correct)';
+  }
+}
 
-        <strong>(c) Numerical:</strong><br>
-        Assuming \(h = 3400\,km\), \(R = 6400\,km\). Orbital radius \(r = R + h = 9800\,km = 9.8 \times 10^6\,m\).<br>
-        Orbital velocity \(v_o = \sqrt{\frac{gR^2}{r}} = \sqrt{\frac{9.8 \times (6.4 \times 10^6)^2}{9.8 \times 10^6}} = \sqrt{(6.4)^2 \times 10^6} = 6400\,m/s\)<br>
-        Time period \(T = \frac{2\pi r}{v_o} = \frac{2\pi \times 9.8 \times 10^6}{6400} \approx 9620\,s \approx 160\,minutes\).
-    </div>
-
-    <div class="question">3. Concave Mirror and Optics<br>
-    (a) Derive the mirror formula of a concave mirror. [4]<br>
-    (b) The radius of curvature of a concave mirror is 24 cm and the image is magnified by 1.5 times. What is the object distance? [2]<br>
-    (c) Define linear magnification and express it in terms of image distance and object distance. [2]</div>
-    <div class="answer">
-        <strong>(a) Mirror Formula Derivation:</strong><br>
-        The mirror formula is \(\frac1f = \frac1v + \frac1u\).<br>
-        Consider an object placed beyond \(C\) in front of a concave mirror. A ray parallel to the principal axis passes through \(F\) after reflection. Another ray passing through \(C\) retraces its path. These rays intersect at point \(A'\) (image).<br>
-        Using similar triangles in the ray diagram and applying sign conventions (distances against incident ray are negative):<br>
-        \(\frac{A'B}{AB} = \frac{A'F}{PF}\) and \(\frac{A'B}{AB} = \frac{A'C}{PC}\)<br>
-        Substituting signed values (\(AB = +h_1, A'B = -h_2, PF = -f, PC = -R, A'F = v-f, A'C = v-R\)) and solving using \(R = 2f\) leads to: \(\frac{1}{f} = \frac{1}{v} + \frac{1}{u}\)<br><br>
-
-        <strong>(b) Object Distance:</strong><br>
-        \(R = 24\,cm \implies f = -12\,cm\). Magnification \(m = -1.5\) (assuming real image).<br>
-        \(m = -\frac vu \implies -1.5 = -\frac vu \implies v = 1.5u\)<br>
-        Using mirror formula: \(\frac1{-12} = \frac1{1.5u} + \frac1u \implies -\frac1{12} = \frac{2}{3u} + \frac1u = \frac{5}{3u}\)<br>
-        \(3u = -60 \implies u = -20\,cm\). Object distance is 20 cm from the mirror.<br><br>
-
-        <strong>(c) Linear Magnification:</strong><br>
-        Linear magnification is defined as the ratio of the height of the image to the height of the object.<br>
-        \(m = \frac{h_i}{h_o}\). In terms of distances, \(m = -\frac vu\).<br><br>
-
-        <strong>OR: Prism</strong><br>
-        <strong>(a) Minimum Deviation:</strong> Minimum deviation is the least angle through which a ray of light is deviated by a prism. Conditions: 1) Angle of incidence = Angle of emergence (\(i = e\)). 2) The ray passes symmetrically through the prism (\(r_1 = r_2 = A/2\)).<br><br>
-        <strong>(b) Derivation:</strong><br>
-        For a prism, \(A = r_1 + r_2\). At minimum deviation, \(r_1 = r_2 = r \implies A = 2r \implies r = A/2\).<br>
-        Also, \(D_m = i + e - A\). Since \(i = e\), \(D_m = 2i - A \implies i = \frac{A+D_m}{2}\).<br>
-        Using Snell’s law at the first surface: \(\mu = \frac{\sin i}{\sin r} \implies \mu = \frac{\sin\left(\frac{A+D_m}{2}\right)}{\sin\left(\frac A2\right)}\)<br><br>
-        <strong>(c) Numerical:</strong><br>
-        Relative refractive index \(\mu = \frac{\mu_g}{\mu_l} = \frac{1.66}{1.33} \approx 1.248\).<br>
-        Angle of refraction \(r = \frac A2 = \frac{72^\circ}{2} = 36^\circ\).<br>
-        Using the formula: \(1.248 = \frac{\sin(\frac{72^\circ+D_m}{2})}{\sin36^\circ} \implies \sin(\frac{72^\circ+D_m}{2}) = 1.248 \times 0.588 = 0.734\)<br>
-        \(\frac{72^\circ+D_m}{2} = \sin^{-1}(0.734) \approx 47.2^\circ \implies 72^\circ + D_m = 94.4^\circ \implies D_m \approx 22.4^\circ\)
-    </div>
-
-    <div class="question">4. Thermal Expansion and Heat<br>
-    (a) Define an element of an electric fire with an output of 1.5 kW. It is a cylinder of 0.3 m long and 0.04 m in radius. Calculate its temperature if it behaves as a black body. [3]<br>
-    (b) Define temperature gradient. Derive the relation between thermal conductivity and temperature gradient. [2]<br>
-    (c) A glass vessel of volume 50 cm³ is filled with mercury and is heated from 20°C to 60°C. What volume of mercury will overflow? [\(\alpha_g = 1.8\times10^{-6} K^{-1}\) and \(\gamma_m = ?\)] [3]</div>
-    <div class="answer">
-        <strong>(a) Black Body Temperature:</strong><br>
-        Given: \(P = 1500\,W\), \(l = 0.3\,m\), \(r = 0.04\,m\), \(\sigma = 5.67 \times 10^{-8}\,Wm^{-2}K^{-4}\).<br>
-        Surface area of cylinder \(A = 2\pi r(l+r) = 2\pi(0.04)(0.34) \approx 0.0854\,m^2\).<br>
-        For a black body, \(P = \sigma A T^4 \implies T^4 = \frac{P}{\sigma A} = \frac{1500}{5.67 \times 10^{-8} \times 0.0854} \approx 3.1 \times 10^{11}\)<br>
-        \(T \approx 746\,K\) (or \(473^\circ C\))<br><br>
-
-        <strong>(b) Temperature Gradient:</strong><br>
-        Temperature gradient is the rate of change of temperature with distance in the direction of heat flow (\(\frac{dT}{dx}\)).<br>
-        From Fourier's law of heat conduction: \(\frac{Q}{t} = -KA\frac{dT}{dx}\)<br>
-        Thus, thermal conductivity \(K = \frac{H}{A|\frac{dT}{dx}|}\), where \(H\) is the rate of heat flow. The negative sign indicates heat flows from high to low temperature.<br><br>
-
-        <strong>(c) Overflow Volume:</strong><br>
-        Given: \(V = 50\,cm^3\), \(\Delta T = 40^\circ C\). \(\gamma_g = 3\alpha_g = 3 \times 1.8 \times 10^{-6} = 5.4 \times 10^{-6}K^{-1}\).<br>
-        Standard value for mercury \(\gamma_m = 1.8 \times 10^{-4}K^{-1}\).<br>
-        Overflow volume \(\Delta V = V(\gamma_m - \gamma_g)\Delta T\)<br>
-        \(\Delta V = 50(1.8 \times 10^{-4} - 5.4 \times 10^{-6}) \times 40 = 50(1.746 \times 10^{-4}) \times 40 = 0.3492\,cm^3 \approx 0.35\,cm^3\)
-    </div>
-
-    <div class="question">5. Gravitational PE, Conservation of Energy & Circular Motion<br>
-    (a) Derive the mathematical expression for gravitational potential energy. [3]<br>
-    (b) Derive the orbital velocity, time period and total energy of satellite. [3]<br>
-    (c) If the force on all bodies is proportional to their masses, why does a heavy body fall faster than a light body? [2]</div>
-    <div class="answer">
-        <strong>(a) Gravitational PE Derivation:</strong><br>
-        Let a body of mass \(m\) be at a distance \(r\) from the centre of earth of mass \(M\).<br>
-        Gravitational force \(F = \frac{GMm}{r^2}\).<br>
-        Gravitational potential energy at distance \(r\) is the work done in bringing the body from infinity to that point:<br>
-        \(U = -\int_{\infty}^{r} F\,dr = -\int_{\infty}^{r} \frac{GMm}{r^2}\,dr = -GMm\left[-\frac1r\right]_{\infty}^{r} = -\frac{GMm}{r}\)<br><br>
-
-        <strong>(b) Satellite Derivations:</strong><br>
-        **Orbital velocity:** \(\frac{GMm}{r^2} = \frac{mv^2}{r} \implies v = \sqrt{\frac{GM}{r}}\)<br>
-        **Time period:** \(T = \frac{2\pi r}{v} = \frac{2\pi r}{\sqrt{GM/r}} = 2\pi \sqrt{\frac{r^3}{GM}}\)<br>
-        **Total energy:** K.E. = \(\frac12 mv^2 = \frac{GMm}{2r}\). P.E. = \(-\frac{GMm}{r}\).<br>
-        Total Energy \(E = K.E. + P.E. = \frac{GMm}{2r} - \frac{GMm}{r} = -\frac{GMm}{2r}\)<br><br>
-
-        <strong>(c) Heavy vs Light Body Falling:</strong><br>
-        In vacuum, a heavy body and a light body fall with the same acceleration because \(F = mg \implies a = \frac{F}{m} = g\) (acceleration is independent of mass).<br>
-        However, in air, a light body is more affected by air resistance (buoyancy and drag) compared to its weight. A heavy body overcomes air resistance more easily due to its greater weight, causing it to fall faster in real-world conditions.
-    </div>
-
+/* Initialize everything */
+buildTabs();
+buildMindMap();
+buildNotes();
+buildImp();
+buildCheat();
+buildTricks();
+buildQuiz();
+</script>
 </body>
 </html>
